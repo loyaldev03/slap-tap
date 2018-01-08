@@ -95,9 +95,14 @@
                         
                         if (response.data.token) {
                             $auth.setToken(response.data.token);
-                            $state.go('mindset.privilegeAndResponsibility');
+                            if (!productStorage.isRenew) {
+                                $state.go('mindset.privilegeAndResponsibility');
+                            }
+                            else {
+                                $state.go('yearGoal.overview');
+                            }
                             document.location.reload(true);
-                            return;
+                            return;                                
                         }
                         // $scope.errors = response.data.errors;
                     }

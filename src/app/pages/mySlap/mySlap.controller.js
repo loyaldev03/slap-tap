@@ -131,7 +131,7 @@
 
             stepService.getApiData('fixedBusinessExpenses')  //TODO: request api? data service
                 .then(function (response) {
-                    if (response && response.status === 200) {
+                    if (response && response.status === 200 && response.data) {
                         $scope.totalFixedExpenses = (response.data.fixedBusinessExpenses.expensesSum + response.data.fixedBusinessExpenses.incidentals * 0.01 * response.data.fixedBusinessExpenses.expensesSum) * 12  + (+response.data.fixedBusinessExpenses.profit);
 
                         $scope.profit = response.data.fixedBusinessExpenses.profit;
@@ -142,7 +142,7 @@
 
             stepService.getApiData('whatsHappening')  //TODO: request api? data service
                 .then(function (response) {
-                    if (response && response.status === 200) {
+                    if (response && response.status === 200 && response.data) {
                         $scope.quaters = response.data.whatsHappening;
                     }
                 });

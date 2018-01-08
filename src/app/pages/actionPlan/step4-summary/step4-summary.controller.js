@@ -150,7 +150,7 @@
 
             stepService.getApiData('whatsHappening')  //TODO: request api? data service
                 .then(function (response) {
-                    if (response && response.status === 200) {
+                    if (response && response.status === 200 && response.data) {
                         $scope.quaters = response.data.whatsHappening;
                     }
                 });

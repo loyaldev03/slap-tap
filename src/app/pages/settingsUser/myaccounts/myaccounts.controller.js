@@ -63,10 +63,8 @@
             });
             if ($scope.userAllData && $scope.userAllData.slapMindset && $scope.userAllData.slapMindset.slapStartDate)
             {
-                var startDate = $scope.userAllData.slapMindset.slapStartDate;
-                var m = new Date(startDate.year+1,startDate.month-1,1);
-                $scope.startDate = moment(m);
-                if (moment().isAfter(moment($scope.startDate)))
+                $scope.startDate = moment($scope.userAllData.slapMindset.slapStartDate).add(8, 'months');
+                if (moment().isAfter($scope.startDate))
                     $scope.canRenew = true;
             }
         }
