@@ -18104,6 +18104,9 @@ md-toast {
   border: none;
   border-bottom: 1px solid #ddd;
 }
+.slap-page .quater-letter-container .quater-letter.active {
+  outline: none;
+}
 .slap-page .quater-letter-container .quater-letter.active a {
   color: #373c37;
   background-color: #fff;
@@ -21415,7 +21418,6 @@ md-select-menu {
 md-dialog.activity-dialog {
   padding: 20px;
   font-size: 16px;
-  max-height: initial;
 }
 md-dialog.activity-dialog a {
   cursor: pointer;

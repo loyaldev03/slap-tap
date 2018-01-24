@@ -619,7 +619,7 @@
                 .textContent('Record Client Interaction?')
                 .ariaLabel('CIN')
                 .targetEvent($event)
-                .ok('Attended Meeting - record CIN')
+                .ok('Attended SLAPexpert Meeting - record CIN')
                 .cancel('Missed Meeting - charge cancellation fee');
         
                 $mdDialog.show(confirm).then(function() {
