@@ -353,8 +353,6 @@
 
 			<md-list style="color:black;" class="text-color-main">
 				<md-list-item ng-repeat-start="revenueGrid in gridData | filter: { revenue: { deleted: false } }" layout="column" layout-align="center stretch">
-					{{revenueGrid}}
-					
 					<section layout="row" layout-align="space-between center">
 						<a ng-if="!revenueGrid.showDetail" ng-click="revenueGrid.showDetail=!revenueGrid.showDetail"><i class="material-icons">add_circle</i></a>
 						<a ng-if="revenueGrid.showDetail" ng-click="revenueGrid.showDetail=!revenueGrid.showDetail"><i class="material-icons">remove_circle</i></a>
