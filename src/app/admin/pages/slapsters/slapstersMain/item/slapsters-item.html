@@ -408,7 +408,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in paymentData">
+                    <tr ng-repeat="item in paymentData | orderBy: '-paymentDT'">
                         <td>{{item.programName}}</td>
                         <td>{{item.costProduct | currency}}</td>
                         <td>{{item.promoCode}}</td>

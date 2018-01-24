@@ -83,7 +83,7 @@
             if ($scope.data.expenses.length > 0) {
                 $scope.data.expensesSum = 0;
                 _.each($scope.data.expenses, function (item) {
-                    $scope.data.expensesSum += +item.monthlyCost
+                    $scope.data.expensesSum += item.monthlyCost ? +item.monthlyCost : 0
                 })
             }
         }

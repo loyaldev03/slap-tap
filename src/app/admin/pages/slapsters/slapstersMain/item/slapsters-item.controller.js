@@ -419,7 +419,11 @@
         function loadPayments() {
             return paymentsService.getStripePaymentsByUser($stateParams.user_id)
             .then(function (response) {
-                return $scope.paymentData = response.data;
+                $scope.paymentData = response.data;
+                _.each($scope.paymentData, function(payment){
+                    payment.paymentDT = new Date(payment.paymentDate);
+                })
+                return $scope.paymentData;
             }).catch(function(err) { console.log(err); $state.go('slapsters'); });
         }
 
