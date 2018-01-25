@@ -160,5 +160,12 @@
                 sendData();
             }
         });
+
+        $scope.getExpenses = function() {
+            var expenses = $scope.data.expenses.slice(1).filter(function(item){
+                return item;
+            });
+            return expenses;
+        }
     }
 }());

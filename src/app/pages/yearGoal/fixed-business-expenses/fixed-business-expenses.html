@@ -72,7 +72,7 @@
                     </div>
                 </div>
 
-                <div class="row item" ng-repeat="item in data.expenses.slice(1)">
+                <div class="row item" ng-repeat="item in getExpenses()">
                     <div class="col-md-5">
                         <div class="input-box">
                             <input ng-model="item.expense" type="text" id="expense-{{$index}}"
