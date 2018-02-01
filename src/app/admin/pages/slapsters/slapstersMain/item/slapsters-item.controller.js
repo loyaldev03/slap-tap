@@ -420,9 +420,20 @@
             return paymentsService.getStripePaymentsByUser($stateParams.user_id)
             .then(function (response) {
                 $scope.paymentData = response.data;
+                var _paymentData = [];
                 _.each($scope.paymentData, function(payment){
+                    
                     payment.paymentDT = new Date(payment.paymentDate);
+                    _paymentData.push(payment);
+                    if (payment.refunds) {
+                        payment.refunds.forEach(function(refund){
+                            var _payment = angular.copy(payment, {})
+                            _payment.amountCharges = (-1) * +refund.amount / 100;
+                            _paymentData.push(_payment)                            
+                        })
+                    }
                 })
+                $scope.paymentData = _paymentData;
                 return $scope.paymentData;
             }).catch(function(err) { console.log(err); $state.go('slapsters'); });
         }

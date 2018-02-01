@@ -116,9 +116,9 @@
         }
 
         function apply() {
-            if(vm.useCoupon) {
-                return;
-            }
+            // if(vm.useCoupon) {
+            //     return;
+            // }
             couponService.validCoupon(vm.user.code, vm.plan._id, vm.build ? vm.build._id : null)
                 .then(function(response) {
                     productStorage.setCoupon(response.data);

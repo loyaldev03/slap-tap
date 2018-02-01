@@ -48,7 +48,7 @@
             adminUserService.list()
             .then(function (response) {
                 var slapsters = response.data.filter(function(user) {
-                    user.currentQuarter = user.currentQuater && user.currentQuater.number ? user.currentQuater.number : "Not Started!"
+                    user.currentQuarter = user.currentQuater && user.currentQuater.number ? user.currentQuater.number : user.currentQuater
                     return user.role == 4;
                 });
                 slapsters = permissionService.filterSlapstersByPermission(slapsters);
@@ -126,8 +126,12 @@
                 .catch(function(err) {
                     console.log(err);
                 });
-            }
+        }
             commonDialogService.openDeleteItemDialog(event, 'Are you sure you want to remove this account?', 'Archive', success);
+        }
+
+        $scope.isNumber = function(str) {
+            return !isNaN(+str);
         } 
         
         // function adminBuild(item) {

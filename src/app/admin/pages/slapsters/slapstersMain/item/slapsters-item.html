@@ -414,7 +414,7 @@
                         <td>{{item.promoCode}}</td>
                         <td>{{item.discount | currency}}</td>
                         <td>{{item.amountCharges | currency}}</td>
-                        <td   ng-class="item.status ? '' : 'bg-danger' ">{{item.status == 0 ? 'Declined' : 'Paid'}}</td>
+                        <td   ng-class="item.status ? '' : 'bg-danger' ">{{item.amountCharges >= 0 ? item.status == 0 ? 'Declined' : 'Paid' : 'Refunded'}}</td>
                         <td>{{item.totalAmountOwed | currency }}</td>
                         <td>{{item.paymentDate}}</td>
                     </tr>

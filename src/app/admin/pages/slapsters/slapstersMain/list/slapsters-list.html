@@ -106,7 +106,7 @@
                             {{item.countslapyear}}
                         </td>                        
                         <td>
-                            {{item.currentQuarter == "Not Started!" ? "Not Started" :  item.currentQuarter + "/" + item.currentMonth }}
+                            {{isNumber(item.currentQuarter) ? item.currentQuarter + "/" + item.currentMonth : item.currentQuarter }}
                         </td>
                         <td>
                             {{item.lastLogin | date: 'MM-dd-yyyy'}}
