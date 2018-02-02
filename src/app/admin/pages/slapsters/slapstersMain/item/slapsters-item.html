@@ -126,7 +126,7 @@
 
                 <md-input-container ng-if="!user.stripeSubscription" >
                     <label>SLAPProgram</label>
-                    <md-select disabled ng-model="user.planId" aria-label="plan-select">
+                    <md-select ng-model="user.planId" aria-label="plan-select">
                         <md-option ng-repeat="product in programData | filter: {buildType: 1}" ng-value="product._id">{{product.productName}}</md-option>
                     </md-select>    
 					<div class="md-errors-spacer"></div>
