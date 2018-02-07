@@ -33,12 +33,12 @@
         });
 
         var beforeSave = moment({year: $scope.data.year, month: +$scope.data.month - 1, day:1});
-        if ($scope.data.year === null || $scope.data.year === 0) {
+        if ($scope.data.year == 'undefined' || $scope.data.year === null || $scope.data.year === 0) {
             $scope.data.year = currentYear
             // $scope.data.year = 2017;            
         }
 
-        if ($scope.data.month === null || $scope.data.month === "0") {
+        if ($scope.data.month == 'undefined' || $scope.data.month === null || $scope.data.month === "0") {
             $scope.data.month = currentMonth;
         }
         else var startMonth = $scope.data.month;

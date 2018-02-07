@@ -99,7 +99,7 @@
                                 $state.go('mindset.privilegeAndResponsibility');
                             }
                             else {
-                                $state.go('yearGoal.overview');
+                                $state.go('mindset.slapStartDate');
                             }
                             document.location.reload(true);
                             return;                                
