@@ -162,10 +162,10 @@
                 if(!startDate)
                     return;
                     
-                angular.extend($scope.quaters[0], _.merge(actionplanService.getNthQuater(startDate, 1), $scope.buildData.actionPlan.whatsHappening[0]));
-                angular.extend($scope.quaters[1], _.merge(actionplanService.getNthQuater(startDate, 2), $scope.buildData.actionPlan.whatsHappening[1]));
-                angular.extend($scope.quaters[2], _.merge(actionplanService.getNthQuater(startDate, 3), $scope.buildData.actionPlan.whatsHappening[2]));
-                angular.extend($scope.quaters[3], _.merge(actionplanService.getNthQuater(startDate, 4), $scope.buildData.actionPlan.whatsHappening[3]));
+                angular.extend($scope.quaters[0], _.merge(actionplanService.getNthQuater(startDate, 1), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[0] : {}));
+                angular.extend($scope.quaters[1], _.merge(actionplanService.getNthQuater(startDate, 2), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[1] : {}));
+                angular.extend($scope.quaters[2], _.merge(actionplanService.getNthQuater(startDate, 3), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[2] : {}));
+                angular.extend($scope.quaters[3], _.merge(actionplanService.getNthQuater(startDate, 4), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[3] : {}));
  
                 $scope.startDate = $scope.quaters[0].start.toDate();
                 $scope.endDate = $scope.quaters[3].end.toDate();
@@ -234,9 +234,9 @@
             
 
 
-            $scope.revenues = $scope.revenues.filter(function(revenue) {
+            $scope.revenues = $scope.revenues ? $scope.revenues.filter(function(revenue) {
                 return (!revenue.deleted);
-            });
+            }) : {};
             _.each($scope.revenues, function(revenue, revenueID){
                 revenue.actualUnit = 0;
                 revenue.unit = 0;
