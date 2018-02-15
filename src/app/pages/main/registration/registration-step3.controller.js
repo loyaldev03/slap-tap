@@ -110,8 +110,11 @@
                 .catch( function(err) {
                     vm.buttonDisabled = false;
                     if (err.data.message != "Failed create customer") 
-                    toaster.pop({type: 'error', body: err.data.message ? err.data.message : err.data.errmsg });
-                    else addNotification(vm.notifications, {name: 'Server Error', type: 'error', message:"So sorry - something has gone wrong on our end.  Try again and if it still doesn't work email support@smallbizsilverlining.com", show: true});
+                        // toaster.pop({type: 'error', body: err.data.message ? err.data.message : err.data.errmsg });
+                        toaster.pop({type: 'error', body: "So sorry - something has gone wrong on our end.  Try again and if it still doesn't work email support@smallbizsilverlining.com.", timeout: 2000});
+                    else 
+                        toaster.pop({type: 'error', body: "So sorry - something has gone wrong on our end.  Try again and if it still doesn't work email support@smallbizsilverlining.com.", timeout: 2000});
+                        // addNotification(vm.notifications, {name: 'Server Error', type: 'error', message:"So sorry - something has gone wrong on our end.  Try again and if it still doesn't work email support@smallbizsilverlining.com", show: true});
                 });
         }
 

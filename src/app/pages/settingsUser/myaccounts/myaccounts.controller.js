@@ -22,6 +22,7 @@
         $scope.downloadFinished = true;
         $scope.canRenew = false;
         $scope.startDate = Date;
+        $scope.forms = {};
         pageService
             .reset()
             .setShowBC(false)
@@ -121,8 +122,12 @@
             userService.changeCreditCard($scope.user).then(function(user){
                 $scope.user = user;
                 $scope.user.card = null;
-                
-                // $scope.creditform.$setPristine();
+                $scope.forms.creditform.$setPristine();
+                $scope.forms.creditform.$setUntouched();
+                $scope.forms.creditform.creditCard.$setUntouched()
+                $scope.forms.creditform.expDate.$setUntouched()
+                $scope.forms.creditform.cvc.$setUntouched()
+                $scope.forms.creditform.address.$setUntouched()
                 toaster.pop({type: 'success', body: 'Credit Card Changed to ****-****-****-.' + $scope.user.last4, timeout: 2000});
             }).catch(function(err){
                 addNotification($scope.notifications_card, {name: 'Server Error', type: 'error', message:"We were unable to process your credit card. Please try again or use a new card.", show: true});
