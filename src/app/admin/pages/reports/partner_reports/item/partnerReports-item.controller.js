@@ -11,7 +11,7 @@
         angular.extend($scope,  {
             gridData: {
                 gridOptions: {data:[]},
-                gridActions: {}
+                gridActions: {} 
             },            
             dataReady: false,
             report: {},

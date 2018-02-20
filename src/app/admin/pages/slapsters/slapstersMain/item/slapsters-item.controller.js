@@ -335,7 +335,7 @@
         function createOrSave(event) {
             update().then(function(){
                 toaster.pop({type: 'success', body: 'Success'});
-                
+                                                                                                                                                                                                                                                                                                                                                                                                `   
             }).catch(function(err){
                 console.log(err);
                 $scope.user.couponId = null
@@ -420,6 +420,11 @@
             return paymentsService.getStripePaymentsByUser($stateParams.user_id)
             .then(function (response) {
                 $scope.paymentData = response.data;
+                if ($stateParams.user_id == '59c1e0c4dcb3a054d970e9c5' || $stateParams.user_id == '5a53b6affac52d34ff6c6eb6') {
+                    var josh_data = paymentsService.getJoshPrevPaymentInStatic();
+                    $scope.paymentData =  $scope.paymentData.concat(josh_data);
+                }
+
                 var _paymentData = [];
                 _.each($scope.paymentData, function(payment){
                     
@@ -439,8 +444,15 @@
         }
 
         function togglePayment() {
-            $scope.user.pausingPayment = !$scope.user.pausingPayment;
-            createOrSave();
+            $scope.user.pausingPayment = !$scope.user.pausingPayment;                
+            createOrSave()
+            .then(function() {
+                // $scope.user.pausingPayment = !$scope.user.pausingPayment;                
+            })
+            .catch(function(err) {
+                $scope.user.pausingPayment = !$scope.user.pausingPayment;                
+                console.log(err);
+            })
             // paymentsService.toggleSubscription($scope.user);
         }
 
