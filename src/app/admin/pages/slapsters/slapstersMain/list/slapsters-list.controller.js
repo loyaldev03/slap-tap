@@ -57,7 +57,7 @@
                 $scope.slpasters = [];
                 _.each(accounts, function(account){
                     $scope.slpasters.push({
-                        current: account[0],  //TODO: select appropriate slapsters
+                        current: account[account.length - 1],  //TODO: select appropriate slapsters
                         accounts: account
                     });
                 });

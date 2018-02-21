@@ -419,11 +419,16 @@
             return paymentsService.getStripePaymentsByUser($stateParams.user_id)
             .then(function (response) {
                 $scope.paymentData = response.data;
+                //For Josh, we need to add manually payment history which is not existing in stripe
                 if ($stateParams.user_id == '59c1e0c4dcb3a054d970e9c5' || $stateParams.user_id == '5a53b6affac52d34ff6c6eb6') {
                     var josh_data = paymentsService.getJoshPrevPaymentInStatic();
                     $scope.paymentData =  $scope.paymentData.concat(josh_data);
                 }
-
+                //For Eduardo, we need to add manually payment history which is not existing in stripe
+                if ($stateParams.user_id == '5a36bac6c9d84206eb6e2f3c') {
+                    var eduardo_data = paymentsService.getEduardoPrevPaymentInStatic();
+                    $scope.paymentData =  $scope.paymentData.concat(eduardo_data);
+                }
                 var _paymentData = [];
                 _.each($scope.paymentData, function(payment){
                     

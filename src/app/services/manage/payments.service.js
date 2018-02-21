@@ -17,6 +17,7 @@
         this.getStripePayments = getStripePayments;
         this.getStripePaymentsByUser = getStripePaymentsByUser;
         this.getJoshPrevPaymentInStatic = getJoshPrevPaymentInStatic;
+        this.getEduardoPrevPaymentInStatic = getEduardoPrevPaymentInStatic; 
         //////////////////////////////////
 
         function transformationData(data) {
@@ -1037,5 +1038,51 @@
 ];
             return data;
         }
+
+        function getEduardoPrevPaymentInStatic() {
+            let data = [
+                {
+                    paymentDate: "Dec 17, 2017",
+                    amountCharges: 500,
+                    refunds: [],
+                    discount: "0",
+                    status: 1,
+                    programName: "SLAPbuild One Time Payment",
+                    costProduct: 500,
+                    totalAmountOwed: 0,
+                    route: "59c1e0c4dcb3a054d970e9c5",
+                    reqParams: null,
+                    restangularized: true,
+                    fromServer: true,
+                    parentResource: {
+                      route: "stripe-payments",
+                      parentResource: null
+                    },
+                    restangularCollection: false
+                },
+                {
+                    paymentDate: "Jan 17, 2018",
+                    amountCharges: 200,
+                    refunds: [
+                    ],
+                    discount: "-100",
+                    status: 1,
+                    programName: "monthlySLAP",
+                    costProduct: 300,
+                    couponName: "$100OFF_m",
+                    totalAmountOwed: 0,
+                    route: "59c1e0c4dcb3a054d970e9c5",
+                    reqParams: null,
+                    restangularized: true,
+                    fromServer: true,
+                    parentResource: {
+                      route: "stripe-payments",
+                      parentResource: null
+                    },
+                    restangularCollection: false
+                }
+            ];
+            return data;
+        }        
     }
 }());
