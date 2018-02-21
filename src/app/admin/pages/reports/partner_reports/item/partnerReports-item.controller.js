@@ -45,6 +45,12 @@
     //         windowPopup.document.write('<html><head><link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     // rel="stylesheet"><link rel="stylesheet" type="text/css" href="/../css/vendor.css" /><link rel="stylesheet" type="text/css" href="/../css/custom/custom.css" /><link rel="stylesheet" type="text/css" href="/../css/style.css" /><link rel="stylesheet" type="text/css" href="/../css/materializestyle.css" /><link rel="stylesheet" type="text/css" href="/../css/materialize.css" /><script src="./vendor.js"></script><script type="text/javascript" src="/js/plugins/jquery-1.11.2.min.js"></script><script type="text/javascript" src="./materialize.js"></script><script type="text/javascript" src="./plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script></head><body onload="window.print()">' + contentToPrint + '</body></html>');
     //         windowPopup.document.close();            
+              // var printContents = $('#partner-report').innerHTML;
+              // var popupWin = window.open('', '_blank', 'width=300,height=300');
+              // popupWin.document.open();
+              // popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
+              // popupWin.document.close();
+
         };
 
         function buildReport() {

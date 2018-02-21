@@ -21470,6 +21470,11 @@ md-input-container lable {
 .reports-item-container md-select {
   margin: 0px;
 }
+@media print and (color) {
+  .reports-item-container {
+    display: block;
+  }
+}
 #partner-report .slapster-detail {
   width: 500px;
 }
@@ -21586,10 +21591,6 @@ ul li {
   }
   .report-search {
     display: none ;
-  }
-  .blue-mark {
-    background: inherit !important;
-    color: #50cfe3 !important;
   }
 }
 .coupon-form h4 {
