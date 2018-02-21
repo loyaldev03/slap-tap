@@ -335,7 +335,6 @@
         function createOrSave(event) {
             update().then(function(){
                 toaster.pop({type: 'success', body: 'Success'});
-                                                                                                                                                                                                                                                                                                                                                                                                `   
             }).catch(function(err){
                 console.log(err);
                 $scope.user.couponId = null
