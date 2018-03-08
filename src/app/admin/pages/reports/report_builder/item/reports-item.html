@@ -27,6 +27,7 @@
         <md-input-container flex="50">
             <md-select md-container-class="type-menu" aria-label="slapExpert" ng-model="report.filter.expert" multiple>
                 <md-option ng-repeat="ex in expert" ng-value="ex._id">{{ex.name}}</md-option>
+                <md-option ng-value="null   ">No SLAPexpert Assigned</md-option>
             </md-select>
             <div class="md-errors-spacer"></div>
         </md-input-container>
@@ -36,7 +37,7 @@
         <span flex="100"  class="subtitle " >Associated with Partner</span>
         <md-input-container flex="50">
             <md-select md-container-class="type-menu" aria-label="slapPartner" ng-model="report.filter.partner" multiple>
-                <md-option ng-repeat="pa in partner" ng-value="pa._id">{{pa.name}}</md-option>
+                <md-option ng-repeat="pa in partner" ng-value="pa._id">{{pa.businessName}}</md-option>
             </md-select>
             <div class="md-errors-spacer"></div>
         </md-input-container>
@@ -85,7 +86,7 @@
         <section flex>
         </section>
 
-        <span flex="100"  class="subtitle ">Associated With Coupon</span>
+        <span flex="100"  class="subtitle ">Associated With Promo Code</span>
         <md-input-container flex="100">
         <md-select md-container-class="type-menu" aria-label="coupon" ng-model="report.filter.coupons" multiple>
             <md-option ng-repeat="item in allCoupons" ng-value="item._id">{{item.name}}</md-option>
