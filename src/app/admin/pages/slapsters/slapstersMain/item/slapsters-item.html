@@ -198,8 +198,6 @@
         <button-switch visible="showJourney"></button-switch>
     </section>
     <section class="  sample-show-hide"  ng-show="showJourney">
-
-        Ideal Client Journey
         <table class="table table-responsive ">
             <thead>
                 <tr>
@@ -224,12 +222,13 @@
                         {{isJouneyItemDone('onboard', 'Onboarding Call') ? '✔' : ''}}Call Happened {{isJouneyItemDone('onboard', 'Onboarding Call').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('onboard', 'SM Calls Set') ? '✔' : ''}}SM Calls Set {{isJouneyItemDone('onboard', 'SM Calls Set').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('start', 'SE Calls Set') ? '✔' : ''}}SE Calls Set {{isJouneyItemDone('start', 'SE Calls Set').createdAt | date:short}}<br/>
+                        {{isJouneyItemDone('onboard', 'Execute Call Set') ? '✔' : ''}}Execute Call Set {{isJouneyItemDone('onboard', 'Execute Call Set').createdAt | date:short}}<br/>                        
                     </td>
                     <td>
                         {{isJouneyItemDone('build', 'Step1 Done') ? '✔' : ''}}Step 1 Done {{isJouneyItemDone('build', 'Step1 Done').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('build', 'Step2 Done') ? '✔' : ''}}Step 2 Done {{isJouneyItemDone('build', 'Step2 Done').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('build', 'Step3 Done') ? '✔' : ''}}Step 3 Done {{isJouneyItemDone('build', 'Step3 Done').createdAt | date:short}}<br/>
-                        {{isJouneyItemDone('build', 'Step4 Done') ? '✔' : ''}}Step 4 Done {{isJouneyItemDone('build', 'Step4 Done').createdAt | date:short}}<br/>
+                        {{isJouneyItemDone('build', 'Step4 Done') ? '✔' : ''}}Step 4 Done {{isJouneyItemDone('build', 'Step4 Done').createdAt | date:short}}<br/>                        
                     </td>
                     <td>
                         {{isJouneyItemDone('approve', 'Review Done') ? '✔' : ''}}Review Done {{isJouneyItemDone('approve', 'Review Done').createdAt | date:short}}<br/>
@@ -475,14 +474,17 @@
                 <button class="btn btn-primary" ng-click="openExpertDialog($event, item)">
                     SLAPexpert Call
                 </button>
+        </section>
+        <section layout="row" flex="50" class="calls-ex-mn">
+                <button class="btn  btn-primary" ng-click="openManagerOnboardingDialog($event, item)">
+                    SLAPmanager Onboarding Call
+                </button>             
+                <button class="btn  btn-primary" ng-click="openManagerExecuteDialog($event, item)">
+                    SLAPmanager Execute Call
+                </button>
                 <button class="btn  btn-primary" ng-click="openManagerAccountabilityDialog($event, item)">
                     SLAPmanager Accountability Call
                 </button>
-                <button class="btn  btn-primary" ng-click="openManagerOnboardingDialog($event, item)">
-                    SLAPmanager Onboarding Call
-                </button>
-
-             
         </section>
     </section>
 </md-card>

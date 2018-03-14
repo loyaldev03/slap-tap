@@ -61,7 +61,7 @@
                 },
                 {
                     title: "Execute Call Set",
-                    journey: {section: 'excute', name: 'Execute Call Set'}
+                    journey: {section: 'onboard', name: 'Execute Call Set'}
                 },
                 {
                     title: "SE Calls Set",
@@ -114,6 +114,7 @@
             openDeleteItemDialog: openDeleteItemDialog,
             openManagerAccountabilityDialog: openManagerAccountabilityDialog,
             openManagerOnboardingDialog: openManagerOnboardingDialog,
+            openManagerExecuteDialog: openManagerExecuteDialog,            
             closeDialog: closeDialog,
             updateItem: updateItem,
             updateNotes: updateNotes,
@@ -397,6 +398,13 @@
 
         function isJouneyItemDone(section, name){
             var isEx = _.find($scope.activityData, {journey : {section:section, name: name}});
+            if (isEx)
+                return isEx;
+            return null;
+        }
+
+        function isExecuteCallHappened() {
+            var isEx = _.find($scope.activityData, {type: 'SLAPmanager', title: 'Execute Call'});
             if (isEx)
                 return isEx;
             return null;
@@ -736,6 +744,29 @@
                 autoWrap: true
             });
         }
+
+        function openManagerExecuteDialog($event, item) {
+            var newForm = {
+                type: 'SLAPmanager',
+                title: 'Execute Call',
+                extra: {
+                    typeForPopUp:'Execute Call',
+                },
+                notes: '',
+                userId: $scope.userID,
+            };
+
+            $scope.formData = newForm;
+            $mdDialog.show({
+                clickOutsideToClose: true,
+                targetEvent: $event,
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: 'admin/components/dialogs/slapmanager-execute-dialog/slapmanager-execute-dialog.html',
+                controller: 'SlapManagerExecuteDialogController',
+                autoWrap: true
+            });            
+        }            
 
         function updateNotes($event, form) { 
             if(form.$invalid) {
