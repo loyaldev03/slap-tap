@@ -38,7 +38,7 @@
                     return emailTemplateService.list()
                         .then(function (response) {
                             // console.log(response.data);
-                            return response.data.map(function(e) { return {name: e}; });
+                            return response.data.map(function(e) { return {name: e.templateName}; });
                         });
                 }
             }

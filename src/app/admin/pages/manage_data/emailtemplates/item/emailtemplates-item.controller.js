@@ -58,6 +58,21 @@
                 })
         };
 
+        $scope.activate = function() {
+            $scope.emailTemplate.state = true;
+            $scope.apply().then(function () {
+                // toaster.pop({type: 'success', body: 'Successfully Activated'});
+                
+            });            
+        }
+
+        $scope.deactivate = function() {
+            $scope.emailTemplate.state = false;
+            $scope.apply().then(function () {
+                // toaster.pop({type: 'success', body: 'Successfully Deactivated'});
+            });            
+        }
+
         $scope.update = function () {
             return ($stateParams.emailtemplate_name) ? emailTemplateService.update($scope.emailTemplate) : emailTemplateService.add($scope.emailTemplate);
         };

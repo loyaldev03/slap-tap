@@ -7,6 +7,7 @@
                     <form name="emailTemplateForm" novalidate>
                         <div class="col-xs-12">
                             <div class="text-right col-xs-12">
+                                <button class="btn btn-primary" ng-click="!emailTemplate.state ? activate() : deactivate()">{{!emailTemplate.state ? 'Activate' : 'Deactivate'}}</button>
                                 <button type="submit" class="btn btn-primary" ng-click="save()">Save</button>
                                 <!--<button type="submit" class="btn btn-default" ng-click="apply()" ng-show="productID">Apply</button>-->
                                 <a class="btn btn-danger" ui-sref="emailtemplates.list">Cancel</a>
