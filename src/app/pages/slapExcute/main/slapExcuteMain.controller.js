@@ -710,7 +710,7 @@
                 for(var key in quater.units) {
                     var revenue = _.find($scope.revenues, {name: key});
                     if(revenue  && revenue.deleted == false) {
-                        tempTotalYearRevenue += (+revenue.sellingPrice - +revenue.totalVExp) * + quater.units[key];
+                        tempTotalYearRevenue += (+revenue.sellingPrice) * (+quater.units[key]);
                     }
                 }  
             })
@@ -718,7 +718,7 @@
             for(var key in $scope.currentQuater.units) {
                 var revenue = _.find($scope.revenues, {name: key});
                 if(revenue  && revenue.deleted == false) {
-                    tempTotalQuaterRevenue += (+revenue.sellingPrice - +revenue.totalVExp) * +$scope.currentQuater.units[key];
+                    tempTotalQuaterRevenue += (+revenue.sellingPrice) * (+$scope.currentQuater.units[key]);
                 }
             }
 
