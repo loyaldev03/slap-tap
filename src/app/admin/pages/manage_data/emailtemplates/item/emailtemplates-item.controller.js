@@ -6,7 +6,7 @@
         .controller('EmailtemplatesItemController', EmailtemplatesItemController);
 
     /* @ngInject */
-    function EmailtemplatesItemController($scope, pageService ,toaster,$stateParams,$state, emailTemplateService) {
+    function EmailtemplatesItemController($scope, pageService ,toaster,$stateParams,$state, emailTemplateService, commonDialogService) {
 
         $scope.emailTemplate = {
             
@@ -39,16 +39,28 @@
             //     toaster.pop({type: 'error', body: 'Please fill all fields required'});
             //     return;
             // }
-
-            $scope.apply().then(function () {
-                $state.go('emailtemplates.list');
-            });
+            var send_test_yes = function(){
+                $scope.apply().then(function () {
+                    emailTemplateService.sendTestEmail($scope.emailTemplate.templateName)
+                    .then(function(){
+                        toaster.pop({type: 'success', body: 'Success'});
+                        $state.go('emailtemplates.list');                    
+                    });
+                });
+            }
+            var send_test_no = function() {
+                $scope.apply().then(function () {
+                    toaster.pop({type: 'success', body: 'Success'});
+                    $state.go('emailtemplates.list');                    
+                });
+            }
+            commonDialogService.openSendTestEmailDialog(event, 'Do you want to send test emails?', 'Yes', send_test_yes, send_test_no);
         };
 
         $scope.apply = function() {
             return $scope.update().then(
                 function () {
-                    toaster.pop({type: 'success', body: 'Success'});
+                    // toaster.pop({type: 'success', body: 'Success'});
                 },
                 function (err) {
                     // err.data.forEach(function (item) {
@@ -61,7 +73,7 @@
         $scope.activate = function() {
             $scope.emailTemplate.state = true;
             $scope.apply().then(function () {
-                // toaster.pop({type: 'success', body: 'Successfully Activated'});
+                toaster.pop({type: 'success', body: 'Successfully Activated'});
                 
             });            
         }
@@ -69,7 +81,7 @@
         $scope.deactivate = function() {
             $scope.emailTemplate.state = false;
             $scope.apply().then(function () {
-                // toaster.pop({type: 'success', body: 'Successfully Deactivated'});
+                toaster.pop({type: 'success', body: 'Successfully Deactivated'});
             });            
         }
 

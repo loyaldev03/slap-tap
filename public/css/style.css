@@ -21417,25 +21417,25 @@ md-select-menu {
   overflow-y: auto;
 }
 li.selfSLAP:before {
-  background-color: #9400D3;
+  background-color: #249587;
 }
 li.groupSLAP:before {
-  background-color: #4B0082;
+  background-color: #3f51b5;
 }
 li.monthlySLAP:before {
-  background-color: #0000FF;
+  background-color: #e91e62;
 }
 li.seriousSLAP:before {
-  background-color: #00FF00;
+  background-color: #db4437;
 }
 li.masterSLAP:before {
-  background-color: #FFFF00;
+  background-color: #fa9800;
 }
 li.teamSLAP:before {
-  background-color: #FF7F00;
+  background-color: #673ab7;
 }
 li.accessSLAP:before {
-  background-color: #FF0000;
+  background-color: #db4437;
 }
 md-dialog.activity-dialog {
   padding: 20px;

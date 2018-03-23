@@ -12,6 +12,7 @@
             .addCrumb({name: 'Dashboard', path: 'home'})
             .setPageTitle('Dashboard');
 
+        $scope.data = {};
         $timeout(activate);
         function activate() {
             loadStatistic();
@@ -51,43 +52,43 @@
                 var doughnutData = [
                     {
                         label: 'selfSLAP',
-                        color:"#9400D3",
+                        color:"#249587",
                         highlight: "#FF5A5E",
                         value: $scope.data.slapsters_by_program['selfSLAP']
                     },
                     {
                         label: 'groupSLAP',
-                        color: "#4B0082",
+                        color: "#3f51b5",
                         highlight: "#5AD3D1",
                         value: $scope.data.slapsters_by_program['groupSLAP']
                     },
                     {
                         label: 'monthlySLAP',
-                        color: "#0000FF",
+                        color: "#e91e62",
                         highlight: "#FFC870",
                         value: $scope.data.slapsters_by_program['monthlySLAP']
                     },
                     {
                         label: 'seriousSLAP',
-                        color: "#00FF00",
+                        color: "#db4437",
                         highlight: "#FFC870",
                         value: $scope.data.slapsters_by_program['seriousSLAP']
                     },
                     {
                         label: 'masterSLAP',
-                        color: "#FFFF00",
+                        color: "#fa9800",
                         highlight: "#FFC870",
                         value: $scope.data.slapsters_by_program['masterSLAP']
                     },
                     {
                         label: 'teamSLAP',
-                        color: "#FF7F00",
+                        color: "#673ab7",
                         highlight: "#FFC870",
                         value: $scope.data.slapsters_by_program['teamSLAP']
                     },
                     {
                         label: 'accessSLAP',
-                        color: "#FF0000",
+                        color: "#db4437",
                         highlight: "#FFC870",
                         value: $scope.data.slapsters_by_program['accessSLAP']
                     }                   
@@ -101,7 +102,7 @@
                 var current_month = (new Date()).getMonth();
                 var ordered_labels = [];
                 for (var i = 0; i < 12; i++) {
-                    ordered_labels.push(labels[(current_month + i)%12]);
+                    ordered_labels.push(labels[(current_month + i + 1)%12]);
                 }
                 console.log("----------------order labels----------------", ordered_labels);
                 var dataBarChart = {
@@ -502,6 +503,30 @@
                 });                
             })
         }
+
+        $scope.calcPercentForMonthlyRecurringRevenue = function() {
+            if ($scope.data.total_monthly_recurring_revenue && $scope.data.total_monthly_recurring_revenue[10] != 0) {
+                var percent = $scope.data.total_monthly_recurring_revenue[11] / $scope.data.total_monthly_recurring_revenue[10] * 100;
+                return (percent - 100); 
+            }            
+            return 0;                
+        }
+
+        $scope.calcPercentForNewSlapsters = function() {
+            if ($scope.data.new_slapsters && $scope.data.new_slapsters[10] != 0) {
+                var percent = $scope.data.new_slapsters[11] / $scope.data.new_slapsters[10] * 100;
+                return (percent - 100); 
+            }            
+            return 0;                
+        }
+
+        $scope.calcPercentForRenewedSlapsters = function() {
+            if ($scope.data.renewed_slapsters && $scope.data.renewed_slapsters[10] != 0) {
+                var percent = $scope.data.renewed_slapsters[11] / $scope.data.renewed_slapsters[10] * 100;
+                return (percent - 100); 
+            }            
+            return 0;                
+        }        
 
     }
 
