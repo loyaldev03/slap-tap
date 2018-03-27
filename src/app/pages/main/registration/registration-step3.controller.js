@@ -71,6 +71,7 @@
                                     cellPhone: vm.cellPhone,
                                     contactMethod:'',
                                     textNotes:'',}
+            vm.isAmex = false;
             $auth.signup(vm.user)
             .then(
                 function (response) {                        
@@ -141,6 +142,13 @@
           e.preventDefault();
           var url = $state.href('tos')
           window.open(url, '_blank');
+        }
+
+        vm.useAmex = function() {
+            vm.isAmex = true;
+        }
+        vm.useStandard = function() {
+            vm.isAmex = false;
         }
 
         function addNotification(notifications, newNotification) {
