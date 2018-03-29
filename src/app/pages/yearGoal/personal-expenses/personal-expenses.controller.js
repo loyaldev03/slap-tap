@@ -111,7 +111,7 @@
                 var expenses = [];
                 _.forEach($scope.data.expenses, function (value) {
 
-                    if (!angular.equals(value, $scope.emptyExpense)) {
+                    if (value && !angular.equals(value, $scope.emptyExpense)) {
                         expenses.push(value);
                     }
 
