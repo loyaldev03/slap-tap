@@ -395,7 +395,7 @@
 					<section  ng-if="revenueGrid.showDetail && revenueGrid.gridOptions.data.length >=1" class="over-table">
 
 
-						<div grid-data class='slap-grid' grid-options="revenueGrid.gridOptions" grid-actions="revenueGrid.gridActions">
+						<div grid-data class='slap-grid' grid-options="revenueGrid.gridOptions" grid-actions="revenueGrid.gridActions" ng-init="paginationOptions.itemsPerPage = '100000'">
 							<table  class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover">
 								<thead style="background-color: rgb(244, 244, 244);">
 									<tr style="font-style: normal; font-weight: normal; font-size: 10px; color: black;">

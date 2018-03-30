@@ -392,6 +392,10 @@
                 data.urlSync = false;
 
 
+                _.each(data.data, function(item) {
+                    item.dueDate = new Date(item.dueDate);
+                })
+                
                 $scope.gridData.push({
                     gridOptions: data,
                     gridActions: {},
