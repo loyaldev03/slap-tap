@@ -1,6 +1,12 @@
 
 <div layout="column" style="width: 100%;" class="reports-item-container">
 <md-card flex="100" class="p-es-30 m-w-es-40 card-reports">
+    <div class="pull-right" layout="row" layout-align="end start">
+        <button class="print" ng-click="printSlap()">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            Print
+        </button>
+    </div>    
     <form layout="row" layout-wrap layout-align="center center" name="form">
         <md-input-container  flex="100">
             <label >Name</label>
@@ -194,155 +200,145 @@
 </md-card>
 </div>
 
-<md-card ng-if="res.users.length > 0 || is_running" flex="100" class="p-es-30 m-w-es-40">
-    <section ng-if="!report.filter.slapStatus">         
-        <div class="pull-right">
-            <button class="print" ng-click="printSlap()">
-                <i class="fa fa-print" aria-hidden="true"></i>
-                Print
-            </button>
-        </div>
-        <div grid-data class='slap-grid' id="users-grid"
-         grid-options="gridData.gridOptions" grid-actions="gridData.gridActions" ng-if="dataReady">
-            <div layout-gt-sm="row" layout-sm="column" layout-align="center">
-                <div flex-gt-sm="100" flex-sm="100" layout="row" layout-align="start center">            
-                    <!-- <div layout-xs="column" layout="row" layout-align-xs="end end" layout-align="end center"> -->
-                        <md-input-container flex-offset-gt-xs="5" class="items-per-page">
-                            <md-select ng-init="paginationOptions.itemsPerPage=20" ng-model="paginationOptions.itemsPerPage" ng-change="reloadGrid()" aria-label="page-selector">
-                                
-                                <md-option value="5">5</md-option>
-                                <md-option value="10">10</md-option>
-                                <md-option value="20">20</md-option>
-                                <md-option value="50">50</md-option>
-                            </md-select>
-                        </md-input-container>
-                        <grid-pagination max-size="5"
-                        boundary-links="true"
-                        class="pagination mdl-shadow--2dp" 
-                        ng-if="paginationOptions.totalItems  > paginationOptions.itemsPerPage"
-                        total-items="paginationOptions.totalItems"
-                        ng-model="paginationOptions.currentPage"
-                        ng-change="reloadGrid()"
-                        items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
-                    <!-- </div> -->
+<div class="report-builder" print-section>
+    <md-card ng-if="res.users.length > 0 || is_running" flex="100" class="p-es-30 m-w-es-40">
+        <section ng-if="!report.filter.slapStatus">         
+            <div grid-data class='slap-grid' id="users-grid"
+             grid-options="gridData.gridOptions" grid-actions="gridData.gridActions" ng-if="dataReady">
+                <div layout-gt-sm="row" layout-sm="column" layout-align="center">
+                    <div flex-gt-sm="100" flex-sm="100" layout="row" layout-align="start center">            
+                        <!-- <div layout-xs="column" layout="row" layout-align-xs="end end" layout-align="end center"> -->
+                            <md-input-container flex-offset-gt-xs="5" class="items-per-page">
+                                <md-select ng-init="paginationOptions.itemsPerPage=20" ng-model="paginationOptions.itemsPerPage" ng-change="reloadGrid()" aria-label="page-selector">
+                                    
+                                    <md-option value="5">5</md-option>
+                                    <md-option value="10">10</md-option>
+                                    <md-option value="20">20</md-option>
+                                    <md-option value="50">50</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <grid-pagination max-size="5"
+                            boundary-links="true"
+                            class="pagination mdl-shadow--2dp" 
+                            ng-if="paginationOptions.totalItems  > paginationOptions.itemsPerPage"
+                            total-items="paginationOptions.totalItems"
+                            ng-model="paginationOptions.currentPage"
+                            ng-change="reloadGrid()"
+                            items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                        <!-- </div> -->
+                    </div>
                 </div>
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th sortable="businessName" class="sortable">
+                                <span>Business Name</span>
+                            </th>
+                            <th sortable="name" class="sortable">
+                                <span>First Name</span>
+                            </th>
+                            <th sortable="lastName" class="sortable">
+                                <span>Last Name</span>
+                            </th>
+                            <th sortable="email" class="sortable">
+                                <span>Email</span>
+                            </th>
+                            <th sortable="inBuild" class="sortable">
+                                <span>In Build</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr grid-item>
+                            <td>
+                                {{item.businessName}}
+                            </td>
+                            <td> 
+                                {{item.name}}
+                            </td> 
+                            <td>
+                                {{item.lastName}}
+                            </td> 
+                            <td>
+                                {{item.email}}
+                            </td> 
+                            <td>
+                                {{item.finishedSteps.length < 47 ? 'Yes' : 'No'}}
+                            </td> 
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>   
+        </section>
+        <section  ng-if="report.filter.slapStatus">         
+            <div grid-data class='slap-grid' id="users-grid"
+             grid-options="gridData.gridOptions" grid-actions="gridData.gridActions" ng-if="dataReady">
+                <div layout-gt-sm="row" layout-sm="column" layout-align="center">
+                    <div flex-gt-sm="100" flex-sm="100" layout="row" layout-align="start center">            
+                        <!-- <div layout-xs="column" layout="row" layout-align-xs="end end" layout-align="end center"> -->
+                            <md-input-container flex-offset-gt-xs="5" class="items-per-page">
+                                <md-select ng-init="paginationOptions.itemsPerPage=20" ng-model="paginationOptions.itemsPerPage" ng-change="reloadGrid()" aria-label="page-selector">
+                                    
+                                    <md-option value="5">5</md-option>
+                                    <md-option value="10">10</md-option>
+                                    <md-option value="20">20</md-option>
+                                    <md-option value="50">50</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <grid-pagination max-size="5"
+                            boundary-links="true"
+                            class="pagination mdl-shadow--2dp" 
+                            ng-if="paginationOptions.totalItems  > paginationOptions.itemsPerPage"
+                            total-items="paginationOptions.totalItems"
+                            ng-model="paginationOptions.currentPage"
+                            ng-change="reloadGrid()"
+                            items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                        <!-- </div> -->
+                    </div>
+                </div>         
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th sortable="businessName" class="sortable">
+                                <span>Business Name</span>
+                            </th>
+                            <th sortable="name" class="sortable">
+                                <span>First Name</span>
+                            </th>
+                            <th sortable="lastName" class="sortable">
+                                <span>Last Name</span>
+                            </th>
+                            <th sortable="email" class="sortable">
+                                <span>Email</span>
+                            </th>
+                            <th sortable="currentQuater" class="sortable">
+                                <span>Current Quater</span>
+                            </th>                        
+                            <th sortable="annualGoal" class="sortable">
+                                <span>Annual Goal</span>
+                            </th>
+                            <th sortable="quaterlyGoal" class="sortable">
+                                <span>Quaterly Goal</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr grid-item>
+                            <td>{{item.businessName}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.lastName}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.currentQuater}}</td> 
+                            <td>{{item.annualGoal | number: 2}}</td>
+                            <td>{{item.quaterlyGoal | number: 2}}</td>
+                        </tr>
+                    </tbody>
+                </table> 
             </div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover">
-                <thead>
-                    <tr>
-                        <th sortable="businessName" class="sortable">
-                            <span>Business Name</span>
-                        </th>
-                        <th sortable="name" class="sortable">
-                            <span>First Name</span>
-                        </th>
-                        <th sortable="lastName" class="sortable">
-                            <span>Last Name</span>
-                        </th>
-                        <th sortable="email" class="sortable">
-                            <span>Email</span>
-                        </th>
-                        <th sortable="inBuild" class="sortable">
-                            <span>In Build</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr grid-item>
-                        <td>
-                            {{item.businessName}}
-                        </td>
-                        <td> 
-                            {{item.name}}
-                        </td> 
-                        <td>
-                            {{item.lastName}}
-                        </td> 
-                        <td>
-                            {{item.email}}
-                        </td> 
-                        <td>
-                            {{item.finishedSteps.length < 47 ? 'Yes' : 'No'}}
-                        </td> 
-                    </tr>
-                </tbody>
-            </table> 
-        </div>   
-    </section>
-    <section  ng-if="report.filter.slapStatus">         
-        <div class="pull-right">
-            <button class="print" ng-click="printSlap()">
-                <i class="fa fa-print" aria-hidden="true"></i>
-                Print
-            </button>
-        </div>
-        <div grid-data class='slap-grid' id="users-grid"
-         grid-options="gridData.gridOptions" grid-actions="gridData.gridActions" ng-if="dataReady">
-            <div layout-gt-sm="row" layout-sm="column" layout-align="center">
-                <div flex-gt-sm="100" flex-sm="100" layout="row" layout-align="start center">            
-                    <!-- <div layout-xs="column" layout="row" layout-align-xs="end end" layout-align="end center"> -->
-                        <md-input-container flex-offset-gt-xs="5" class="items-per-page">
-                            <md-select ng-init="paginationOptions.itemsPerPage=20" ng-model="paginationOptions.itemsPerPage" ng-change="reloadGrid()" aria-label="page-selector">
-                                
-                                <md-option value="5">5</md-option>
-                                <md-option value="10">10</md-option>
-                                <md-option value="20">20</md-option>
-                                <md-option value="50">50</md-option>
-                            </md-select>
-                        </md-input-container>
-                        <grid-pagination max-size="5"
-                        boundary-links="true"
-                        class="pagination mdl-shadow--2dp" 
-                        ng-if="paginationOptions.totalItems  > paginationOptions.itemsPerPage"
-                        total-items="paginationOptions.totalItems"
-                        ng-model="paginationOptions.currentPage"
-                        ng-change="reloadGrid()"
-                        items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
-                    <!-- </div> -->
-                </div>
-            </div>         
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover">
-                <thead>
-                    <tr>
-                        <th sortable="businessName" class="sortable">
-                            <span>Business Name</span>
-                        </th>
-                        <th sortable="name" class="sortable">
-                            <span>First Name</span>
-                        </th>
-                        <th sortable="lastName" class="sortable">
-                            <span>Last Name</span>
-                        </th>
-                        <th sortable="email" class="sortable">
-                            <span>Email</span>
-                        </th>
-                        <th sortable="currentQuater" class="sortable">
-                            <span>Current Quater</span>
-                        </th>                        
-                        <th sortable="annualGoal" class="sortable">
-                            <span>Annual Goal</span>
-                        </th>
-                        <th sortable="quaterlyGoal" class="sortable">
-                            <span>Quaterly Goal</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr grid-item>
-                        <td>{{item.businessName}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.lastName}}</td>
-                        <td>{{item.email}}</td>
-                        <td>{{item.currentQuater}}</td> 
-                        <td>{{item.annualGoal | number: 2}}</td>
-                        <td>{{item.quaterlyGoal | number: 2}}</td>
-                    </tr>
-                </tbody>
-            </table> 
-        </div>           
-    </section>
-</md-card>
+        </section>
+    </md-card>
 
-<md-card ng-if="(!res.users || res.users.length == 0) && is_running" flex="100" class="p-es-50 m-w-es-40 ">
-    <h1>No matching slapsters </h1>
-</md-card>
+    <md-card ng-if="(!res.users || res.users.length == 0) && is_running" flex="100" class="p-es-50 m-w-es-40 ">
+        <h1>No matching slapsters </h1>
+    </md-card>
+</div>

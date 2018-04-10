@@ -76,6 +76,10 @@
                     journey: {section: 'q1', name: 'SLAPstuff Sent'}
                 },
                 {
+                    title: "Q1 Feedback Call",
+                    journey: {section: 'q1', name: 'Q1 Feedback'}
+                },
+                {
                     title: "SLAPbuddy Connected",
                     journey: {section: 'q2', name: 'SLAPbuddy Connected'}
                 },

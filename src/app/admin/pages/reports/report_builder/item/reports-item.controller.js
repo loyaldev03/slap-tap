@@ -6,7 +6,7 @@
         .controller('AdminReportsItemController', AdminReportsItemController);
 
     /* @ngInject */
-    function AdminReportsItemController($scope, allPartners, allExperts, $state, pageService, adminUserService, NgTableParams, $mdToast, $q, Restangular, $mdDialog, $timeout, $rootScope, commonDialogService, $stateParams, toaster, reportService, allProducts, allCoupons, actionplanService) {
+    function AdminReportsItemController($scope, allPartners, allExperts, $state, pageService, adminUserService, NgTableParams, $mdToast, $q, Restangular, $mdDialog, $timeout, $rootScope, commonDialogService, $stateParams, toaster, reportService, allProducts, allCoupons, actionplanService, $window) {
         angular.extend($scope,  {
             report: {},
             reportID: $stateParams.report_id,
@@ -182,7 +182,7 @@
         }
 
         function printSlap() {
-            window.print();
+            $window.print();
         }
 
         function getItemPerPage(value) {

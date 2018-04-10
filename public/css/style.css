@@ -21518,11 +21518,6 @@ md-dialog.execute-dialog md-datepicker input {
 .reports-item-container md-select {
   margin: 0px;
 }
-@media print and (color) {
-  .reports-item-container {
-    display: block;
-  }
-}
 #partner-report .slapster-detail {
   width: 500px;
 }
