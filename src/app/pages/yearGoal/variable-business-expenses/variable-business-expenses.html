@@ -90,7 +90,10 @@
                                             ng-blur="checkVariableExpenseCompleted(variableExpense, revenue, $event, $index, revenueIndex)"
                                             id="expense-{{revenueIndex}}-cost-{{$index}}"
                                             ng-keydown="checkValidity(variableExpense.cost, $event, $index, revenueIndex)"
-                                            ng-class="{'active': variableExpense.cost}" required>
+                                            ng-class="{'active': variableExpense.cost}" 
+                                            ng-currency 
+                                            fraction="2" 
+                                            required>
                                 </div>
                             </div>
 

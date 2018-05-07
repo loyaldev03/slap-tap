@@ -85,7 +85,7 @@
 
                 // if (lastItem.id == $scope.data.revenues.length) {  //If no empty item is added
                 //     force = true;
-                if(lastItem.name != '') {
+                if(!lastItem || lastItem.name != '') {
                     force = true;
                 } else {
                 }
@@ -208,7 +208,9 @@
                 _.each(nonDeleted, function(revenue) {
                     var totalVariableExpenses = 0;
                     _.each(revenue.variableExpenses, function(variableExpense) {
-                        totalVariableExpenses += +variableExpense.cost;
+                        if (variableExpense && variableExpense.cost) {
+                            totalVariableExpenses += +variableExpense.cost;
+                        }
                     });
 
                     revenue.totalVExp = totalVariableExpenses;
@@ -285,8 +287,14 @@
             });
             _.each(nonDeleted, function(revenue) {
                 var totalVariableExpenses = 0;
+                revenue.margin = revenue.margin == "NaN" ? 0 : revenue.margin;
+                revenue.totalVExp = revenue.totalVExp == "NaN" ? 0 : revenue.totalVExp;
+                revenue.unit = revenue.unit == "NaN" ? 0 : revenue.unit;
                 _.each(revenue.variableExpenses, function(variableExpense) {
-                    totalVariableExpenses += +variableExpense.cost;
+                    if (variableExpense && variableExpense.cost) {
+                        variableExpense.cost = parseFloat(variableExpense.cost).toFixed(2);
+                        totalVariableExpenses += +variableExpense.cost;
+                    }
                 });
                 if (+revenue.sellingPrice != 0) {
                     revenue.margin = (+revenue.sellingPrice - totalVariableExpenses) / +revenue.sellingPrice * 100;
