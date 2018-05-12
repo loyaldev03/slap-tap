@@ -153,7 +153,6 @@
                     });
                 }
             } else {
-
                 if(direction == 'forward')
                     $state.go(nextprevStep.nextStep.sref); 
                 else if(direction == 'backward')
