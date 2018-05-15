@@ -22,7 +22,6 @@
     "gulp-watch": "*",
     "gulp-webserver": "*",
     "main-bower-files": "*",
-    "ng-currency": "^1.2.5",
     "rimraf": "*"
   },
   "devDependencies": {

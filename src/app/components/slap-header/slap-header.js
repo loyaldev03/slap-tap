@@ -52,8 +52,19 @@
                     $state.go('home');
 
                 })
-
             }
+
+            this.gotoSlapSchool = function() {
+                amplitude.getInstance().logEvent('SLAPSCHOOL');
+                $state.go('slapSchool');
+            }
+
+            this.gotoSlapworld = function() {
+                amplitude.getInstance().logEvent('SLAPWORLD');
+                $state.go('slapWorld');
+            }
+
+
         },
         templateUrl: 'components/slap-header/slap-header.html'
     };

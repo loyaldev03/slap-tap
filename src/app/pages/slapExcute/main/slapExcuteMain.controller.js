@@ -512,6 +512,7 @@
         function updateItem($event) {
             if ($scope.curMode == 'add') {
                 if ($scope.formData.type == 'action') {
+                    amplitude.getInstance().logEvent('ADDACTIONITEMEXECUTE');
                     // formData holds the data now.
                     if ($scope.formData.recurrency == 'No Recurrency') {
                         $scope.excuteItems.post({
@@ -577,6 +578,7 @@
                         });
                     }
                 } else if ($scope.formData.type == 'sales') {
+                    amplitude.getInstance().logEvent('ADDSALES');
                     $scope.excuteItems.post($scope.formData).then(function(item){
                         $scope.excuteItems.push(item.data);
                         showToast('Added!');
