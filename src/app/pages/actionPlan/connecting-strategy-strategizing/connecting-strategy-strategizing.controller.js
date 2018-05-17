@@ -229,6 +229,7 @@
         function checkActionCompleted(action, monthID, evt, currentIndex) {
             if (action.title.trim() != '') {
                 addNewActions(monthID, evt, currentIndex);
+                amplitude.getInstance().logEvent('ADDACTIONITEMBUILD');
             } else {
             }
         }

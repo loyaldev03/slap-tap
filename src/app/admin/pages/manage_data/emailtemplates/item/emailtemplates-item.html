@@ -25,10 +25,25 @@
                             </md-select>                                
                             <div class="md-errors-spacer"></div>
                         </md-input-container>                                
-                        <br>
+                        <br/>
+                        <md-input-container flex="40">
+                            <label class="type-lable">Receiver</label>
+                            <md-select ng-model="emailTemplate.receiver">
+                                <md-option ng-value="'slapmanager'" ng-selected="true">Slapmanager</md-option>
+                                <md-option ng-value="'slapster'">Slapster</md-option>
+                            </md-select>                                
+                            <div class="md-errors-spacer"></div>
+                        </md-input-container>                                
+                        <br/>
+                        <md-input-container class="md-block">
+                            <label>Description</label>
+                            <textarea ng-model="emailTemplate.templateDescription"></textarea>
+                        
+                        </md-input-container>
+                        <br/>
                         <hr>
                         <md-input-container class="md-block">
-                            <label>Title</label>
+                            <label>Email Subject Line</label>
                             <input required type="text" name="subject" ng-model="emailTemplate.subject"/>
                         </md-input-container>
                         <br/>
@@ -53,12 +68,7 @@
                         
                         </md-input-container>
                         <br/>
-                        <br/>
-                        <md-input-container class="md-block">
-                            <label>Description</label>
-                            <textarea ng-model="emailTemplate.templateDescription"></textarea>
-                        
-                        </md-input-container>                                                
+                                                
                         <!--<md-input-container class="md-block">
                             <label>Html Version</label>
                             <text-angular ng-model="emailTemplate.html"></textatext-angularrea>
