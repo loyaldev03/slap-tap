@@ -52,9 +52,9 @@
                             class="monthly-cost outline-0"
                             ng-keydown="$event.keyCode === 13 && checkRevenueCompleted(revenue, $event, $index)"
                             ng-blur="checkRevenueCompleted(revenue, $event, $index)"
-                            id="revenue-{{$index}}"
+                            id="revenue-{{revenue.id}}"
                             ng-class="{'active': revenue.name}" required
-                            placeholder="Add  Revenue">
+                            placeholder="Add  Revenue"> 
 
                         <span tabIndex="-1" class="delete-btn outline-0 pull-right" ng-click="deleteRevenue(revenue)" style="padding-top: 20px">
                             <i class="fa fa-trash" aria-hidden="true" ></i>

@@ -95,7 +95,7 @@
                 revenueModel.id = $scope.data.revenues.length + 1;
                 $scope.data.revenues.push(revenueModel);
                 $timeout(function () {
-                    var nextElemIndex = currentIndex +1;
+                    var nextElemIndex = model ? model.id + 1 : revenueModel.id
                     var elem = $('#revenue-' + nextElemIndex).focus();
                 });
             }
@@ -403,12 +403,13 @@
             var data = {};
 
             var revenues = [];
-            _.forEach($scope.data.revenues, function (value) {
-
-                if (value.name && value.name.trim() != '') {
-                    revenues.push(value);
+            _.forEach($scope.data.revenues, function (value, index) {
+                if (index == $scope.data.revenues.length - 1 && !(value.name && value.name.trim() != ''))
+                    return;
+                if (!(value.name && value.name.trim() != '')) {
+                    value.deleted = true;
                 }
-
+                revenues.push(value);                    
             });
             data.revenues = revenues;
 

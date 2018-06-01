@@ -96,7 +96,25 @@
             stepService.getApiData('whatsHappening') //TODO: Think over the dynamics url
                 .then(function (response) {
                     if (response && response.status === 200) {
-                        $scope.data = _.get(response, 'data.whatsHappening', []);
+                        var _data = [
+                            {
+                                "impactClient" : "",
+                                "impactBusiness" : ""
+                            },
+                            {
+                                "impactClient" : "",
+                                "impactBusiness" : ""
+                            },
+                            {
+                                "impactClient" : "",
+                                "impactBusiness" : ""
+                            },
+                            {
+                                "impactClient" : "",
+                                "impactBusiness" : ""
+                            },
+                        ];
+                        $scope.data = _.get(response, 'data.whatsHappening', _data);
                         _.each($scope.data, function(quarterly_data,qID) {
                             if (quarterly_data.impactBusiness) {
                                 $scope.impactBusinessChanged[qID] = true;
@@ -120,9 +138,16 @@
             // var resBusiness = $scope.impactBusinessChanged.every(function (quaterBusinessChanges) {
             //     return quaterBusinessChanges;
             // });
+            var valid = true;
+            _.each($scope.data, function(quarterly_data) {
+                valid = valid && (quarterly_data.impactBusiness && quarterly_data.impactBusiness != '') && (quarterly_data.impactClient && quarterly_data.impactClient != '') 
+            })
 
-            if (!checkValidation() && direction == 'forward') {
+            if (($scope.data.length != 4  || !valid) && direction == 'forward') {
                 addNotification($scope.notifications, { name: 'Happenings empty', type: 'error', message: 'You must build your plan for all 4 Quarters before you can go to the next step.', show: true });
+                $('body').animate({
+                    scrollTop: $("slap-notifications").offset().top
+                }, 400);                
                 return false;
             }
             stepService.updateActiveModel($scope);
@@ -167,14 +192,6 @@
                 existing.show = true;
             }
 
-        }
-
-        function checkValidation() {
-            var valid = true;
-            _.each($scope.data, function(quarterly_data) {
-                valid = valid && quarterly_data.impactBusiness && quarterly_data.impactClient 
-            })
-            return valid;
         }
 
         $scope.checkChanges = function (nthQut, arr) {
