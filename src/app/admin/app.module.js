@@ -17,6 +17,7 @@
                 'toaster',
                 'restangular',
                 'ngTable',
+                'ng-currency',
                 'frapontillo.bootstrap-switch',
                 'textAngular',
 

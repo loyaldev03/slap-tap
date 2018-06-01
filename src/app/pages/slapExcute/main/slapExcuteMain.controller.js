@@ -700,31 +700,27 @@
             _.each($scope.excuteItems, function(item){ //Count Actions
                 if(item.type != 'sales')
                     return;
-                if (item.progress == 100 && !$scope.revenues[+item.title - 1].deleted )
+                var item_revenue = getItemRevenue(+item.title);
+                if (item.progress == 100 && (item_revenue && !item_revenue.deleted) )
                     if (item.saleUnit) {
-                        tempClosedYearRevenue += item.saleUnit * +$scope.revenues[+item.title - 1].sellingPrice;                        
+                        tempClosedYearRevenue += item.saleUnit * +item_revenue.sellingPrice;                        
                     }
                 
                 if (!(moment(item.dueDate).isBetween($scope.quaters[$scope.filter.showQ - 1].start, $scope.quaters[$scope.filter.showQ - 1].end, 'day', '[]')))  
                     return;
                 
                 // /tempTotalQuaterRevenue += item.saleUnit * +$scope.revenues[+item.title - 1].sellingPrice;
-                if (item.progress == 100 && !$scope.revenues[+item.title - 1].deleted )
+                if (item.progress == 100 && (item_revenue && !item_revenue.deleted) )
                     if (item.saleUnit) {
-                        tempClosedQuaterRevenue += item.saleUnit * +$scope.revenues[+item.title - 1].sellingPrice;
+                        tempClosedQuaterRevenue += item.saleUnit * +item_revenue.sellingPrice;
                     }
             });
 
-            _.each($scope.quaters, function(quater){
-
-                for(var key in quater.units) {
-                    var revenue = _.find($scope.revenues, {name: key});
-                    if(revenue  && revenue.deleted == false) {
-                        tempTotalYearRevenue += (+revenue.sellingPrice) * (+quater.units[key]);
-                    }
-                }  
+            _.each($scope.revenues, function(revenue) {
+                if (revenue && revenue.deleted == false) {
+                    tempTotalYearRevenue += (+revenue.sellingPrice) * (+revenue.unit);
+                }
             })
-
             for(var key in $scope.currentQuater.units) {
                 var revenue = _.find($scope.revenues, {name: key});
                 if(revenue  && revenue.deleted == false) {
@@ -757,6 +753,17 @@
         }
         function deleteItem(item) {
 
+        }
+
+        function getItemRevenue(id) {
+            var revenue = null;
+            _.each($scope.revenues, function(_revenue) {
+                if (_revenue.id == id) {
+                    revenue = _revenue;
+                    return;
+                }
+            });
+            return revenue;
         }
 
         function showToast(message) {
