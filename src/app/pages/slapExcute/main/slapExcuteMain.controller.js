@@ -362,7 +362,7 @@
             _.each($scope.revenues, function(revenue){
                 var data = {}; 
                 var salesItems = $scope.filteredSalesItems.filter(function(item){ return +item.title == +revenue.id; });
-
+                // $scope.filter.showQ = $scope.currentQuater.nth;
                 var totalSalesItemCount = 0;
                 if ($scope.filter.showQ != 5) {  //Quater
                     totalSalesItemCount = $scope.quaters[$scope.filter.showQ - 1].units[revenue.name];
@@ -706,7 +706,7 @@
                         tempClosedYearRevenue += item.saleUnit * +item_revenue.sellingPrice;                        
                     }
                 
-                if (!(moment(item.dueDate).isBetween($scope.quaters[$scope.filter.showQ - 1].start, $scope.quaters[$scope.filter.showQ - 1].end, 'day', '[]')))  
+                if (!(moment(item.dueDate).isBetween($scope.quaters[$scope.currentQuater.nth - 1].start, $scope.quaters[$scope.currentQuater.nth - 1].end, 'day', '[]')))  
                     return;
                 
                 // /tempTotalQuaterRevenue += item.saleUnit * +$scope.revenues[+item.title - 1].sellingPrice;
