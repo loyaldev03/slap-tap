@@ -26,6 +26,9 @@
                     <li><a ui-sref="myaccounts">Account</a></li>
                     <li><a ui-sref="payments">Payment History</a></li>
                     <li><a ui-sref="mySlap">My SLAP</a></li>
+                    <li><a ui-sref="mindset.ourCommitment">Go to Build</a></li>
+                    <li><a ui-sref="slapExcute.main">Go to Execute</a></li>
+
                     <li role="separator" class="divider"></li>
                     <li><a ng-click="$ctrl.logout()">Logout</a></li>
                 </ul>
@@ -47,6 +50,8 @@
                         <li><a ui-sref="myaccounts">Account</a></li>
                         <li><a ui-sref="payments">Payment History</a></li>
                         <li><a ui-sref="mySlap">My SLAP</a></li>
+                        <li><a ng-if="$ctrl.canGoToBuild()" ui-sref="mindset.ourCommitment">Go to Build</a></li>
+                        <li><a ng-if="$ctrl.canGoToExecute()" ui-sref="slapExcute.main">Go to Execute</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a ng-click="$ctrl.logout()">Logout</a></li>
                     </ul>

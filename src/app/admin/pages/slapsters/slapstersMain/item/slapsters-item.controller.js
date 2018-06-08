@@ -37,7 +37,8 @@
             openSlapexpertDialog: openSlapexpertDialog,
             dialogCharge: dialogCharge,
             openNotes: openNotes,
-
+            isItemReadMoreAvailable: isItemReadMoreAvailable,
+            isItemEditable: isItemEditable, 
 
             //Journey
             isJouneyItemDone: isJouneyItemDone,
@@ -118,7 +119,8 @@
             openDeleteItemDialog: openDeleteItemDialog,
             openManagerAccountabilityDialog: openManagerAccountabilityDialog,
             openManagerOnboardingDialog: openManagerOnboardingDialog,
-            openManagerExecuteDialog: openManagerExecuteDialog,            
+            openManagerExecuteDialog: openManagerExecuteDialog,    
+            openManagerDialog: openManagerDialog,        
             closeDialog: closeDialog,
             updateItem: updateItem,
             updateNotes: updateNotes,
@@ -472,7 +474,8 @@
             // paymentsService.toggleSubscription($scope.user);
         }
 
-        function dialogCharge(type) {
+        function dialogCharge(type) {            
+
             charge(type);
             closeDialog();
         }
@@ -495,11 +498,25 @@
 
             paymentsService.chargeUser(product, $scope.userID)
                 .then(function(resp){
+                    missCall('SLAPexpert', 'Missed SE Call');
                     toaster.pop({type: 'success', body: 'Success'});
                     activatePayments();
                 }).catch(function(err){
-                    toaster.pop({type: 'error', body: 'Payment Failed.'});
+                    // toaster.pop({type: 'error', body: err.data.message});
                 });
+        }
+
+        function missCall(type, title) {
+            var missCallForm = {
+                type: type,
+                title: title,
+                extra: {},
+                notes: '',
+                userId: $scope.userID
+            }
+            $scope.formData = missCallForm;
+            $scope.updateNotes();                    
+
         }
         
         function toggleSMmilestone(item) {
@@ -594,6 +611,14 @@
             $mdDialog.hide();
         }
 
+        function isItemReadMoreAvailable(item) {
+            return !(item.title == 'Missed SM Call' || item.title == 'Missed SE Call')  
+        }
+
+        function isItemEditable(item) {
+            return !(item.title == 'Missed SM Call' || item.title == 'Missed SE Call')  
+        }
+
         function openItemDialog($event, mode, item) {
             $scope.curMode = mode;
             if ($scope.curMode == 'add') {
@@ -659,7 +684,7 @@
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
                 .title('Record Client Interaction?')
-                .textContent('Record Client Interaction?')
+                .textContent()
                 .ariaLabel('CIN')
                 .targetEvent($event)
                 .ok('Attended SLAPexpert Meeting - record CIN')
@@ -678,6 +703,30 @@
                             autoWrap: true
                         });
                     });
+        }
+
+        function openManagerDialog($event, item, meeting_type) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            var confirm = $mdDialog.confirm()
+                .title('Record Client Interaction?')
+                .textContent()
+                .ariaLabel('CIN')
+                .targetEvent($event)
+                .ok('Attended Meeting')
+                .cancel('Missed Meeting');            
+                $mdDialog.show(confirm).then(function() {
+                        if (meeting_type == 'onboarding') {
+                            openManagerOnboardingDialog($event, item);
+                        }
+                        else if (meeting_type == 'execute') {
+                            openManagerExecuteDialog($event, item)
+                        }
+                        else if (meeting_type == 'accountability') {
+                            openManagerAccountabilityDialog($event, item);
+                        }
+                    }, function() {
+                        missCall('SLAPmanager', 'Missed SM ' + meeting_type.charAt(0).toUpperCase() + meeting_type.slice(1) + " Call");
+                })
         }
         function openManagerAccountabilityDialog($event, item){
             var newForm = {
@@ -773,7 +822,7 @@
         }            
 
         function updateNotes($event, form) { 
-            if(form.$invalid) {
+            if(form && form.$invalid) {
                 toaster.pop({type: 'error', body: "You cannot finalize this process until all fields are completed.", timeout: 2000});
                 vm.buttonDisabled = false;
                 return;

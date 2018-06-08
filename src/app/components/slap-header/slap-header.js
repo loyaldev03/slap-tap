@@ -54,6 +54,25 @@
                 })
             }
 
+            this.canGoToBuild = function() {
+                console.log($rootScope.toState.name)
+                var buildStates = ['mindset', 'statement', 'idealClient', 'yeargoal', 'actionPlan', 'execute.livingDayToDay', 'execute.tourExecute'];
+                var result = true;
+                _.each(buildStates, function(state) {
+                    if ($rootScope.toState.name.indexOf(state) > -1) {
+                        result = false;
+                    }
+                })
+                return result;
+            }
+
+            this.canGoToExecute = function() {
+                if ($rootScope.toState.name != 'slapExcute.main') {
+                    return true;
+                }
+                else false;
+            }
+
             this.gotoSlapSchool = function() {
                 amplitude.getInstance().logEvent('SLAPSCHOOL');
                 $state.go('slapSchool');

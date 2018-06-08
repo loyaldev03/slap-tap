@@ -476,13 +476,13 @@
                 </button>
         </section>
         <section layout="row" flex="50" class="calls-ex-mn">
-                <button class="btn  btn-primary" ng-click="openManagerOnboardingDialog($event, item)">
+                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'onboarding')">
                     SLAPmanager Onboarding Call
                 </button>             
-                <button class="btn  btn-primary" ng-click="openManagerExecuteDialog($event, item)">
+                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'execute')">
                     SLAPmanager Execute Call
                 </button>
-                <button class="btn  btn-primary" ng-click="openManagerAccountabilityDialog($event, item)">
+                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'accountability')">
                     SLAPmanager Accountability Call
                 </button>
         </section>
@@ -623,11 +623,11 @@
                                 {{item.createdTime}}
                             </td>
                             <td>
-                                <a style="margin:0px" ng-click="openNotes($event, item)">Read more</a>
+                                <a style="margin:0px" ng-click="openNotes($event, item)" ng-if="isItemReadMoreAvailable(item)">Read more</a>
                             </td>
                             
                             <td>
-                                <a ng-click="openItemDialog($event, 'edit', item)"style="margin:0px">
+                                <a ng-click="openItemDialog($event, 'edit', item)" ng-if="isItemEditable(item)" style="margin:0px">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </a>
                                 <a ng-click="openDeleteItemDialog($event, item)" style="margin:0px">

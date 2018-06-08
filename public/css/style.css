@@ -21446,7 +21446,7 @@ md-dialog.activity-dialog a {
 }
 md-dialog.activity-dialog md-input-container {
   margin: 0px;
-  margin-top: 5px;
+  margin-top: 20px;
 }
 md-dialog.activity-dialog .md-label,
 md-dialog.activity-dialog md-slider-container span {
