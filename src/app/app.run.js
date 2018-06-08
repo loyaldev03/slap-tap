@@ -39,6 +39,15 @@
             $state.go('home');
         });
 
+        $('#agilecrm-button-chat').on('click', function() {
+            if (!$rootScope.user) {
+                amplitude.getInstance().logEvent('BUYCHAT');
+            }
+            else {
+                amplitude.getInstance().logEvent('SLAPSTERCHAT');                
+            }
+        });
+
         if ($auth.isAuthenticated()) {
             userService.loadUser().then(function (data) {
                 $rootScope.isReady = true;

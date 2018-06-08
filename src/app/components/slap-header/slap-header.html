@@ -24,8 +24,8 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a ui-sref="myaccounts">Account</a></li>
-                    <li><a ui-sref="payments">Payment History</a></li>
-                    <li><a ui-sref="mySlap">My SLAP</a></li>
+                    <li><a ng-click="$ctrl.gotoPaymentHistory()">Payment History</a></li>
+                    <li><a ng-click="$ctrl.gotoMySlap()">My SLAP</a></li>
                     <li><a ui-sref="mindset.ourCommitment">Go to Build</a></li>
                     <li><a ui-sref="slapExcute.main">Go to Execute</a></li>
 
@@ -35,7 +35,7 @@
 
             </div>
             <ul class="nav navbar-nav navbar-right hidden-xs">
-                <li><a ui-sref="get-help">get help</a></li>
+                <li><a ng-click="$ctrl.getHelp()">get help</a></li>
                 <li><a ng-click="$ctrl.gotoSlapSchool()">slapschool</a></li>
                 <li><a ng-click="$ctrl.gotoSlapworld()">slapworld</a></li>                
                 <li class='dropdown pull-right profile-dropdown'>
@@ -48,8 +48,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a ui-sref="myaccounts">Account</a></li>
-                        <li><a ui-sref="payments">Payment History</a></li>
-                        <li><a ui-sref="mySlap">My SLAP</a></li>
+                        <li><a ng-click="$ctrl.gotoPaymentHistory()">Payment History</a></li>
+                        <li><a ng-click="$ctrl.gotoMySlap()">My SLAP</a></li>
                         <li><a ng-if="$ctrl.canGoToBuild()" ui-sref="mindset.ourCommitment">Go to Build</a></li>
                         <li><a ng-if="$ctrl.canGoToExecute()" ui-sref="slapExcute.main">Go to Execute</a></li>
                         <li role="separator" class="divider"></li>
@@ -69,7 +69,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $ctrl.user.name }}<i class="fa fa-chevron-down" aria-hidden="true"></i></i></a>
                         <ul class="dropdown-menu">
-                            <li><a ui-sref="payments">Payments</a></li>
+                            <li><a ng-click="$ctrl.gotoPaymentHistory()">Payments</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a ng-click="$ctrl.logout()">Logout</a></li>
                         </ul>

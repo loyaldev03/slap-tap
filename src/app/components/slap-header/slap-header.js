@@ -83,7 +83,20 @@
                 $state.go('slapWorld');
             }
 
+            this.gotoMySlap = function() {
+                amplitude.getInstance().logEvent('MYSLAP');
+                $state.go('mySlap');
+            }
 
+            this.gotoPaymentHistory = function() {
+                amplitude.getInstance().logEvent('PAYMENTS');
+                $state.go('payments');                
+            }
+
+            this.getHelp = function() {
+                amplitude.getInstance().logEvent('GETHELP');
+                $state.go('get-help');                                
+            }
         },
         templateUrl: 'components/slap-header/slap-header.html'
     };

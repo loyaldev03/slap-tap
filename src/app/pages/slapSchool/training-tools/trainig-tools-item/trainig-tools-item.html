@@ -32,7 +32,7 @@
                 <div class="container-video">
                     <div class="video-row">
                         <video-block-tools ng-repeat="item in videoUrl" class="video-block-600 vid-tol"
-                                     video="item" idvideo="$index">
+                                     video="item" idvideo="$index" ng-click="startTrainingVideo()">
 
                         </video-block-tools>
                     </div>
@@ -53,7 +53,7 @@
                                 <i class="fa fa-file-o" aria-hidden="true"></i>
                                 Document {{$index + 1}}
                             </span>
-                            <a  href="{{item.link}}" target="_blank"><i class="fa fa-download btn-dow"
+                            <a  href="{{item.link}}" target="_blank" ng-click="downloadTemplates()"><i class="fa fa-download btn-dow"
                                                                    aria-hidden="true"></i></a>
                         </button>
                     </div>

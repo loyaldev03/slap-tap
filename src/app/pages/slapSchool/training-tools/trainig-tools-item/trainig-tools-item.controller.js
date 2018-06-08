@@ -18,7 +18,12 @@
         $scope.docUrl = $scope.data.trainig.documents;
         $scope.videoUrl = $scope.data.trainig.videos;
 
-
+        $scope.startTrainingVideo = function() {
+            amplitude.getInstance().logEvent('SSVIDEOS');            
+        }
+        $scope.downloadTemplates = function() {
+            amplitude.getInstance().logEvent('SSTOOLS');            
+        }
 
     }
 }());

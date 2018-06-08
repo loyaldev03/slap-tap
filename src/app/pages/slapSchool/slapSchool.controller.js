@@ -42,8 +42,12 @@
         $scope.openTraining = function() {
             $state.go('slapSchool.trainingTools');
         }
-
+        
+        $scope.goToPastEvents = function() {
+            amplitude.getInstance().logEvent('SSARCHIVE');                                    
+        }
         $scope.isStart = function(start, duration, e, url) {
+            amplitude.getInstance().logEvent('SSJOIN');                        
             e.preventDefault();
             var now = moment();
             var start_ = moment(start);

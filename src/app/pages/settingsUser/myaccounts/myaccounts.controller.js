@@ -83,6 +83,7 @@
         }
 
         function saveBasic() {
+            amplitude.getInstance().logEvent('ACCOUNTUPDATE');
             userService.updateMe($scope.user).then(function(user){
                 $scope.user = user;
                 // toaster.pop({type: 'success', body: 'Info Saved!', timeout: 1000});
@@ -98,6 +99,7 @@
 
         
         function changePassword() {
+            amplitude.getInstance().logEvent('ACCOUNTUPDATE');
             userService.updateMe($scope.user).then(function(user){
                 $scope.user = user;
                 toaster.pop({type: 'success', body: 'Password Changed.', timeout: 1000});
@@ -119,6 +121,7 @@
             });     
         }
         function changeCreditCard() {
+            amplitude.getInstance().logEvent('CCUPDATE');
             userService.changeCreditCard($scope.user).then(function(user){
                 $scope.user = user;
                 $scope.user.card = null;
@@ -136,6 +139,7 @@
         
         function renewAccount() {
             //productStorage.resetStorage();
+            amplitude.getInstance().logEvent('ACCOUNTUPDATE');
             productStorage.setRenew();
             
             

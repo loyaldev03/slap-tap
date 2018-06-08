@@ -21,6 +21,10 @@
 
             resultPage: false,
             changeView: function() { 
+                if (!$scope.resultPage) {
+                    amplitude.getInstance().logEvent('REVIEW RESULTS');                
+
+                }
                 $scope.resultPage = !$scope.resultPage; 
                 $scope.filterSales();     //Main function to redraw grid
             },
@@ -478,7 +482,7 @@
                 });
 
             } else if (type == 'reflextion') {
-
+                amplitude.getInstance().logEvent('P&R');
                 if ($scope.curMode == 'add') {
                     $scope.tempReflextWhat = '';
                     var newForm = {
