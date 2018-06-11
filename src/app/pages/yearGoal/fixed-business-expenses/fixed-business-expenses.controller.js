@@ -35,7 +35,7 @@
         function getData() {
             // var urls = _.get($state.current, 'params.prev.sref').split('.');
             var url = 'personalExpenses';
-
+            getExpenses();
             // return stepService.getApiData(urls[urls.length - 1])
             return stepService.getApiData(url) //TODO: Think over the dynamics url
                 .then(function (response) {
@@ -47,10 +47,16 @@
                             $scope.data.procentFound = 30;
                         }
                         var presidentSalary = (response.data.personalExpenses.incidentals * 0.01) * response.data.personalExpenses.expensesSum + response.data.personalExpenses.expensesSum;
-                        if (!$scope.data.expenses[0] || $scope.data.expenses[0].expense != "President Salary") {                            
+                        var presidentExpense = null;
+                        $scope.data.expenses.forEach(function(expense){
+                            if (expense && expense.expense == 'President Salary') {
+                                presidentExpense = expense;
+                            }
+                        })
+                        if (!presidentExpense) {                            
                             $scope.data.expenses.unshift({expense: "President Salary", monthlyCost: presidentSalary});
                         } else {
-                            $scope.data.expenses[0].monthlyCost = presidentSalary;
+                            presidentExpense.monthlyCost = presidentSalary;
                         }
                         expensesSum();
                     }
@@ -161,10 +167,11 @@
             }
         });
 
-        $scope.getExpenses = function() {
+        function getExpenses() {
             var expenses = $scope.data.expenses.slice(1).filter(function(item){
                 return item;
             });
+            $scope._expenses = expenses;
             return expenses;
         }
     }

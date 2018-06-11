@@ -44,6 +44,7 @@
                 'app.directives',
                 'app.pages',
                 'ngFileUpload',
+                'dndLists'
             ]
         )
 })();

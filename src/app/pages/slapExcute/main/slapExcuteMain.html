@@ -225,8 +225,13 @@
 
 				<md-content style="height: auto">
 					<section >
-						<md-list class="text-color-main">
-							<md-list-item ng-repeat-start="item in filteredForListView()" ng-class="{'list-item-action': item.type=='action','list-item-sales': item.type=='sales','list-item-reflextion': item.type=='reflextion'} " layout="row">
+						<md-list class="text-color-main"  dnd-list="filteredForListView()">
+							<md-list-item ng-repeat-start="item in filteredForListView()" 
+	                        dnd-draggable="item"
+	                        dnd-moved="filteredForListView().splice($index, 1)"
+	                        dnd-effect-allowed="move"
+	                        dnd-selected="models.selected = item"
+	                        ng-class="{'selected': models.selected === item, 'list-item-action': item.type=='action','list-item-sales': item.type=='sales','list-item-reflextion': item.type=='reflextion'} " layout="row">
 								<slap-list-item item="item" title="{{item.type=='sales' ? revenues[item.title-1].name : (item.type=='reflextion' ? capitalize(item.reflextWhat) + 'ly Reflection' : item.title )}}" open-item-dialog="openItemDialog" open-delete-item-dialog="openDeleteItemDialog" layout="row" layout-align='space-between center' flex="100"></slap-list-item>
 							</md-list-item>
 							<md-divider ng-if="!$last" ng-repeat-end></md-divider>

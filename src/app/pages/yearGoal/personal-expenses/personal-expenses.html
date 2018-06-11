@@ -47,8 +47,48 @@
                     <div class="col-md-2"><h4>Monthly Expense</h4></div>
                     <div class="col-md-4"><h4>Yearly Expense</h4></div>
                 </div>
+                <ul dnd-list="data.expenses">
+                    <!-- The dnd-draggable directive makes an element draggable and will
+                         transfer the object that was assigned to it. If an element was
+                         dragged away, you have to remove it from the original list
+                         yourself using the dnd-moved attribute -->
+                    <li ng-repeat="item in data.expenses"
+                        dnd-draggable="item"
+                        dnd-moved="data.expenses.splice($index, 1)"
+                        dnd-effect-allowed="move"
+                        dnd-selected="models.selected = item"
+                        class="row item" 
+                        ng-class="{'selected': models.selected === item}"
+                        >
+                        <div class="col-md-5">
+                            <div class="input-box">
+                                <input ng-model="item.expense" type="text" id="expense-{{$index}}"
+                                       class="expense outline-0"
+                                       ng-keydown="$event.keyCode === 13 "
+                                       placeholder="Add Another Expense"
+                                       ng-class="{'active': item.expense}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-box">
+                                <span class="currency">$</span>
+                                <input ng-model="item.monthlyCost" type="text"
+                                       class="monthly-cost outline-0"
+                                       ng-blur="checkFormElements(item, $event)"
+                                       ng-keydown="$event.keyCode === 13 && checkFormElements(item, $event)"
+                                       ng-class="{'active': item.monthlyCost}" required>
+                            </div>
+                        </div>
+                        <div class="result result-height col-md-4">
+                            <div ng-show="item.monthlyCost">&#215;12 = ${{item.monthlyCost ? (item.monthlyCost * 12) : '' | number:2}}</div>
 
-                <div class="row margin-b-50 item" ng-repeat="item in data.expenses">
+                            <div class="delete-btn outline-0" tabIndex="-1" ng-click="deleteItem(item)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>  
+                <!-- <div class="row margin-b-50 item" ng-repeat="item in data.expenses">
                     <div class="col-md-5">
                         <div class="input-box">
                             <input ng-model="item.expense" type="text" id="expense-{{$index}}"
@@ -75,7 +115,7 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <hr>
                 <div class="row row-flex incidentals-wrap  m-t-es-10">
                     <div class="col-md-3 padd">

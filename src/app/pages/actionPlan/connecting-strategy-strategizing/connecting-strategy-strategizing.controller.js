@@ -28,6 +28,7 @@
 
 
             checkValidity: checkValidity,
+            removeOriginalActionItem: removeOriginalActionItem,
             notifications: [],
             defaultStrategies: actionplanService.getDefaultConnectingStrategies(),
             filterActionItemsByMonth: filterActionItemsByMonth,
@@ -62,12 +63,22 @@
 
 
         for (var i = 0; i < 12; i++) 
-        $scope.actionItemsByMonth[i] = [];
+            $scope.actionItemsByMonth[i] = [];
         $scope.actionItems.forEach(function(item){
             $scope.actionItemsByMonth[moment(item.dueDate).month()].push(item);
         });
        
-
+        for (var i = 0; i < 12; i++) {
+            for (var j = 0; j < $scope.actionItemsByMonth[i].length - 1; j++) {
+                for (var k = j+1; k < $scope.actionItemsByMonth[i].length; k++) {
+                    if ($scope.actionItemsByMonth[i][j].order > $scope.actionItemsByMonth[i][k].order) {
+                        var temp = $scope.actionItemsByMonth[i][j];
+                        $scope.actionItemsByMonth[i][j] = $scope.actionItemsByMonth[i][k];
+                        $scope.actionItemsByMonth[i][k] = temp;
+                    }
+                }
+            }
+        }
         function getData() {
             // var urls = _.get($state.current, 'params.prev.sref').split('.');
             var url = 'allMindsetUser';
@@ -269,6 +280,14 @@
             });
         }
         
+        function removeOriginalActionItem(monthID, index) {
+            $scope.actionItemsByMonth[monthID].forEach(function(action_item, _index) {
+                if (action_item.title == $scope.actionItemsByMonth[monthID][index].title) {
+                    $scope.actionItemsByMonth[monthID][_index] = $scope.actionItemsByMonth[monthID][index];
+                }
+            })
+            $scope.actionItemsByMonth[monthID].splice(index, 1);
+        }
         function sendData(direction) {
             //Validations Before sending Data
             if ((($scope.pageName == 'quarterlyGoals') || ($scope.pageName == 'commitToYourActionPlan')) && !checkQuaterUnitsValid()) { //quater units sum should same as quaterly goal.
@@ -347,10 +366,15 @@
                         else if(direction == 'backward')
                             $state.go(nextprevStep.prevStep.sref);
                     } else {
+                        for (var i = 0; i < 12; i++) {
+                            for (var j = 0; j < $scope.actionItemsByMonth[i].length; j++) {
+                                $scope.actionItemsByMonth[i][j].order = j;
+                            }
+                        }                        
                         $q.all($scope.actionItems.map(function(item){
                             if (item.title == '')
                                 return true;
-                            if (_.isUndefined(item._id)) {
+                            if (_.isUndefined(item._id) || !item._id) {
                                 return excuteItemService.createItem(item);
                             } else {
                                 return item.save();

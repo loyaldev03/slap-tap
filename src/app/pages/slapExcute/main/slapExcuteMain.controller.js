@@ -279,6 +279,11 @@
 
         function filteredForListView(){
             var results = [];
+            var i = 0;
+            // _.each(_.sortBy($scope.excuteItems, ['order']), function(e_item) {
+            //     e_item.order = i;
+            //     i += 1;
+            // });
             _.each($scope.excuteItems, function(item){
                 var isValid = true;
 
@@ -336,8 +341,7 @@
                     results.push(item);
             });
             return _.sortBy(results, ['dueDate']);
-             
-            
+            // return _.sortBy(results, ['order']);
         }
 
         function filterSales() {
