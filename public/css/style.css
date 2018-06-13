@@ -19257,6 +19257,7 @@ md-toast {
   margin-right: 30px;
 }
 .slap-excute .progress-container .progress-text-result p {
+  word-break: break-word;
   font-size: 1.3em;
   font-weight: 200;
 }
