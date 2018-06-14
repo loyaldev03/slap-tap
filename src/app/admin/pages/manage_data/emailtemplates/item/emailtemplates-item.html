@@ -41,13 +41,26 @@
                         
                         </md-input-container>
                         <br/>
-                        <hr>
                         <md-input-container class="md-block">
                             <label>Email Subject Line</label>
                             <input required type="text" name="subject" ng-model="emailTemplate.subject"/>
                         </md-input-container>
                         <br/>
                         <br/>
+                        <div ng-if="emailTemplate.templateName == 'weekly-report'">
+                            <md-input-container class="md-block">
+                                <label>Inspirational Quote</label>
+                                <textarea ng-model="emailTemplate.inspirational_quote"></textarea>
+                            </md-input-container>
+                            <br/>
+                            <br/>
+                            <md-input-container class="md-block">
+                                <label>Important Updates For Silver Lining</label>
+                                <textarea ng-model="emailTemplate.important_updates"></textarea>
+                            </md-input-container>
+                            <br/>
+                            <br/>         
+                        </div>               
                         <md-input-container class="md-block">
                             <label>Html Version</label>
                             <textarea ng-model="emailTemplate.html"></textarea>

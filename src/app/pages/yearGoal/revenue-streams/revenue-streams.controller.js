@@ -107,7 +107,12 @@
             }
             if ($scope.data.revenues.length === 0 || $scope.data.revenues.length === index + 1 || force) {
                 var revenueModel = _.cloneDeep($scope.emptyRevenue);
-                revenueModel.id = $scope.data.revenues.length + 1;
+                var id = 0;
+                $scope.data.revenues.forEach(function(revenue){
+                    if (id < revenue.id) id = revenue.id;
+                })
+                id = Math.max(id, $scope.data.revenues.length)
+                revenueModel.id = id + 1;
                 $scope.data.revenues.push(revenueModel);
                 $timeout(function () {
                     var nextElemIndex = model ? model.id + 1 : revenueModel.id
