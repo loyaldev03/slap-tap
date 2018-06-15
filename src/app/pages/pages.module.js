@@ -16,6 +16,8 @@
             'app.pages.getHelp',
             'app.pages.mySlap',
             'app.pages.slapWorld',
+            'app.pages.slapChallenge',
+            'app.pages.slapBenefits',
             'app.pages.tos'
             // 'app.pages.cart',
             // 'app.pages.media',
