@@ -203,6 +203,12 @@
 <div class="report-builder" print-section>
     <md-card ng-if="res.users.length > 0 || is_running" flex="100" class="p-es-30 m-w-es-40">
         <section ng-if="!report.filter.slapStatus">         
+            <div layout-gt-sm="row" layout-sm="column" layout-align="end">
+                <button ng-json-export-excel data="gridData.gridOptions.data" report-fields="excelReportFields", filename ="'report'" class="print">
+                    <i class="fa fa-print" aria-hidden="true"></i>
+                    Export                    
+                </button>
+            </div>
             <div grid-data class='slap-grid' id="users-grid"
              grid-options="gridData.gridOptions" grid-actions="gridData.gridActions" ng-if="dataReady">
                 <div layout-gt-sm="row" layout-sm="column" layout-align="center">
@@ -246,6 +252,15 @@
                             <th sortable="inBuild" class="sortable">
                                 <span>In Build</span>
                             </th>
+                            <th sortable="currentQuarter" class="sortable">
+                                <span>Q/M</span>
+                            </th>
+                            <th sortable="quarterlyGoalProgress" class="sortable">
+                                <span>Quarterly Goal</span>
+                            </th>
+                            <th sortable="annualGoalProgress" class="sortable">
+                                <span>Annual Goal</span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -265,6 +280,15 @@
                             <td>
                                 {{item.finishedSteps.length < 47 ? 'Yes' : 'No'}}
                             </td> 
+                            <td>
+                                {{item.currentQuater == 'Not Started!' ? item.currentQuater : item.currentMonth + " / " + item.currentQuater.number}}
+                            </td>
+                            <td>
+                                {{item.quaterlyGoal.toFixed(2)}}
+                            </td>
+                            <td>
+                                {{item.annualGoal.toFixed(2)}}
+                            </td>
                         </tr>
                     </tbody>
                 </table> 

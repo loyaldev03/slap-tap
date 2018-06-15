@@ -17,7 +17,10 @@
                 parent : 'admin',
                 url : '/home',
                 resolve: {
-                    allUsers: function (adminUserService, $state) {
+                    allUsers: function (adminUserService, $state, userService) {
+                        var user = userService.getStoredUser();
+                        if (user.role != adminUserService.ROLE_ADMIN) 
+                            $state.go('slapsters.list');                        
                         return adminUserService.list()
                         .then(function (response) {
                             return response.data;

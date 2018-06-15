@@ -158,12 +158,25 @@
         function runReportBuilder() {
             $scope.is_running = true;
             $scope.dataReady = false;
+            $scope.excelReportFields = {
+                businessName: 'Business Name',
+                name: 'First Name',
+                lastName: 'Last Name',
+                email: 'Email',
+                finishedStepsInfo: 'In Build',
+                currentQuaterInfo: 'Q/M',
+                quaterlyGoal: 'QuarterlyGoal',
+                annualGoal: 'AnnualGoal'
+            }
             return reportService.run($scope.report).then(function(res){
                 $scope.res = res.data;
                 var users = res.data.users;
                 var gridData = [];
                 users.forEach(function(user) {
+                    user.finishedStepsInfo = user.finishedSteps.length < 47 ? 'Yes' : 'No';
+                    user.currentQuaterInfo = user.currentQuater == 'Not Started!' ? user.currentQuater : user.currentMonth + " / " + user.currentQuater.number;
                     gridData.push(user);
+
                 })
                 $scope.gridData = {
                     gridOptions: {

@@ -31,6 +31,7 @@
             {permName: 'canUsers', 'sref': 'users.list', 'name': 'Users'},
             {permName: 'canTestUsers', 'sref': 'testusers.list', 'name': 'Test Users' },
             {permName: 'canAdmin', 'sref': 'admin.home', 'name': 'Admin'},
+            // {permName: 'canAdmin', 'sref': 'slapsters.list', 'name': 'Admin'},
             {permName: 'canDelete', 'sref': 'archive.list', 'name': 'Archived Accounts'},
             {permName: 'canBuild', 'sref': 'home', 'name': 'Build'},
             

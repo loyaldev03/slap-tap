@@ -33,7 +33,7 @@
             
             <ul class="nav navbar-nav navbar-right hidden-xs">
 
-                <li><a ui-sref="admin.home">Home</a></li>
+                <li ng-if='$ctrl.isSuperAdmin()'><a ui-sref="admin.home">Home</a></li>
                 <li class="dropdown">
                     <a ui-sref="slapsters.list">SLAPsters</a>
                 </li>
