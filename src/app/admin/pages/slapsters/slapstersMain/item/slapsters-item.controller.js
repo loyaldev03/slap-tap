@@ -39,6 +39,7 @@
             openNotes: openNotes,
             isItemReadMoreAvailable: isItemReadMoreAvailable,
             isItemEditable: isItemEditable, 
+            isSlapExpert: isSlapExpert,
 
             //Journey
             isJouneyItemDone: isJouneyItemDone,
@@ -935,6 +936,8 @@
         }
 
 
-    
+        function isSlapExpert() {
+            return ($scope.curUser.role == 2)            
+        }
 }
 }());

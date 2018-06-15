@@ -191,7 +191,7 @@
 
 
 
-<md-card flex="100" class="p-es-30 m-es-40 slapster-ideal-client-journey"  ng-init="showJourney = false">
+<md-card flex="100" class="p-es-30 m-es-40 slapster-ideal-client-journey"  ng-init="showJourney = false" ng-if="!isSlapExpert()">
     <section layout="row" layout-align="space-between center">
 
         <h3>Ideal Client Journey</h3>
@@ -382,7 +382,7 @@
 
 
 
-<md-card flex="100" class="p-es-30 m-es-40 slapster-payments"  ng-init="showPayments = false">
+<md-card flex="100" class="p-es-30 m-es-40 slapster-payments"  ng-init="showPayments = false" ng-if="!isSlapExpert()">
     <section layout="row" layout-align="space-between center">
 
         <h3>Payments</h3>
@@ -437,7 +437,7 @@
 </md-card>
 
 
-<md-card flex="100" class="p-es-30 m-es-40 slapster-slap-milestones"  ng-init="showSlapMilestones = false">
+<md-card flex="100" class="p-es-30 m-es-40 slapster-slap-milestones"  ng-init="showSlapMilestones = false" ng-if="!isSlapExpert()">
     <section layout="row" layout-align="space-between center">
 
         <h3>SLAPmanager Milestones</h3>
