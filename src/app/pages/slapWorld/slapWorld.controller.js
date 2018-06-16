@@ -15,7 +15,9 @@
         }
 
         $scope.goToConcierge = function() {
-        	$('.agilechaticon').click();
+			var iframe = document.getElementById("_agile_parent_container_frame");
+			var elmnt = iframe.contentWindow.document.getElementById("agilecrm-button-chat");
+			elmnt.click();
         }
 
         $scope.goToBenefits = function() {
