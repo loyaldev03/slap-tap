@@ -15,7 +15,7 @@
         }
 
         $scope.goToConcierge = function() {
-        	$('#agilecrm-button-chat').click();
+        	$('.agilechaticon').click();
         }
 
         $scope.goToBenefits = function() {
