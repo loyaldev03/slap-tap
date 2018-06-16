@@ -249,6 +249,9 @@
                             <th sortable="email" class="sortable">
                                 <span>Email</span>
                             </th>
+                            <th sortable="status" class="sortable">
+                                <span>Status</span>
+                            </th>
                             <th sortable="inBuild" class="sortable">
                                 <span>In Build</span>
                             </th>
@@ -277,6 +280,9 @@
                             <td>
                                 {{item.email}}
                             </td> 
+                            <td>
+                                {{item.status}}
+                            </td>
                             <td>
                                 {{item.finishedSteps.length < 47 ? 'Yes' : 'No'}}
                             </td> 

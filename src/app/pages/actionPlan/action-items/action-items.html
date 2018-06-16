@@ -94,6 +94,11 @@
                         </div>
                         <div class="slap-work-box m-t-es-40 col-xs-12" ng-init="showActionItemsBox=true">
                             <slap-work-moment-icon visible="showActionItemsBox"  type="'work'" title="'Action Items'"></slap-work-moment-icon>
+                            <div>
+                                <button class="delete-selected-items" ng-click='deleteSelectedItems()'>
+                                    Delete Selected Items
+                                </button>
+                            </div>
                             <div ng-show="showActionItemsBox" class="sample-show-hide">
                                 <div ng-repeat="monthID in QMonths[nthQut - 1]"  class="col-xs-12 col-sm-12">
                                     <p class="m-t-es-40">{{monthNames[monthID]}}</p>
@@ -109,7 +114,8 @@
                                             dnd-effect-allowed="move"
                                             dnd-selected="models.selected = item"
                                             class="row item" 
-                                            ng-class="{'selected': models.selected === item}"
+                                            ng-class="{'selected': models.selected === item, 'delete-selected': item.delete_selected}"
+                                            ng-click="item.delete_selected = !item.delete_selected"
                                             >
                                             <div class="input-box" 
                                                 style="width: calc(100% - 25px); display: inline-block">

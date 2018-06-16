@@ -21,6 +21,7 @@
             topRatingStrategies: [],
             checkActionCompleted: checkActionCompleted,
             deleteAction: deleteAction,
+            deleteSelectedItems: deleteSelectedItems,
             autoExpand: autoExpand,
             init: init,
             revenues: [],
@@ -65,6 +66,7 @@
         for (var i = 0; i < 12; i++) 
             $scope.actionItemsByMonth[i] = [];
         $scope.actionItems.forEach(function(item){
+            item.delete_selected = false;
             $scope.actionItemsByMonth[moment(item.dueDate).month()].push(item);
         });
        
@@ -282,12 +284,13 @@
         
         function removeOriginalActionItem(monthID, index) {
             $scope.actionItemsByMonth[monthID].forEach(function(action_item, _index) {
-                if (action_item.title == $scope.actionItemsByMonth[monthID][index].title) {
-                    $scope.actionItemsByMonth[monthID][_index] = $scope.actionItemsByMonth[monthID][index];
+                if (_index != index && action_item.title == $scope.actionItemsByMonth[monthID][index].title) {
+                    $scope.actionItemsByMonth[monthID][_index] = angular.copy($scope.actionItemsByMonth[monthID][index]);
                 }
             })
             $scope.actionItemsByMonth[monthID].splice(index, 1);
         }
+
         function sendData(direction) {
             //Validations Before sending Data
             if ((($scope.pageName == 'quarterlyGoals') || ($scope.pageName == 'commitToYourActionPlan')) && !checkQuaterUnitsValid()) { //quater units sum should same as quaterly goal.
@@ -450,6 +453,19 @@
                 }
             }
         }           
+
+        function deleteSelectedItems() {
+            $scope.actionItems.forEach(function(action) {
+                if (action.delete_selected && !_.isUndefined(action._id)) {
+                    var month = moment(action.dueDate).month()
+                    action.remove().then(function(response){
+                        _.remove($scope.actionItemsByMonth[month], function (n) {
+                            return n === action;
+                        });
+                    });
+                }
+            })
+        }
 
         function autoExpand(e) {
             var elements = typeof e === 'object' ? [e.target] : [].slice.call(document.getElementsByClassName(e));

@@ -163,10 +163,11 @@
                 name: 'First Name',
                 lastName: 'Last Name',
                 email: 'Email',
+                status: 'Status',
                 finishedStepsInfo: 'In Build',
                 currentQuaterInfo: 'Q/M',
                 quaterlyGoal: 'QuarterlyGoal',
-                annualGoal: 'AnnualGoal'
+                annualGoal: 'AnnualGoal',
             }
             return reportService.run($scope.report).then(function(res){
                 $scope.res = res.data;
@@ -174,7 +175,12 @@
                 var gridData = [];
                 users.forEach(function(user) {
                     user.finishedStepsInfo = user.finishedSteps.length < 47 ? 'Yes' : 'No';
-                    user.currentQuaterInfo = user.currentQuater == 'Not Started!' ? user.currentQuater : user.currentMonth + " / " + user.currentQuater.number;
+                    if (user.status == 'active') {
+                        user.currentQuaterInfo = user.currentQuater == 'Not Started!' ? user.currentQuater : user.currentMonth + " / " + user.currentQuater.number;
+                    }
+                    else {
+                        user.currentQuaterInfo = "";
+                    }
                     gridData.push(user);
 
                 })

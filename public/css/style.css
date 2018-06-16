@@ -18126,6 +18126,25 @@ md-toast {
 .slap-page .quater-tab-container {
   margin: 2em;
 }
+.slap-page .quater-tab-container .delete-selected-items {
+  outline: none;
+  box-shadow: none;
+  background: #0e7cb5;
+  border-radius: 100px;
+  border: solid 1.5px rgba(51, 68, 77, 0.1);
+  padding: 15px 30px;
+  font-size: 0.75em;
+  line-height: 0.88;
+  text-align: center;
+  margin: 20px;
+  color: white;
+  float: right;
+}
+.slap-page .quater-tab-container .delete-selected-items:hover {
+  opacity: 0.9;
+  background-color: #1694d7;
+  transition: all 0.2s ease-in-out 0.1s;
+}
 .slap-page .slap-work-box {
   border: solid 4px #576875;
   padding: 30px;
@@ -20917,7 +20936,12 @@ md-select-menu {
   width: 90vw;
   padding: 40px 30px;
 }
-.world-row .panel-world .btn-world {
+.world-row .panel-world .col-sm-6 {
+  text-align: center;
+}
+.world-row .panel-world .col-sm-6 .btn-world {
+  height: 150px;
+  width: 350px;
   outline: none;
   box-shadow: none;
   background: #0e7cb5;
@@ -20929,13 +20953,16 @@ md-select-menu {
   text-align: center;
   margin: 20px;
 }
-.world-row .panel-world .btn-world h2 {
+.world-row .panel-world .col-sm-6 .btn-world h2 {
   color: #ffffff;
 }
-.world-row .panel-world .btn-world:hover {
+.world-row .panel-world .col-sm-6 .btn-world:hover {
   opacity: 0.9;
   background-color: #1694D7;
   transition: all 0.2s ease-in-out 0.1s;
+}
+.world-row .panel-world .col-sm-6 .btn-world p {
+  line-height: 23px;
 }
 .go-excute-btn {
   position: relative;
@@ -21411,6 +21438,9 @@ ul[dnd-list] li {
   display: block;
   padding: 10px 15px;
   margin-bottom: -1px;
+}
+ul[dnd-list] li.delete-selected {
+  background-color: #eee;
 }
 .admin-content-root-container {
   font-size: 14px;
