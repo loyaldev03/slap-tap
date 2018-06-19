@@ -287,7 +287,7 @@
                                 {{item.finishedSteps.length < 47 ? 'Yes' : 'No'}}
                             </td> 
                             <td>
-                                {{item.currentQuater == 'Not Started!' ? item.currentQuater : item.currentMonth + " / " + item.currentQuater.number}}
+                                {{item.currentQuater == 'Not Started!' ? 'Not Started!' : item.currentQuater.number + " / " + item.currentMonth}}
                             </td>
                             <td>
                                 {{item.quaterlyGoal.toFixed(2)}}
