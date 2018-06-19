@@ -161,11 +161,11 @@
             
         }
 
-        $scope.$on('$stateChangeStart', function (event, toState, toStateParams) {
-            if ($scope.saved != true) {
-                sendData();
-            }
-        });
+        // $scope.$on('$stateChangeStart', function (event, toState, toStateParams) {
+        //     if ($scope.saved != true) {
+        //         sendData();
+        //     }
+        // });
     }
 
 }());
