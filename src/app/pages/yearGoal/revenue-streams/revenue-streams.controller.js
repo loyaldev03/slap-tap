@@ -33,11 +33,16 @@
             checkVariableExpenseCompleted: checkVariableExpenseCompleted,
             checkValidity: checkValidity,
             deleteRevenue: deleteRevenue,
+            deleteOriginalRevenueStream: deleteOriginalRevenueStream,
             deleteVariableExpense: deleteVariableExpense,
             calcHeight: calcHeight,
             doCalculation: doCalculation,
             saved: false
         });
+
+        // $scope.data.revenues = $scope.data.revenues.filter(function(revenue) {
+        //     return !revenue.deleted;
+        // })
 
         getData();
         $scope.models = {
@@ -453,6 +458,10 @@
             }
 
         }
+
+        function deleteOriginalRevenueStream(index) {
+            $scope.data.revenues.splice(index, 1)         
+        }        
         $scope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             if ($scope.saved != true) {
                 sendData();

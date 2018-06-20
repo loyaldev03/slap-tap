@@ -51,7 +51,7 @@
                          yourself using the dnd-moved attribute -->
                     <li ng-repeat="item in data.revenues | filter: {deleted: false}"
                         dnd-draggable="item"
-                        dnd-moved="data.revenues.splice($index, 1)"
+                        dnd-moved="deleteOriginalRevenueStream(data.revenues.indexOf(item))"
                         dnd-effect-allowed="move"
                         dnd-selected="models.selected = item"
                         ng-class="{'selected': models.selected === item}"

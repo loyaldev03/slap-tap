@@ -375,12 +375,23 @@
                             }
                         }                        
                         $q.all($scope.actionItems.map(function(item){
+                            if (item._id == '5ada44da3c2bcd1d9d60845c') {
+                                console.log();
+                            }                            
+                            for (var i = 0; i < 12; i++) {
+                                for (var j = 0; j < $scope.actionItemsByMonth[i].length; j++) {
+                                    if ($scope.actionItemsByMonth[i][j]._id == item._id) {
+                                        item.order = $scope.actionItemsByMonth[i][j].order
+                                    }
+                                }
+                            }                        
+
                             if (item.title == '')
                                 return true;
                             if (_.isUndefined(item._id) || !item._id) {
                                 return excuteItemService.createItem(item);
                             } else {
-                                return item.save();
+                                return excuteItemService.updateItem(item);
                             }
                         })).then(function(resp){
                             return stepService.sendApiData('worldAroundYou', data)
