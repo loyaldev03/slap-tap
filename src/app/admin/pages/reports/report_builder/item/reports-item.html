@@ -249,12 +249,6 @@
                             <th sortable="email" class="sortable">
                                 <span>Email</span>
                             </th>
-                            <th sortable="status" class="sortable">
-                                <span>Status</span>
-                            </th>
-                            <th sortable="inBuild" class="sortable">
-                                <span>In Build</span>
-                            </th>
                             <th sortable="currentQuarter" class="sortable">
                                 <span>Q/M</span>
                             </th>
@@ -279,12 +273,6 @@
                             </td> 
                             <td>
                                 {{item.email}}
-                            </td> 
-                            <td>
-                                {{item.status}}
-                            </td>
-                            <td>
-                                {{item.finishedSteps.length < 47 ? 'Yes' : 'No'}}
                             </td> 
                             <td>
                                 {{item.currentQuater == 'Not Started!' ? 'Not Started!' : item.currentQuater.number + " / " + item.currentMonth}}
