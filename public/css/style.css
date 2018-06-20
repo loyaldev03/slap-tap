@@ -18796,10 +18796,11 @@ md-toast {
   align-items: center;
 }
 .personal-expanses .form-box .item:hover {
-  background-color: #f8f8f8;
+  cursor: pointer;
+  background-color: #ccc;
 }
 .personal-expanses .form-box .item:hover .input-box input {
-  background-color: #f8f8f8;
+  background-color: #ccc;
 }
 .personal-expanses .form-box .item:hover .delete-btn {
   display: block;
@@ -19031,6 +19032,24 @@ md-toast {
   padding-left: 0px;
   font-size: 1em;
 }
+.revenue-page .slap-work-panel > div .item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 350px;
+  height: 50px;
+}
+.revenue-page .slap-work-panel > div .item:hover {
+  cursor: pointer;
+  background-color: #ccc;
+}
+.revenue-page .slap-work-panel > div .item:hover input {
+  background-color: #ccc;
+}
+.revenue-page .slap-work-panel > div .item .delete-btn {
+  display: block;
+  margin-left: 50px;
+}
 .revenue-selling-price {
   width: 30%;
 }
@@ -19053,6 +19072,31 @@ md-toast {
 }
 .world-around-you #quaterly-goal-table td {
   line-height: 3em;
+}
+.world-around-you .item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.world-around-you .item:hover {
+  cursor: pointer;
+  background-color: #ccc;
+}
+.world-around-you .item:hover input {
+  background-color: #ccc;
+}
+.world-around-you .item:focus {
+  outline: none;
+}
+.world-around-you .item .delete-btn {
+  display: block;
+  margin-left: 50px;
+}
+.world-around-you .item.delete-selected {
+  background-color: #0e7cb5;
+}
+.world-around-you .item.delete-selected input {
+  background-color: #0e7cb5;
 }
 .rate-connect-strategy #strategy-container {
   position: relative;
@@ -21436,11 +21480,8 @@ ul[dnd-list] li {
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
   display: block;
-  padding: 10px 15px;
+  padding: 2px 15px;
   margin-bottom: -1px;
-}
-ul[dnd-list] li.delete-selected {
-  background-color: #eee;
 }
 .admin-content-root-container {
   font-size: 14px;
