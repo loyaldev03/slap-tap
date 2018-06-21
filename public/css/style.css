@@ -21776,3 +21776,18 @@ ul li {
 .coupon-form h4 {
   text-align: center;
 }
+.slap-status h3 {
+  text-align: center;
+}
+.slap-status .status-list {
+  max-height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 10px 30px;
+}
+.slap-status .status-list .slapster-status {
+  padding: 5px;
+}
+.slap-status .slapstatus-read-more button {
+  float: right;
+}

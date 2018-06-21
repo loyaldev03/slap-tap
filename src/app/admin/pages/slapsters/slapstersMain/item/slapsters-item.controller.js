@@ -18,6 +18,7 @@
             paymentData: [],
             curUser: userService.getStoredUser(),
             excuteItems: excuteItems,
+            readMore: readMore,
             changeStripeSubscription: changeStripeSubscription,
             partners: partners,
             userData: [],
@@ -138,54 +139,56 @@
         function activate() {
             reloadData()
             .then(function(){
-                activatePayments();
+                getSlapStatus().then(function() {
+                    activatePayments();
 
-                initializeIdealJourney();
-                 activityService.list($stateParams.user_id)
-                .then(function (response) {
-                    $scope.activityData = response.data;
-                    buildActivityGridData();
-                }).catch(function (err) { console.log(err); $state.go('slapsters'); });
-            
+                    initializeIdealJourney();
+                     activityService.list($stateParams.user_id)
+                    .then(function (response) {
+                        $scope.activityData = response.data;
+                        buildActivityGridData();
+                    }).catch(function (err) { console.log(err); $state.go('slapsters'); });
                 
-
-                $scope.activityTypes
-                .filter(function(type){ return type.show = false; });
-
-                $scope.activityTypesSlice = $scope.activityTypes.slice(4);
-                
-                //remove slapassistant from dropdown for the type of client activity
-                $scope.activityTypesSlice = $scope.activityTypesSlice
-                .filter(function(type){ return type.name != 'SLAPassistant'; });
-
-
-                var startDate = ($scope.buildData && $scope.buildData.slapMindset && $scope.buildData.slapMindset.slapStartDate) ? $scope.buildData.slapMindset.slapStartDate : null;
-                $scope.startDate = startDate;
-
-                $scope.startPlan = $scope.user.planId;
-
-                //$scope.actFilter.startDate = new Date();
-                $scope.actFilter.endDate = new Date();
-     
-                if(!startDate)
-                    return;
                     
-                angular.extend($scope.quaters[0], _.merge(actionplanService.getNthQuater(startDate, 1), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[0] : {}));
-                angular.extend($scope.quaters[1], _.merge(actionplanService.getNthQuater(startDate, 2), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[1] : {}));
-                angular.extend($scope.quaters[2], _.merge(actionplanService.getNthQuater(startDate, 3), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[2] : {}));
-                angular.extend($scope.quaters[3], _.merge(actionplanService.getNthQuater(startDate, 4), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[3] : {}));
- 
-                $scope.startDate = $scope.quaters[0].start.toDate();
-                $scope.endDate = $scope.quaters[3].end.toDate();
 
-                $scope.actFilter.startDate = moment($scope.user.createdAt).format("MM/DD/YYYY");
-                $scope.actFilter.endDate = $scope.quaters[3].end.format("MM/DD/YYYY");
-                
-                $scope.today = moment.max(moment($scope.startDate), moment()).toDate(); //If the user haven't started the tracking yet.
+                    $scope.activityTypes
+                    .filter(function(type){ return type.show = false; });
 
-                $scope.revenues = ($scope.buildData && $scope.buildData.yearGoal && $scope.buildData.yearGoal.revenueStreams && $scope.buildData.yearGoal.revenueStreams.revenues) ? $scope.buildData.yearGoal.revenueStreams.revenues : null;
+                    $scope.activityTypesSlice = $scope.activityTypes.slice(4);
+                    
+                    //remove slapassistant from dropdown for the type of client activity
+                    $scope.activityTypesSlice = $scope.activityTypesSlice
+                    .filter(function(type){ return type.name != 'SLAPassistant'; });
 
-                doCalculation();
+
+                    var startDate = ($scope.buildData && $scope.buildData.slapMindset && $scope.buildData.slapMindset.slapStartDate) ? $scope.buildData.slapMindset.slapStartDate : null;
+                    $scope.startDate = startDate;
+
+                    $scope.startPlan = $scope.user.planId;
+
+                    //$scope.actFilter.startDate = new Date();
+                    $scope.actFilter.endDate = new Date();
+         
+                    if(!startDate)
+                        return;
+                        
+                    angular.extend($scope.quaters[0], _.merge(actionplanService.getNthQuater(startDate, 1), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[0] : {}));
+                    angular.extend($scope.quaters[1], _.merge(actionplanService.getNthQuater(startDate, 2), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[1] : {}));
+                    angular.extend($scope.quaters[2], _.merge(actionplanService.getNthQuater(startDate, 3), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[2] : {}));
+                    angular.extend($scope.quaters[3], _.merge(actionplanService.getNthQuater(startDate, 4), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[3] : {}));
+     
+                    $scope.startDate = $scope.quaters[0].start.toDate();
+                    $scope.endDate = $scope.quaters[3].end.toDate();
+
+                    $scope.actFilter.startDate = moment($scope.user.createdAt).format("MM/DD/YYYY");
+                    $scope.actFilter.endDate = $scope.quaters[3].end.format("MM/DD/YYYY");
+                    
+                    $scope.today = moment.max(moment($scope.startDate), moment()).toDate(); //If the user haven't started the tracking yet.
+
+                    $scope.revenues = ($scope.buildData && $scope.buildData.yearGoal && $scope.buildData.yearGoal.revenueStreams && $scope.buildData.yearGoal.revenueStreams.revenues) ? $scope.buildData.yearGoal.revenueStreams.revenues : null;
+
+                    doCalculation();
+                })
             });
         }
 
@@ -339,7 +342,14 @@
             });
         }
 
-
+        function getSlapStatus() {
+            return adminUserService.getSlapStatus($scope.userID)
+            .then(function(res) {
+                $scope.slapStatus = res.data;
+                $scope.isStatusReadMore = true;
+                return res;
+            })            
+        }
         function createOrSave(event) {
             update().then(function(){
                 toaster.pop({type: 'success', body: 'Success'});
@@ -348,6 +358,10 @@
                 $scope.user.couponId = null
                 toaster.pop({type: 'error', body: err.data.message});
             });
+        }
+
+        function readMore(event) {
+            $scope.isStatusReadMore = !$scope.isStatusReadMore
         }
 
         function changeStripeSubscription(event) {
