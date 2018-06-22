@@ -163,12 +163,11 @@
                 name: 'First Name',
                 lastName: 'Last Name',
                 email: 'Email',
-                status: 'Status',
-                finishedStepsInfo: 'In Build',
                 currentQuaterInfo: 'Q/M',
                 quaterlyGoal: 'QuarterlyGoal',
                 annualGoal: 'AnnualGoal',
             }
+            $scope.columnList = [""]
             return reportService.run($scope.report).then(function(res){
                 $scope.res = res.data;
                 var users = res.data.users;

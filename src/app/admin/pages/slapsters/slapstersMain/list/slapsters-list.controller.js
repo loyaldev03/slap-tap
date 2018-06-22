@@ -45,7 +45,7 @@
         }
         function reloadData() {
             $scope.dataloaded = false;
-            adminUserService.list()
+            return adminUserService.list()
             .then(function (response) {
                 var slapsters = response.data.filter(function(user) {
                     user.currentQuarter = user.currentQuater && user.currentQuater.number ? user.currentQuater.number : user.currentQuater

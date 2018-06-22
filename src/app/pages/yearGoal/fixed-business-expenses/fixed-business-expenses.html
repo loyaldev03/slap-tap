@@ -81,8 +81,8 @@
                         dnd-moved="data.expenses.splice($index,1)"
                         dnd-effect-allowed="move"
                         dnd-selected="models.selected = item"
-                        class="row" 
-                        ng-class="{'selected': models.selected === item, 'item': item.expense !== 'President Salary'}"
+                        class="row item" 
+                        ng-class="{'selected': models.selected === item"
                         >
                         <div class="col-md-5">
                             <div class="input-box">

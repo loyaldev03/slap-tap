@@ -122,10 +122,9 @@
 
   .item {
     display: flex;
-    align-items: center;
     margin-bottom: 10px;
     width: 350px;
-    height: 50px;
+    height: 70px;
     &:hover {
       cursor: pointer;
       background-color: #ccc;
@@ -134,9 +133,15 @@
       }
     }    
     .delete-btn {
-      display: block;
-      margin-left: 50px;        
+      display: flex;
+      margin-left: 50px;
+      align-items: center;
     }
+  }
+
+  .dndPlaceholder {
+    width: 310px;
+    height: 70px;
   }
 }
 .revenue-selling-price{

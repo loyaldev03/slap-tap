@@ -204,7 +204,7 @@
     <md-card ng-if="res.users.length > 0 || is_running" flex="100" class="p-es-30 m-w-es-40">
         <section ng-if="!report.filter.slapStatus">         
             <div layout-gt-sm="row" layout-sm="column" layout-align="end">
-                <button ng-json-export-excel data="gridData.gridOptions.data" report-fields="excelReportFields", filename ="'report'" class="print">
+                <button ng-json-export-excel data="gridData.gridOptions.data" report-fields="excelReportFields", filename ="'report'" class="print" report-fields="columnList">
                     <i class="fa fa-print" aria-hidden="true"></i>
                     Export                    
                 </button>
