@@ -75,13 +75,13 @@
             colorSales: '#00837f',
             colorReflextion: '#f8d144',
             colorProgress: '#38b636',
-            
             curMode: '',
             openItemDialog: openItemDialog,
             openDeleteItemDialog: openDeleteItemDialog,
             closeDialog: closeDialog,
             updateItem: updateItem,
             formData: {},
+            convertToStandardNumber: convertToStandardNumber,
 
             selectEmotion: selectEmotion,
             selectReflextWhat: selectReflextWhat,
@@ -833,6 +833,10 @@
             }*/
         }
 
+        function convertToStandardNumber(number) {
+            return number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
         function addAllReflextion(type) {
             var datesList = [];
             var endDate = moment($scope.endDate);
