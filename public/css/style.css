@@ -21784,6 +21784,7 @@ ul li {
 }
 .slapster-stats span {
   color: #828282;
+  margin-right: 5px;
 }
 .slapster-stats .slap-status h3 {
   text-align: center;

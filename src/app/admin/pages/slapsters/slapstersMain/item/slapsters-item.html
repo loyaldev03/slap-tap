@@ -255,7 +255,7 @@
                         </div>
                     </section>                    
                     <section layout="column" flex="50">
-                        <h4>SLAPmanager Accountability Calls</h4>
+                        <h4>SLAPmanager Calls</h4>
                         <div>
                             <span># of Scheduled Accountability Calls: </span>
                             {{slapStatus.fingers.slapmanager_calls.number_of_scheduled_accountability_calls}}
@@ -296,17 +296,22 @@
                         <div  ng-if="slapStatus.activities.length != 0">
                             <div class="most-recent-status">
                                 <span>Most Recent Status:</span>
-                                {{slapStatus.slapStatus.most_recent}}
+                                {{slapStatus.slapStatus.most_recent ? slapStatus.slapStatus.most_recent : "N/A"}}
                             </div>
                             <div class="overall-status">
-                                <span>Status- 30-day average:</span>{{slapStatus.slapStatus.last_30_status.overall_status}}
+                                <span>Status- 30-day average:</span>{{slapStatus.slapStatus.last_30_status.overall_status ? slapStatus.slapStatus.last_30_status.overall_status : "N/A"}}
                             </div>
                             <div class="overall-status">
-                                <span>Status- Program start to current date:</span>{{slapStatus.slapStatus.entire_status.overall_status}}
+                                <span>Status- Program start to current date:</span>{{slapStatus.slapStatus.entire_status.overall_status ? slapStatus.slapStatus.entire_status.overall_status : "N/A"}}
                             </div>
                             <div class="status-list" ng-if="isStatusReadMore != true">
-                                <div class="slapster-status" ng-repeat="activity in slapStatus.slapStatus.last_30_status.activities">
+                                <div class="slapster-status" ng-repeat="activity in slapStatus.slapStatus.entire_status.activities">
+                                    <div  ng-if="activity.by.name && activity.by.name != ''">
                                     {{activity.status}} by {{activity.by.name}} {{activity.by.lastName}} on {{activity.createdAt | monthName: 'MM'}} 
+                                    </div>
+                                    <div  ng-if="!(activity.by.name && activity.by.name != '')">
+                                    {{activity.status}} by Admin on {{activity.createdAt | monthName: 'MM'}} 
+                                    </div>                                    
                                 </div>
                             </div>
                             <div class="slapstatus-read-more">
