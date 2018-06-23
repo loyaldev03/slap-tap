@@ -61,6 +61,7 @@
                         accounts: account
                     });
                 });
+                $scope.slapsters = slapsters;
                 
                 $scope.dataloaded = true;
                 buildGridData();

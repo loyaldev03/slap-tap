@@ -20,7 +20,7 @@
     <section class="  sample-show-hide"  ng-show="showAtAGlance">
 
         <form layout="row" layout-wrap layout-align="center start" name="form">
-            <section layout="column" flex="50">
+            <section layout="column" flex="50"j>
                 <md-input-container >
                     <label>Business Name</label>
                     <input ng-disabled="!isAdmin()" ng-model="user.businessName" required name="businessName">
@@ -174,35 +174,6 @@
                     <input type="text" disabled value="0">
                     
                 </md-input-container>
-
-                <div class="slap-status">
-                    <h3> SLAPster Status </h3>
-                    <div  ng-if="slapStatus.activities.length != 0">
-                        <div class="most-recent-status">
-                            <label>Most Recent:</label>
-                            <span>{{slapStatus.most_recent}}</span>
-                        </div>
-                        <div class="overall-status">
-                            <label>Overall Status:</label>                        
-                            <span>{{slapStatus.overall_status}}</span>
-                        </div>
-                        <div class="status-list" ng-if="isStatusReadMore != true">
-                            <div class="slapster-status" ng-repeat="activity in slapStatus.activities">
-                                {{activity.status}} by {{activity.by.name}} {{activity.by.lastName}} on {{activity.createdAt | monthName: 'MM'}} 
-                            </div>
-                        </div>
-                        <div class="slapstatus-read-more">
-                            <md-button ng-disabled="!isAdmin()" ng-if="isStatusReadMore" ng-click="readMore()" class="md-primary" >
-                                Read More
-                            </md-button>                        
-                            <md-button ng-disabled="!isAdmin()" ng-if="!isStatusReadMore" ng-click="readMore()" class="md-primary" >
-                                Read Less
-                            </md-button>                        
-                        </div>
-                    </div>
-                    <div ng-if="slapStatus.activities.length == 0">
-                    </div>
-                </div>
             </section>
             
 
@@ -218,7 +189,143 @@
     </section>
 </md-card>
 
+<md-card flex="100" class="p-es-30 m-es-40 slapster-stats"  ng-init="showStats = false">
+    <section layout="row" layout-align="space-between center">
 
+        <h3 class="no-capitalize">SLAPster Stats</h3>
+        <button-switch visible="showStats"></button-switch>
+    </section>
+    <section class="sample-show-hide"  ng-show="showStats">
+        <div layout="row" layout-wrap layout-align="center start">
+            <section layout="column" flex="25">
+                <section layout="column" class="slap-stats-common-section">
+                    <h4>SLAPster Goals</h4>
+                    <div>
+                        <span>% of Annual Goals Hit: </span>{{slapStatus.slapGoals.annual_goal.toFixed(2)}}
+                    </div>
+                    <div>
+                        <span>% of Quarterly Goals Hit: </span>{{slapStatus.slapGoals.quarterly_goal.toFixed(2)}}
+                    </div>                    
+                </section>
+                <section layout="column" class="slap-stats-common-section slap-stats-long-section">
+                    <h4>3 SLAPhabits</h4>
+                    <div>
+                        <span># of Action Item Updates: </span>
+                        {{slapStatus.slapHabits.number_of_action_items}}
+                    </div>
+                    <div>
+                        <span># of Sales Goals Updates: </span>
+                        {{slapStatus.slapHabits.number_of_sales_goals}}
+                    </div>
+                    <div>
+                        <span># of Pause & Reflects: </span>
+                        {{slapStatus.slapHabits.number_of_reflections}}
+                    </div>
+                </section>
+            </section>
+            <section layout="column" flex="50">
+                <section flex="100" layout="row"  class="slap-stats-common-section non-bottom-border-section">
+                    <section layout="column" flex="30" class="border-right-section">
+                        <h4>SLAPworld</h4>
+                    </section>
+                    <section layout="column" flex="40" class="border-right-section border-bottom-section">
+                        <h4>SLAPcenter Logins</h4>
+                        <div>
+                            {{slapStatus.fingers.slapcenter_logins}}
+                        </div>
+                    </section>
+                    <section layout="column" flex="30">
+                        <h4>SLAPschool</h4>
+                    </section>                    
+                </section>
+                <section flex="100" layout="row" class="slap-stats-common-section slap-stats-long-section non-top-border-section">
+                    <section layout="column" flex="50"  class="border-right-section">
+                        <h4>SLAPexpert Meetings</h4>
+                        <div>
+                            <span># of Scheduled SLAPexpert Calls: </span>
+                            {{slapStatus.fingers.slapexpert_meetings.number_of_scheduled_slap_expert_calls}}
+                        </div>
+                        <div>
+                            <span># of Attended SLAPexpert Calls: </span>
+                            {{slapStatus.fingers.slapexpert_meetings.number_of_attended_slap_expert_calls}}
+                        </div>
+                        <div>
+                            <span># of Missed SLAPexpert Calls: </span>
+                            {{slapStatus.fingers.slapexpert_meetings.number_of_missed_slap_expert_calls}}
+                        </div>
+                    </section>                    
+                    <section layout="column" flex="50">
+                        <h4>SLAPmanager Accountability Calls</h4>
+                        <div>
+                            <span># of Scheduled Accountability Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_scheduled_accountability_calls}}
+                        </div>
+                        <div>
+                            <span># of Attended Accountability Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_attended_accountability_calls}}
+                        </div>
+                        <div>
+                            <span># of Missed Accountability Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_missed_accountability_calls}}
+                        </div>                        
+                        <div>
+                            <span># of Scheduled Onboarding or Execute Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_scheduled_onboarding_execute_calls}}
+                        </div>                        
+                        <div>
+                            <span># of Attended Onboarding or Execute Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_attended_onboarding_execute_calls}}
+                        </div>                        
+                        <div>
+                            <span># of Missed Onboarding or Execute Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_missed_onboarding_execute_calls}}
+                        </div>                        
+                    </section>                    
+                </section>
+            </section>
+            <section layout="column" flex="25">
+                <section flex="100" layout="column" class="slap-stats-common-section">
+                    <h4>SLAPscore</h4>
+                    <div>
+                        <span>{{slapStatus.slapScore.toFixed(0)}} out of 100</span>
+                    </div>
+                </section>
+                <section flex="100" layout="column" class="slap-stats-common-section slap-stats-long-section">
+                    <div class="slap-status">
+                        <h4> SLAPster Status </h4>
+                        <div  ng-if="slapStatus.activities.length != 0">
+                            <div class="most-recent-status">
+                                <span>Most Recent Status:</span>
+                                {{slapStatus.slapStatus.most_recent}}
+                            </div>
+                            <div class="overall-status">
+                                <span>Status- 30-day average:</span>{{slapStatus.slapStatus.last_30_status.overall_status}}
+                            </div>
+                            <div class="overall-status">
+                                <span>Status- Program start to current date:</span>{{slapStatus.slapStatus.entire_status.overall_status}}
+                            </div>
+                            <div class="status-list" ng-if="isStatusReadMore != true">
+                                <div class="slapster-status" ng-repeat="activity in slapStatus.slapStatus.last_30_status.activities">
+                                    {{activity.status}} by {{activity.by.name}} {{activity.by.lastName}} on {{activity.createdAt | monthName: 'MM'}} 
+                                </div>
+                            </div>
+                            <div class="slapstatus-read-more">
+                                <md-button ng-disabled="!isAdmin()" ng-if="isStatusReadMore" ng-click="readMore()" class="md-primary" >
+                                    Read More
+                                </md-button>                        
+                                <md-button ng-disabled="!isAdmin()" ng-if="!isStatusReadMore" ng-click="readMore()" class="md-primary" >
+                                    Read Less
+                                </md-button>                        
+                            </div>
+                        </div>
+                        <div ng-if="slapStatus.activities.length == 0">
+                        </div>
+                    </div>                    
+                </section>
+            </section>
+        </div>
+    </section>
+</md-card>
 
 <md-card flex="100" class="p-es-30 m-es-40 slapster-ideal-client-journey"  ng-init="showJourney = false" ng-if="!isSlapExpert()">
     <section layout="row" layout-align="space-between center">
