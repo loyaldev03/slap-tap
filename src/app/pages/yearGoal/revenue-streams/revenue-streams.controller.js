@@ -33,13 +33,33 @@
             checkVariableExpenseCompleted: checkVariableExpenseCompleted,
             checkValidity: checkValidity,
             deleteRevenue: deleteRevenue,
+            deleteOriginalRevenueStream: deleteOriginalRevenueStream,
             deleteVariableExpense: deleteVariableExpense,
             calcHeight: calcHeight,
             doCalculation: doCalculation,
             saved: false
         });
 
+        // $scope.data.revenues = $scope.data.revenues.filter(function(revenue) {
+        //     return !revenue.deleted;
+        // })
+
         getData();
+        $scope.models = {
+            selected: null,
+            lists: {"A": [], "B": []}
+        };
+
+        // Generate initial model
+        for (var i = 1; i <= 3; ++i) {
+            $scope.models.lists.A.push({label: "Item A" + i});
+            $scope.models.lists.B.push({label: "Item B" + i});
+        }
+        $scope.list = $scope.models.lists.A;
+        // Model to JSON for demo purpose
+        $scope.$watch('models', function(model) {
+            $scope.modelAsJson = angular.toJson(model, true);
+        }, true);
 
         var nextprevStep = stepService.getNextAndPrevStep();
         var urls = activeStep.sref.split('.');
@@ -85,17 +105,22 @@
 
                 // if (lastItem.id == $scope.data.revenues.length) {  //If no empty item is added
                 //     force = true;
-                if(lastItem.name != '') {
+                if(!lastItem || lastItem.name != '') {
                     force = true;
                 } else {
                 }
             }
             if ($scope.data.revenues.length === 0 || $scope.data.revenues.length === index + 1 || force) {
                 var revenueModel = _.cloneDeep($scope.emptyRevenue);
-                revenueModel.id = $scope.data.revenues.length + 1;
+                var id = 0;
+                $scope.data.revenues.forEach(function(revenue){
+                    if (id < revenue.id) id = revenue.id;
+                })
+                id = Math.max(id, $scope.data.revenues.length)
+                revenueModel.id = id + 1;
                 $scope.data.revenues.push(revenueModel);
                 $timeout(function () {
-                    var nextElemIndex = currentIndex +1;
+                    var nextElemIndex = model ? model.id + 1 : revenueModel.id
                     var elem = $('#revenue-' + nextElemIndex).focus();
                 });
             }
@@ -208,7 +233,9 @@
                 _.each(nonDeleted, function(revenue) {
                     var totalVariableExpenses = 0;
                     _.each(revenue.variableExpenses, function(variableExpense) {
-                        totalVariableExpenses += +variableExpense.cost;
+                        if (variableExpense && variableExpense.cost) {
+                            totalVariableExpenses += +variableExpense.cost;
+                        }
                     });
 
                     revenue.totalVExp = totalVariableExpenses;
@@ -285,8 +312,14 @@
             });
             _.each(nonDeleted, function(revenue) {
                 var totalVariableExpenses = 0;
+                revenue.margin = revenue.margin == "NaN" ? 0 : revenue.margin;
+                revenue.totalVExp = revenue.totalVExp == "NaN" ? 0 : revenue.totalVExp;
+                revenue.unit = revenue.unit == "NaN" ? 0 : revenue.unit;
                 _.each(revenue.variableExpenses, function(variableExpense) {
-                    totalVariableExpenses += +variableExpense.cost;
+                    if (variableExpense && variableExpense.cost) {
+                        variableExpense.cost = parseFloat(variableExpense.cost).toFixed(2);
+                        totalVariableExpenses += +variableExpense.cost;
+                    }
                 });
                 if (+revenue.sellingPrice != 0) {
                     revenue.margin = (+revenue.sellingPrice - totalVariableExpenses) / +revenue.sellingPrice * 100;
@@ -395,12 +428,13 @@
             var data = {};
 
             var revenues = [];
-            _.forEach($scope.data.revenues, function (value) {
-
-                if (value.name && value.name.trim() != '') {
-                    revenues.push(value);
+            _.forEach($scope.data.revenues, function (value, index) {
+                if (index == $scope.data.revenues.length - 1 && !(value.name && value.name.trim() != ''))
+                    return;
+                if (!(value.name && value.name.trim() != '')) {
+                    value.deleted = true;
                 }
-
+                revenues.push(value);                    
             });
             data.revenues = revenues;
 
@@ -424,6 +458,10 @@
             }
 
         }
+
+        function deleteOriginalRevenueStream(index) {
+            $scope.data.revenues.splice(index, 1)         
+        }        
         $scope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             if ($scope.saved != true) {
                 sendData();

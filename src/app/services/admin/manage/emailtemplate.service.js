@@ -25,5 +25,8 @@
             return emailtemplate.remove();
         }
 
+        this.sendTestEmail = function(template_name) {
+            return adminApiService.rest.all('emailtemplates').all('sendTestEmail').one(template_name).post();
+        }
     }
 }());

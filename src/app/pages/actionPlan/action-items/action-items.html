@@ -94,11 +94,49 @@
                         </div>
                         <div class="slap-work-box m-t-es-40 col-xs-12" ng-init="showActionItemsBox=true">
                             <slap-work-moment-icon visible="showActionItemsBox"  type="'work'" title="'Action Items'"></slap-work-moment-icon>
+                            <div>
+                                <button class="delete-selected-items" ng-click='deleteSelectedItems()'>
+                                    Delete Selected Items
+                                </button>
+                            </div>
                             <div ng-show="showActionItemsBox" class="sample-show-hide">
                                 <div ng-repeat="monthID in QMonths[nthQut - 1]"  class="col-xs-12 col-sm-12">
                                     <p class="m-t-es-40">{{monthNames[monthID]}}</p>
                                     
-                                    <div ng-repeat="action in actionItemsByMonth[monthID]">
+                                    <ul dnd-list="actionItemsByMonth[monthID]">
+                                        <!-- The dnd-draggable directive makes an element draggable and will
+                                             transfer the object that was assigned to it. If an element was
+                                             dragged away, you have to remove it from the original list
+                                             yourself using the dnd-moved attribute -->
+                                        <li ng-repeat="item in actionItemsByMonth[monthID]"
+                                            dnd-draggable="item"
+                                            dnd-moved="removeOriginalActionItem(monthID, $index)"
+                                            dnd-effect-allowed="move"
+                                            dnd-selected="models.selected = item"
+                                            class="row item" 
+                                            ng-class="{'selected': models.selected === item, 'delete-selected': item.delete_selected}"
+                                            ng-click="item.delete_selected = !item.delete_selected"
+                                            >
+                                            <div class="input-box" 
+                                                style="width: calc(100% - 25px); display: inline-block">
+                                                <input ng-model="item.title" type="text"
+                                                        class="monthly-cost outline-0 strategy-description" 
+                                                        ng-blur="checkActionCompleted(item, monthID, $event, $index)"
+                                                        placeholder="Add Action Item" 
+                                                        ng-change = "checkChanges(nthQut-1)" 
+                                                        ng-keydown="$event.keyCode === 13 && checkActionCompleted(item, monthID, $event, $index)"
+                                                        ng-keyup="autoExpand($event)" required 
+                                                        style="width: 100%; min-height: 40px"
+                                                        id="action-{{monthID}}-{{$index}}"></input>
+                                            </div>
+
+                                            <span class="delete-btn outline-0 pull-right" tabindex="-1" ng-click="deleteAction(item, monthID, nthQut-1)">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </span>
+
+                                        </li>
+                                    </ul>  
+                                    <!-- <div ng-repeat="action in actionItemsByMonth[monthID]">
 
                                         <div class="input-box" 
                                             style="width: calc(100% - 25px); display: inline-block">
@@ -116,7 +154,7 @@
                                         <span class="delete-btn outline-0 pull-right" tabindex="-1" ng-click="deleteAction(action, monthID, nthQut-1)">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

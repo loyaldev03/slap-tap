@@ -17960,10 +17960,11 @@ md-toast {
   outline: none;
 }
 .slap-page input {
-  border-bottom: 2px solid #0e7cb5;
+  border-bottom: 2px solid #87beda;
   border-top: 0;
   border-left: 0;
   border-right: 0;
+  font-size: 20px;
 }
 .slap-page .editable:hover {
   cursor: url('../images/pencil.svg'), pointer;
@@ -18104,6 +18105,9 @@ md-toast {
   border: none;
   border-bottom: 1px solid #ddd;
 }
+.slap-page .quater-letter-container .quater-letter.active {
+  outline: none;
+}
 .slap-page .quater-letter-container .quater-letter.active a {
   color: #373c37;
   background-color: #fff;
@@ -18122,6 +18126,25 @@ md-toast {
 }
 .slap-page .quater-tab-container {
   margin: 2em;
+}
+.slap-page .quater-tab-container .delete-selected-items {
+  outline: none;
+  box-shadow: none;
+  background: #0e7cb5;
+  border-radius: 100px;
+  border: solid 1.5px rgba(51, 68, 77, 0.1);
+  padding: 15px 30px;
+  font-size: 0.75em;
+  line-height: 0.88;
+  text-align: center;
+  margin: 20px;
+  color: white;
+  float: right;
+}
+.slap-page .quater-tab-container .delete-selected-items:hover {
+  opacity: 0.9;
+  background-color: #1694d7;
+  transition: all 0.2s ease-in-out 0.1s;
 }
 .slap-page .slap-work-box {
   border: solid 4px #576875;
@@ -18774,10 +18797,11 @@ md-toast {
   align-items: center;
 }
 .personal-expanses .form-box .item:hover {
-  background-color: #f8f8f8;
+  cursor: pointer;
+  background-color: #ccc;
 }
 .personal-expanses .form-box .item:hover .input-box input {
-  background-color: #f8f8f8;
+  background-color: #ccc;
 }
 .personal-expanses .form-box .item:hover .delete-btn {
   display: block;
@@ -19009,6 +19033,28 @@ md-toast {
   padding-left: 0px;
   font-size: 1em;
 }
+.revenue-page .slap-work-panel > div .item {
+  display: flex;
+  margin-bottom: 10px;
+  width: 350px;
+  height: 70px;
+}
+.revenue-page .slap-work-panel > div .item:hover {
+  cursor: pointer;
+  background-color: #ccc;
+}
+.revenue-page .slap-work-panel > div .item:hover input {
+  background-color: #ccc;
+}
+.revenue-page .slap-work-panel > div .item .delete-btn {
+  display: flex;
+  margin-left: 50px;
+  align-items: center;
+}
+.revenue-page .slap-work-panel > div .dndPlaceholder {
+  width: 310px;
+  height: 70px;
+}
 .revenue-selling-price {
   width: 30%;
 }
@@ -19031,6 +19077,31 @@ md-toast {
 }
 .world-around-you #quaterly-goal-table td {
   line-height: 3em;
+}
+.world-around-you .item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.world-around-you .item:hover {
+  cursor: pointer;
+  background-color: #ccc;
+}
+.world-around-you .item:hover input {
+  background-color: #ccc;
+}
+.world-around-you .item:focus {
+  outline: none;
+}
+.world-around-you .item .delete-btn {
+  display: block;
+  margin-left: 50px;
+}
+.world-around-you .item.delete-selected {
+  background-color: #0e7cb5;
+}
+.world-around-you .item.delete-selected input {
+  background-color: #0e7cb5;
 }
 .rate-connect-strategy #strategy-container {
   position: relative;
@@ -19254,6 +19325,8 @@ md-toast {
   margin-right: 30px;
 }
 .slap-excute .progress-container .progress-text-result p {
+  display: flex;
+  justify-content: center;
   font-size: 1.3em;
   font-weight: 200;
 }
@@ -20904,6 +20977,43 @@ md-select-menu {
     margin-top: 140px;
   }
 }
+.world-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.world-row .panel-world {
+  width: 90vw;
+  padding: 40px 30px;
+}
+.world-row .panel-world .col-sm-6 {
+  text-align: center;
+}
+.world-row .panel-world .col-sm-6 .btn-world {
+  height: 150px;
+  width: 350px;
+  outline: none;
+  box-shadow: none;
+  background: #0e7cb5;
+  border-radius: 100px;
+  border: solid 1.5px rgba(51, 68, 77, 0.1);
+  padding: 15px 30px;
+  font-size: 0.75em;
+  line-height: 0.88;
+  text-align: center;
+  margin: 20px;
+}
+.world-row .panel-world .col-sm-6 .btn-world h2 {
+  color: #ffffff;
+}
+.world-row .panel-world .col-sm-6 .btn-world:hover {
+  opacity: 0.9;
+  background-color: #1694D7;
+  transition: all 0.2s ease-in-out 0.1s;
+}
+.world-row .panel-world .col-sm-6 .btn-world p {
+  line-height: 23px;
+}
 .go-excute-btn {
   position: relative;
   z-index: 99999;
@@ -20961,6 +21071,7 @@ md-select-menu {
 }
 .calls-ex-mn {
   display: flex;
+  margin-bottom: 20px;
 }
 .calls-ex-mn button {
   margin-right: 10px;
@@ -21342,6 +21453,42 @@ md-select-menu {
 .slap-grid .sortable.sort-descent span:after {
   display: none;
 }
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+ul[dnd-list] {
+  min-height: 42px;
+  padding-left: 0px;
+}
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+ul[dnd-list] .dndPlaceholder {
+  background-color: #ddd;
+  display: block;
+  min-height: 42px;
+}
+ul[dnd-list] li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  display: block;
+  padding: 2px 15px;
+  margin-bottom: -1px;
+}
 .admin-content-root-container {
   font-size: 14px;
 }
@@ -21412,17 +21559,37 @@ md-select-menu {
   min-height: 90px;
   overflow-y: auto;
 }
+li.selfSLAP:before {
+  background-color: #249587;
+}
+li.groupSLAP:before {
+  background-color: #3f51b5;
+}
+li.monthlySLAP:before {
+  background-color: #e91e62;
+}
+li.seriousSLAP:before {
+  background-color: #db4437;
+}
+li.masterSLAP:before {
+  background-color: #fa9800;
+}
+li.teamSLAP:before {
+  background-color: #673ab7;
+}
+li.accessSLAP:before {
+  background-color: #db4437;
+}
 md-dialog.activity-dialog {
   padding: 20px;
   font-size: 16px;
-  max-height: initial;
 }
 md-dialog.activity-dialog a {
   cursor: pointer;
 }
 md-dialog.activity-dialog md-input-container {
   margin: 0px;
-  margin-top: 5px;
+  margin-top: 20px;
 }
 md-dialog.activity-dialog .md-label,
 md-dialog.activity-dialog md-slider-container span {
@@ -21459,6 +21626,32 @@ md-dialog-content {
 md-input-container lable {
   color: #9e9e9e;
   font-size: 12px;
+}
+md-dialog.execute-dialog {
+  padding: 20px;
+  font-size: 16px;
+}
+md-dialog.execute-dialog a {
+  cursor: pointer;
+}
+md-dialog.execute-dialog md-input-container {
+  margin: 0px;
+  margin-top: 30px;
+}
+md-dialog.execute-dialog .md-label,
+md-dialog.execute-dialog md-slider-container span {
+  color: #77848e;
+}
+md-dialog.execute-dialog md-checkbox.md-default-theme.md-checked .md-ink-ripple,
+md-dialog.execute-dialog md-checkbox.md-checked .md-ink-ripple {
+  color: #50cfe3;
+}
+md-dialog.execute-dialog md-checkbox.md-default-theme.md-checked .md-ink-ripple .md-icon,
+md-dialog.execute-dialog md-checkbox.md-checked .md-ink-ripple .md-icon {
+  background-color: #50cfe3;
+}
+md-dialog.execute-dialog md-datepicker input {
+  min-width: 200px;
 }
 .reports-item-container span.subtitle {
   text-decoration: underline;
@@ -21585,11 +21778,46 @@ ul li {
   .report-search {
     display: none ;
   }
-  .blue-mark {
-    background: inherit !important;
-    color: #50cfe3 !important;
-  }
 }
 .coupon-form h4 {
   text-align: center;
+}
+.slapster-stats span {
+  color: #828282;
+  margin-right: 5px;
+}
+.slapster-stats .slap-status h3 {
+  text-align: center;
+}
+.slapster-stats .slap-status .status-list {
+  max-height: 100px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 10px 30px;
+}
+.slapster-stats .slap-status .status-list .slapster-status {
+  padding: 5px;
+}
+.slapster-stats .slap-status .slapstatus-read-more button {
+  float: right;
+}
+.slapster-stats .slap-stats-common-section {
+  height: 100px;
+  border: 1px solid #828282;
+  text-align: center;
+}
+.slapster-stats .slap-stats-common-section.slap-stats-long-section {
+  height: 350px;
+}
+.slapster-stats .slap-stats-common-section.non-bottom-border-section {
+  border-bottom: none;
+}
+.slapster-stats .slap-stats-common-section.non-top-border-section {
+  border-top: none;
+}
+.slapster-stats .slap-stats-common-section .border-right-section {
+  border-right: 1px solid #828282;
+}
+.slapster-stats .slap-stats-common-section .border-bottom-section {
+  border-bottom: 1px solid #828282;
 }

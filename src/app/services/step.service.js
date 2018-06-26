@@ -873,6 +873,10 @@
         function setFinishActiveStep() {
             if (finishedSteps.indexOf(activeStepIndex) === -1) {
                 finishedSteps.push(activeStepIndex);
+                apiService.rest.all('setFinishedUserStep').post({
+                    finishedSteps: finishedSteps
+                });
+
                 return true; // This means that the activeStep is new and should make activity
             } 
             return false;

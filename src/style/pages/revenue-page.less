@@ -119,6 +119,30 @@
       font-size: 1em;
     }
   }
+
+  .item {
+    display: flex;
+    margin-bottom: 10px;
+    width: 350px;
+    height: 70px;
+    &:hover {
+      cursor: pointer;
+      background-color: #ccc;
+      input {
+        background-color: #ccc;
+      }
+    }    
+    .delete-btn {
+      display: flex;
+      margin-left: 50px;
+      align-items: center;
+    }
+  }
+
+  .dndPlaceholder {
+    width: 310px;
+    height: 70px;
+  }
 }
 .revenue-selling-price{
   width: 30%;

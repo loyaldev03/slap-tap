@@ -901,6 +901,13 @@
             });
         }
 
+        me.updateItem = function(item) {
+            return apiService.rest.all('updateExcuteItems').post(item).then(function (excuteItem) {
+                $rootScope.$broadcast('excuteItemsEvent');
+                return excuteItem;
+            });            
+        }
+
         me.createBulk = function(items) {
             return $q.all(items.map(function (item){
                 return me.rest().post(item);

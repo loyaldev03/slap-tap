@@ -18,6 +18,7 @@
             paymentData: [],
             curUser: userService.getStoredUser(),
             excuteItems: excuteItems,
+            readMore: readMore,
             changeStripeSubscription: changeStripeSubscription,
             partners: partners,
             userData: [],
@@ -37,7 +38,10 @@
             openSlapexpertDialog: openSlapexpertDialog,
             dialogCharge: dialogCharge,
             openNotes: openNotes,
-
+            isItemReadMoreAvailable: isItemReadMoreAvailable,
+            isItemEditable: isItemEditable, 
+            isSlapExpert: isSlapExpert,
+            isPermittedAction: isPermittedAction,
 
             //Journey
             isJouneyItemDone: isJouneyItemDone,
@@ -61,7 +65,7 @@
                 },
                 {
                     title: "Execute Call Set",
-                    journey: {section: 'excute', name: 'Execute Call Set'}
+                    journey: {section: 'onboard', name: 'Execute Call Set'}
                 },
                 {
                     title: "SE Calls Set",
@@ -74,6 +78,10 @@
                 {
                     title: "SLAPstuff Sent",
                     journey: {section: 'q1', name: 'SLAPstuff Sent'}
+                },
+                {
+                    title: "Q1 Feedback Call",
+                    journey: {section: 'q1', name: 'Q1 Feedback'}
                 },
                 {
                     title: "SLAPbuddy Connected",
@@ -114,6 +122,8 @@
             openDeleteItemDialog: openDeleteItemDialog,
             openManagerAccountabilityDialog: openManagerAccountabilityDialog,
             openManagerOnboardingDialog: openManagerOnboardingDialog,
+            openManagerExecuteDialog: openManagerExecuteDialog,    
+            openManagerDialog: openManagerDialog,        
             closeDialog: closeDialog,
             updateItem: updateItem,
             updateNotes: updateNotes,
@@ -130,54 +140,56 @@
         function activate() {
             reloadData()
             .then(function(){
-                activatePayments();
+                getSlapStatus().then(function() {
+                    activatePayments();
 
-                initializeIdealJourney();
-                 activityService.list($stateParams.user_id)
-                .then(function (response) {
-                    $scope.activityData = response.data;
-                    buildActivityGridData();
-                }).catch(function (err) { console.log(err); $state.go('slapsters'); });
-            
+                    initializeIdealJourney();
+                     activityService.list($stateParams.user_id)
+                    .then(function (response) {
+                        $scope.activityData = response.data;
+                        buildActivityGridData();
+                    }).catch(function (err) { console.log(err); $state.go('slapsters'); });
                 
-
-                $scope.activityTypes
-                .filter(function(type){ return type.show = false; });
-
-                $scope.activityTypesSlice = $scope.activityTypes.slice(4);
-                
-                //remove slapassistant from dropdown for the type of client activity
-                $scope.activityTypesSlice = $scope.activityTypesSlice
-                .filter(function(type){ return type.name != 'SLAPassistant'; });
-
-
-                var startDate = ($scope.buildData && $scope.buildData.slapMindset && $scope.buildData.slapMindset.slapStartDate) ? $scope.buildData.slapMindset.slapStartDate : null;
-                $scope.startDate = startDate;
-
-                $scope.startPlan = $scope.user.planId;
-
-                //$scope.actFilter.startDate = new Date();
-                $scope.actFilter.endDate = new Date();
-     
-                if(!startDate)
-                    return;
                     
-                angular.extend($scope.quaters[0], _.merge(actionplanService.getNthQuater(startDate, 1), $scope.buildData.actionPlan.whatsHappening[0]));
-                angular.extend($scope.quaters[1], _.merge(actionplanService.getNthQuater(startDate, 2), $scope.buildData.actionPlan.whatsHappening[1]));
-                angular.extend($scope.quaters[2], _.merge(actionplanService.getNthQuater(startDate, 3), $scope.buildData.actionPlan.whatsHappening[2]));
-                angular.extend($scope.quaters[3], _.merge(actionplanService.getNthQuater(startDate, 4), $scope.buildData.actionPlan.whatsHappening[3]));
- 
-                $scope.startDate = $scope.quaters[0].start.toDate();
-                $scope.endDate = $scope.quaters[3].end.toDate();
 
-                $scope.actFilter.startDate = moment($scope.user.createdAt).format("MM/DD/YYYY");
-                $scope.actFilter.endDate = $scope.quaters[3].end.format("MM/DD/YYYY");
-                
-                $scope.today = moment.max(moment($scope.startDate), moment()).toDate(); //If the user haven't started the tracking yet.
+                    $scope.activityTypes
+                    .filter(function(type){ return type.show = false; });
 
-                $scope.revenues = ($scope.buildData && $scope.buildData.yearGoal && $scope.buildData.yearGoal.revenueStreams && $scope.buildData.yearGoal.revenueStreams.revenues) ? $scope.buildData.yearGoal.revenueStreams.revenues : null;
+                    $scope.activityTypesSlice = $scope.activityTypes.slice(4);
+                    
+                    //remove slapassistant from dropdown for the type of client activity
+                    $scope.activityTypesSlice = $scope.activityTypesSlice
+                    .filter(function(type){ return type.name != 'SLAPassistant'; });
 
-                doCalculation();
+
+                    var startDate = ($scope.buildData && $scope.buildData.slapMindset && $scope.buildData.slapMindset.slapStartDate) ? $scope.buildData.slapMindset.slapStartDate : null;
+                    $scope.startDate = startDate;
+
+                    $scope.startPlan = $scope.user.planId;
+
+                    //$scope.actFilter.startDate = new Date();
+                    $scope.actFilter.endDate = new Date();
+         
+                    if(!startDate)
+                        return;
+                        
+                    angular.extend($scope.quaters[0], _.merge(actionplanService.getNthQuater(startDate, 1), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[0] : {}));
+                    angular.extend($scope.quaters[1], _.merge(actionplanService.getNthQuater(startDate, 2), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[1] : {}));
+                    angular.extend($scope.quaters[2], _.merge(actionplanService.getNthQuater(startDate, 3), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[2] : {}));
+                    angular.extend($scope.quaters[3], _.merge(actionplanService.getNthQuater(startDate, 4), $scope.buildData.actionPlan ? $scope.buildData.actionPlan.whatsHappening[3] : {}));
+     
+                    $scope.startDate = $scope.quaters[0].start.toDate();
+                    $scope.endDate = $scope.quaters[3].end.toDate();
+
+                    $scope.actFilter.startDate = moment($scope.user.createdAt).format("MM/DD/YYYY");
+                    $scope.actFilter.endDate = $scope.quaters[3].end.format("MM/DD/YYYY");
+                    
+                    $scope.today = moment.max(moment($scope.startDate), moment()).toDate(); //If the user haven't started the tracking yet.
+
+                    $scope.revenues = ($scope.buildData && $scope.buildData.yearGoal && $scope.buildData.yearGoal.revenueStreams && $scope.buildData.yearGoal.revenueStreams.revenues) ? $scope.buildData.yearGoal.revenueStreams.revenues : null;
+
+                    doCalculation();
+                })
             });
         }
 
@@ -234,9 +246,9 @@
             
 
 
-            $scope.revenues = $scope.revenues.filter(function(revenue) {
+            $scope.revenues = $scope.revenues ? $scope.revenues.filter(function(revenue) {
                 return (!revenue.deleted);
-            });
+            }) : {};
             _.each($scope.revenues, function(revenue, revenueID){
                 revenue.actualUnit = 0;
                 revenue.unit = 0;
@@ -331,16 +343,26 @@
             });
         }
 
-
+        function getSlapStatus() {
+            return adminUserService.getSlapStatus($scope.userID)
+            .then(function(res) {
+                $scope.slapStatus = res.data;
+                $scope.isStatusReadMore = true;
+                return res;
+            })            
+        }
         function createOrSave(event) {
             update().then(function(){
                 toaster.pop({type: 'success', body: 'Success'});
-                
             }).catch(function(err){
                 console.log(err);
                 $scope.user.couponId = null
                 toaster.pop({type: 'error', body: err.data.message});
             });
+        }
+
+        function readMore(event) {
+            $scope.isStatusReadMore = !$scope.isStatusReadMore
         }
 
         function changeStripeSubscription(event) {
@@ -403,6 +425,13 @@
             return null;
         }
 
+        function isExecuteCallHappened() {
+            var isEx = _.find($scope.activityData, {type: 'SLAPmanager', title: 'Execute Call'});
+            if (isEx)
+                return isEx;
+            return null;
+        }
+
 
 
         //Payments 
@@ -419,17 +448,50 @@
         function loadPayments() {
             return paymentsService.getStripePaymentsByUser($stateParams.user_id)
             .then(function (response) {
-                return $scope.paymentData = response.data;
+                $scope.paymentData = response.data;
+                //For Josh, we need to add manually payment history which is not existing in stripe
+                if ($stateParams.user_id == '59c1e0c4dcb3a054d970e9c5' || $stateParams.user_id == '5a53b6affac52d34ff6c6eb6') {
+                    var josh_data = paymentsService.getJoshPrevPaymentInStatic();
+                    $scope.paymentData =  $scope.paymentData.concat(josh_data);
+                }
+                //For Eduardo, we need to add manually payment history which is not existing in stripe
+                if ($stateParams.user_id == '5a36bac6c9d84206eb6e2f3c') {
+                    var eduardo_data = paymentsService.getEduardoPrevPaymentInStatic();
+                    $scope.paymentData =  $scope.paymentData.concat(eduardo_data);
+                }
+                var _paymentData = [];
+                _.each($scope.paymentData, function(payment){
+                    
+                    payment.paymentDT = new Date(payment.paymentDate);
+                    _paymentData.push(payment);
+                    if (payment.refunds) {
+                        payment.refunds.forEach(function(refund){
+                            var _payment = angular.copy(payment, {})
+                            _payment.amountCharges = (-1) * +refund.amount / 100;
+                            _paymentData.push(_payment)                            
+                        })
+                    }
+                })
+                $scope.paymentData = _paymentData;
+                return $scope.paymentData;
             }).catch(function(err) { console.log(err); $state.go('slapsters'); });
         }
 
         function togglePayment() {
-            $scope.user.pausingPayment = !$scope.user.pausingPayment;
-            createOrSave();
+            $scope.user.pausingPayment = !$scope.user.pausingPayment;                
+            createOrSave()
+            .then(function() {
+                // $scope.user.pausingPayment = !$scope.user.pausingPayment;                
+            })
+            .catch(function(err) {
+                $scope.user.pausingPayment = !$scope.user.pausingPayment;                
+                console.log(err);
+            })
             // paymentsService.toggleSubscription($scope.user);
         }
 
-        function dialogCharge(type) {
+        function dialogCharge(type) {            
+
             charge(type);
             closeDialog();
         }
@@ -452,11 +514,25 @@
 
             paymentsService.chargeUser(product, $scope.userID)
                 .then(function(resp){
+                    missCall('SLAPexpert', 'Missed SE Call');
                     toaster.pop({type: 'success', body: 'Success'});
                     activatePayments();
                 }).catch(function(err){
-                    toaster.pop({type: 'error', body: 'Payment Failed.'});
+                    // toaster.pop({type: 'error', body: err.data.message});
                 });
+        }
+
+        function missCall(type, title) {
+            var missCallForm = {
+                type: type,
+                title: title,
+                extra: {},
+                notes: '',
+                userId: $scope.userID
+            }
+            $scope.formData = missCallForm;
+            $scope.updateNotes();                    
+
         }
         
         function toggleSMmilestone(item) {
@@ -551,6 +627,14 @@
             $mdDialog.hide();
         }
 
+        function isItemReadMoreAvailable(item) {
+            return !(item.title == 'Missed SM Call' || item.title == 'Missed SE Call')  
+        }
+
+        function isItemEditable(item) {
+            return !(item.title == 'Missed SM Call' || item.title == 'Missed SE Call')  
+        }
+
         function openItemDialog($event, mode, item) {
             $scope.curMode = mode;
             if ($scope.curMode == 'add') {
@@ -616,10 +700,10 @@
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
                 .title('Record Client Interaction?')
-                .textContent('Record Client Interaction?')
+                .textContent()
                 .ariaLabel('CIN')
                 .targetEvent($event)
-                .ok('Attended Meeting - record CIN')
+                .ok('Attended SLAPexpert Meeting - record CIN')
                 .cancel('Missed Meeting - charge cancellation fee');
         
                 $mdDialog.show(confirm).then(function() {
@@ -635,6 +719,30 @@
                             autoWrap: true
                         });
                     });
+        }
+
+        function openManagerDialog($event, item, meeting_type) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            var confirm = $mdDialog.confirm()
+                .title('Record Client Interaction?')
+                .textContent()
+                .ariaLabel('CIN')
+                .targetEvent($event)
+                .ok('Attended Meeting')
+                .cancel('Missed Meeting');            
+                $mdDialog.show(confirm).then(function() {
+                        if (meeting_type == 'onboarding') {
+                            openManagerOnboardingDialog($event, item);
+                        }
+                        else if (meeting_type == 'execute') {
+                            openManagerExecuteDialog($event, item)
+                        }
+                        else if (meeting_type == 'accountability') {
+                            openManagerAccountabilityDialog($event, item);
+                        }
+                    }, function() {
+                        missCall('SLAPmanager', 'Missed SM ' + meeting_type.charAt(0).toUpperCase() + meeting_type.slice(1) + " Call");
+                })
         }
         function openManagerAccountabilityDialog($event, item){
             var newForm = {
@@ -706,8 +814,31 @@
             });
         }
 
+        function openManagerExecuteDialog($event, item) {
+            var newForm = {
+                type: 'SLAPmanager',
+                title: 'Execute Call',
+                extra: {
+                    typeForPopUp:'Execute Call',
+                },
+                notes: '',
+                userId: $scope.userID,
+            };
+
+            $scope.formData = newForm;
+            $mdDialog.show({
+                clickOutsideToClose: true,
+                targetEvent: $event,
+                scope: $scope,
+                preserveScope: true,
+                templateUrl: 'admin/components/dialogs/slapmanager-execute-dialog/slapmanager-execute-dialog.html',
+                controller: 'SlapManagerExecuteDialogController',
+                autoWrap: true
+            });            
+        }            
+
         function updateNotes($event, form) { 
-            if(form.$invalid) {
+            if(form && form.$invalid) {
                 toaster.pop({type: 'error', body: "You cannot finalize this process until all fields are completed.", timeout: 2000});
                 vm.buttonDisabled = false;
                 return;
@@ -820,6 +951,12 @@
         }
 
 
-    
+        function isSlapExpert() {
+            return ($scope.curUser.role == 2)            
+        }
+
+        function isPermittedAction(action_name) {
+            return permissionService.isPermittedAction(action_name);
+        }
 }
 }());

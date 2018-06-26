@@ -4,26 +4,74 @@
             <div class="panel panel-default">
 
                 <div class="panel-body">
-                    <!--<div class="row">-->
-                    <!--<h2 class="col-md-8">Manage Products</h2>-->
                     <div class="text-right">
-                        <!--<a class="btn btn-primary" ui-sref="coupon.add"><i class="fa fa-plus"></i> Add</a>-->
                     </div>
-                    <!--</div>-->
                     <hr>
+                    <div grid-data class='slap-grid' id="users-grid"
+                    grid-options="gridData.gridOptions" grid-actions="gridData.gridActions" ng-if="dataReady">
+                        <div layout-gt-sm="row" layout-sm="column" layout-align="center">
+                            <div flex-gt-sm="25" flex-sm="100" layout="row" layout-align="start center">
+                                <span>{{filtered.length}} items total</span>
+                            </div>
+                            <div flex-gt-sm="75" flex-xs="100">
+                                <div layout-xs="column" layout="row" layout-align-xs="end end" layout-align="end center">
+                                    <grid-pagination max-size="5"
+                                        boundary-links="true"
+                                        class="pagination mdl-shadow--2dp"
+                                        ng-if="paginationOptions.totalItems  > paginationOptions.itemsPerPage"
+                                        total-items="paginationOptions.totalItems"
+                                        ng-model="paginationOptions.currentPage"
 
-                    <table ng-table-dynamic="list with cols" class="table table-hover table-vertical-align ng-cloak">
-                        <tr ng-repeat="row in $data">
-                            <td ng-repeat="col in $columns" ng-switch="col.format" ng-class="col.style">
-                                <div ng-switch-when="raw" ng-bind-html="col.getValue(row)"></div>
-                                <div ng-switch-when="compile" compile="col.getValue(row)"></div>
-                                <div ng-switch-default ng-bind-html="col.getValue(row)"></div>
-                            </td>
-                        </tr>
-                        <tr ng-if="!list.data.length">
-                            <td colspan="{{cols.length}}" class="text-center">You do not have records for display</td>
-                        </tr>
-                    </table>
+                                        items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                                    <md-input-container flex-offset-gt-xs="5" class="items-per-page">
+                                        <md-select md-container-class="items-per-page" ng-change=getItemPerPage(paginationOptions.itemsPerPage) ng-init="paginationOptions.itemsPerPage = 10" ng-model="paginationOptions.itemsPerPage" ng-change="reloadGrid()" aria-label="page-selector">             
+                                            <md-option value="5">5</md-option>
+                                            <md-option value="10">10</md-option>
+                                            <md-option value="20">20</md-option>
+                                            <md-option value="50">50</md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover">
+                                <thead>
+                                    <tr>
+                                        <th sortable="name" class="sortable">
+                                            <span>Name</span>
+                                        </th>
+                                        <th sortable="receiver" class="sortable">
+                                            <span>Receiver</span>
+                                        </th>
+                                        <th sortable="state" class="sortable">
+                                            <span>State</span>
+                                        </th>
+                                        <th class="option">
+                                        </th>
+                                </thead>
+                                <tbody>
+                                    <tr grid-item>
+                                        <td>
+                                            <a ui-sref="emailtemplates.item({emailtemplate_name:item.templateName})">
+                                                {{item.name}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{item.receiver}}
+                                        </td>
+                                        <td>
+                                            {{!item.state ? 'Activated' : 'Deactivated'}}
+                                        </td>
+                                        <td>
+                                            <a ui-sref="emailtemplates.item({emailtemplate_name: item.templateName})">
+                                                <span class="glyphicon glyphicon-edit"></span> 
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>                    
                 </div>
             </div>
 

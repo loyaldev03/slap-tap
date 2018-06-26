@@ -16,4 +16,33 @@
       line-height: 3em
     }
   }
+
+  .item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    &:hover {
+      cursor: pointer;
+      background-color: #ccc;
+      input {
+        background-color: #ccc;
+      }
+    }
+    &:focus {
+      outline: none;
+    }    
+    .delete-btn {
+      display: block;
+      margin-left: 50px;        
+    }
+
+    &.delete-selected {
+      background-color: #0e7cb5;
+      input {
+        background-color: #0e7cb5;
+      }
+    }
+
+  }
+
 }

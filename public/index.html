@@ -28,6 +28,35 @@
     <link href="/css/custom/custom.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/print.css" type="text/css" media="print"/>
+
+    <!-- Amplitude Integration -->
+    <script type="text/javascript">
+    (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
+    ;r.type="text/javascript";r.async=true
+    ;r.src="https://cdn.amplitude.com/libs/amplitude-4.2.1-min.gz.js"
+    ;r.onload=function(){if(e.amplitude.runQueuedFunctions){
+    e.amplitude.runQueuedFunctions()}else{
+    console.log("[Amplitude] Error: could not load SDK")}}
+    ;var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)
+    ;function s(e,t){e.prototype[t]=function(){
+    this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));return this}}
+    var o=function(){this._q=[];return this}
+    ;var a=["add","append","clearAll","prepend","set","setOnce","unset"]
+    ;for(var u=0;u<a.length;u++){s(o,a[u])}n.Identify=o;var c=function(){this._q=[]
+    ;return this}
+    ;var l=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"]
+    ;for(var p=0;p<l.length;p++){s(c,l[p])}n.Revenue=c
+    ;var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut","setVersionName","setDomain","setDeviceId","setGlobalUserProperties","identify","clearUserProperties","setGroup","logRevenueV2","regenerateDeviceId","logEventWithTimestamp","logEventWithGroups","setSessionId","resetSessionId"]
+    ;function v(e){function t(t){e[t]=function(){
+    e._q.push([t].concat(Array.prototype.slice.call(arguments,0)))}}
+    for(var n=0;n<d.length;n++){t(d[n])}}v(n);n.getInstance=function(e){
+    e=(!e||e.length===0?"$default_instance":e).toLowerCase()
+    ;if(!n._iq.hasOwnProperty(e)){n._iq[e]={_q:[]};v(n._iq[e])}return n._iq[e]}
+    ;e.amplitude=n})(window,document);
+
+    amplitude.getInstance().init("4eaaab614b525afe6c6c1747fc7b3ffc");
+    </script>    
+    <!-- Amplitude Integration -->
 </head>
 <body sidebar-navigation-type="vertical" sidebar-nav-placement="left">
 
@@ -36,11 +65,16 @@
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
 </div>
+<!-- <div id="agilecrm-button-chat" class="agilecrm-button-chat inline f-middle">
+   <span class="agilechaticon"><i class="fa fa-comments"></i></span> 
+   <div class="agile-chat-unread-message-count hide">0</div>
+</div> -->
 <toaster-container></toaster-container>
 <div ui-view ng-class="{'fadeIn':true}" class="animated main-container">
 </div>
     <script src="/js/vendor.js"></script>  
     <script src="/js/app.min.js"></script>
+    <!-- <script src="/bower_components/ng-currency/dist/ng-currency.js"></script>     -->
     <!-- jQuery Library -->
     <script type="text/javascript" src="/js/plugins/jquery-1.11.2.min.js"></script>    
     <!--materialize js-->
@@ -91,5 +125,12 @@
     //     }, 15000);
     // });
     </script>
+    <script id="_agile_min_js" async type="text/javascript" src="https://d1gwclp1pmzk26.cloudfront.net/agile/agile-cloud.js"> </script>
+    <script type="text/javascript" >
+    var Agile_API = Agile_API || {}; Agile_API.on_after_load = function(){
+    _agile.set_account('8kv5hq4kf6k3qtrv3u1hmaqudn', 'silverlining');
+    _agile.track_page_view();
+    _agile_execute_web_rules();};
+    </script>    
 </body>
 </html>

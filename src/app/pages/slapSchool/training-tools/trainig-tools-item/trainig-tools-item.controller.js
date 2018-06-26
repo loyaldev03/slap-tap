@@ -18,7 +18,9 @@
         $scope.docUrl = $scope.data.trainig.documents;
         $scope.videoUrl = $scope.data.trainig.videos;
 
-
+        $scope.downloadTemplates = function() {
+            amplitude.getInstance().logEvent('SSTOOLS');            
+        }
 
     }
 }());

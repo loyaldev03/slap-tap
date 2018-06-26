@@ -28,10 +28,11 @@
     </div>
 
     <slap-notifications notifications="notifications" ></slap-notifications>
+                 
+
     <div class="panel panel-default">
 
         <div class="panel-body slap-work-panel">
-
             <button-switch visible="showContent"></button-switch>
 
             <p class="logo panel-title">ACTION</p>
@@ -43,7 +44,33 @@
                         Revenue Streams
                     </div>
                 </div>
-                <div class="revenue-row" ng-repeat="revenue in data.revenues | filter:{deleted: false}">
+                <ul dnd-list="data.revenues">
+                    <!-- The dnd-draggable directive makes an element draggable and will
+                         transfer the object that was assigned to it. If an element was
+                         dragged away, you have to remove it from the original list
+                         yourself using the dnd-moved attribute -->
+                    <li ng-repeat="item in data.revenues | filter: {deleted: false}"
+                        dnd-draggable="item"
+                        dnd-moved="deleteOriginalRevenueStream(data.revenues.indexOf(item))"
+                        dnd-effect-allowed="move"
+                        dnd-selected="models.selected = item"
+                        ng-class="{'selected': models.selected === item}"
+                        class="row item" 
+                        >
+                        <input ng-model="item.name" type="text"
+                        class="monthly-cost outline-0"
+                        ng-keydown="$event.keyCode === 13 && checkRevenueCompleted(item, $event, $index)"
+                        ng-blur="checkRevenueCompleted(item, $event, $index)"
+                        id="revenue-{{item.id}}"
+                        ng-class="{'active': item.name}" required
+                        placeholder="Add  Revenue"> 
+
+                        <span tabIndex="-1" class="delete-btn outline-0 pull-right" ng-click="deleteRevenue(item)">
+                            <i class="fa fa-trash" aria-hidden="true" ></i>
+                        </span>
+                    </li>
+                </ul>                 
+                <!-- <div class="revenue-row" ng-repeat="revenue in data.revenues | filter:{deleted: false}">
                     <div class="revenue-name-container" >
                         
                         <div class="input-box" style="width: calc(100% - 20px); display: inline-block">
@@ -52,21 +79,18 @@
                             class="monthly-cost outline-0"
                             ng-keydown="$event.keyCode === 13 && checkRevenueCompleted(revenue, $event, $index)"
                             ng-blur="checkRevenueCompleted(revenue, $event, $index)"
-                            id="revenue-{{$index}}"
+                            id="revenue-{{revenue.id}}"
                             ng-class="{'active': revenue.name}" required
-                            placeholder="Add  Revenue">
+                            placeholder="Add  Revenue"> 
 
-                        <span tabIndex="-1" class="delete-btn outline-0 pull-right" ng-click="deleteRevenue(revenue)" style="padding-top: 20px">
-                            <i class="fa fa-trash" aria-hidden="true" ></i>
-                        </span>
+                            <span tabIndex="-1" class="delete-btn outline-0 pull-right" ng-click="deleteRevenue(revenue)" style="padding-top: 20px">
+                                <i class="fa fa-trash" aria-hidden="true" ></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-
+                </div> -->
             </div>
-
         </div>
-    </div>
-
 </div>
 
 <slap-footer send="sendData" forward="forward"></slap-footer>

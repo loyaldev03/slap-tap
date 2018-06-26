@@ -6,7 +6,7 @@
         .controller('AdminReportsItemController', AdminReportsItemController);
 
     /* @ngInject */
-    function AdminReportsItemController($scope, allPartners, allExperts, $state, pageService, adminUserService, NgTableParams, $mdToast, $q, Restangular, $mdDialog, $timeout, $rootScope, commonDialogService, $stateParams, toaster, reportService, allProducts, allCoupons, actionplanService) {
+    function AdminReportsItemController($scope, allPartners, allExperts, $state, pageService, adminUserService, NgTableParams, $mdToast, $q, Restangular, $mdDialog, $timeout, $rootScope, commonDialogService, $stateParams, toaster, reportService, allProducts, allCoupons, actionplanService, $window) {
         angular.extend($scope,  {
             report: {},
             reportID: $stateParams.report_id,
@@ -32,12 +32,18 @@
             allCoupons: allCoupons,
              selectedCoupon: null,
             searchCouponText: null,
-            ActivitiesAll: [{id: 11, name: 'Have Logged In', dateRange: false}, {id: 1, name: 'Have Not Logged In', dateRange: false},
-            {id: 2, name: 'SE Calls Scheduled', dateRange: false}, {id: 3, name: 'SM Accountability Calls Scheduled', dateRange: false}, 
-            {id: 4, name: 'Onboarding Call Happened', dateRange: true}, {id: 5, name: 'Execute Onboarding Call Happened', dateRange: true}, 
-            {id: 6, name: 'SLAPexpert Call Happend', dateRange: true}, {id: 7, name: 'Q1 Feedback Call Happened', dateRange: true}, 
-            {id: 8, name: 'Q4 Hustle Call Happened', dateRange: true}, {id: 9, name: 'Renewal Confirmed', dateRange: true}, 
-            {id: 10, name: 'SLAPstuff Sent', dateRange: true}],
+            ActivitiesAll: [
+                {id: 11, name: 'Have Logged In', dateRange: false}, {id: 1, name: 'Have Not Logged In', dateRange: false},
+                {id: 2, name: 'SE Calls Scheduled', dateRange: false}, {id: 12, name: 'SE Calls Not Scheduled', dateRange: false}, 
+                {id: 3, name: 'SM Accountability Calls Scheduled', dateRange: false}, {id: 13, name: 'SM Accountability Calls Not Scheduled', dateRange: false}, 
+                {id: 4, name: 'Onboarding Call Happened', dateRange: true}, {id: 14, name: 'Onboarding Call Not Happened', dateRange: true}, 
+                {id: 5, name: 'Execute Onboarding Call Happened', dateRange: true}, {id: 15, name: 'Execute Onboarding Call Not Happened', dateRange: true}, 
+                {id: 6, name: 'SLAPexpert Call Happend', dateRange: true},  {id: 16, name: 'SLAPexpert Call Not Happend', dateRange: true}, 
+                {id: 7, name: 'Q1 Feedback Call Happened', dateRange: true}, {id: 17, name: 'Q1 Feedback Call Not Happened', dateRange: true}, 
+                {id: 8, name: 'Q4 Hustle Call Happened', dateRange: true}, {id: 18, name: 'Q4 Hustle Call Not Happened', dateRange: true}, 
+                {id: 9, name: 'Renewal Confirmed', dateRange: true}, {id: 19, name: 'Renewal Not Confirmed', dateRange: true}, 
+                {id: 10, name: 'SLAPstuff Sent', dateRange: true}, {id: 20, name: 'SLAPstuff Not Sent', dateRange: true}
+            ],
             slapStatuses: [{id: 0, name: 'In Build'}, {id: 1, name: 'In Execute'}],
             //Activities
             allActivities: [{id: 0, name: 'Logged In'},{id: 1, name: 'Did not log in'},{id: 2, name: 'Completed Build Step 1'},{id: 3, name: 'Completed Build Step 2'},{id: 4, name: 'Completed Build Step 3'},{id: 5, name: 'Completed Build Step 4'},{id: 6, name: 'Commited Build'},{id: 7, name: 'Submitted their SLAP'},{id: 8, name: 'Submitted Weekly Reflection'},{id: 9, name: 'Submitted Monthly Reflection'},{id: 10, name: 'Submitted Quarterly Reflection'},{id: 11, name: 'Updated Sales Tracker'},{id: 12, name: 'Updated Action Items'}],
@@ -152,12 +158,30 @@
         function runReportBuilder() {
             $scope.is_running = true;
             $scope.dataReady = false;
+            $scope.excelReportFields = {
+                businessName: 'Business Name',
+                name: 'First Name',
+                lastName: 'Last Name',
+                email: 'Email',
+                currentQuaterInfo: 'Q/M',
+                quaterlyGoal: 'QuarterlyGoal',
+                annualGoal: 'AnnualGoal',
+            }
+            $scope.columnList = [""]
             return reportService.run($scope.report).then(function(res){
                 $scope.res = res.data;
                 var users = res.data.users;
                 var gridData = [];
                 users.forEach(function(user) {
+                    user.finishedStepsInfo = user.finishedSteps.length < 47 ? 'Yes' : 'No';
+                    if (user.status == 'active') {
+                        user.currentQuaterInfo = user.currentQuater == 'Not Started!' ? user.currentQuater : user.currentMonth + " / " + user.currentQuater.number;
+                    }
+                    else {
+                        user.currentQuaterInfo = "";
+                    }
                     gridData.push(user);
+
                 })
                 $scope.gridData = {
                     gridOptions: {
@@ -176,7 +200,7 @@
         }
 
         function printSlap() {
-            window.print();
+            $window.print();
         }
 
         function getItemPerPage(value) {

@@ -130,10 +130,11 @@
   }
 
   input {
-    border-bottom: 2px solid #0e7cb5;
+    border-bottom: 2px solid #87beda;
     border-top: 0;
     border-left: 0;
     border-right: 0;
+    font-size: 20px;
   }
 
 
@@ -297,6 +298,7 @@
       }
     }
     .quater-letter.active {
+      outline: none;
       a {
         color: @color-dark;
         background-color: #fff;
@@ -315,10 +317,29 @@
         border-top: 10px solid @color-aqua;
       }
     }
-
   }
   .quater-tab-container {
     margin: 2em;
+    .delete-selected-items {
+      outline: none;
+      box-shadow: none;
+      background: rgb(14, 124, 181);
+      border-radius: 100px;
+      border: solid 1.5px rgba(51, 68, 77, 0.1);
+      padding: 15px 30px;
+      font-size: 0.75em;
+      line-height: 0.88;
+      text-align: center;
+      margin: 20px;
+      color: white;
+      float: right;
+
+      &:hover {
+        opacity: 0.9;
+        background-color: rgb(22, 148, 215);
+        transition: all 0.2s ease-in-out 0.1s;        
+      }        
+    }
   }
 
   .slap-work-box {

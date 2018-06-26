@@ -1,0 +1,41 @@
+.world-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;     
+
+     .panel-world {
+          width: 90vw;
+          padding: 40px 30px;     
+          .col-sm-6 {
+               text-align: center;
+               .btn-world {
+                    height: 150px;
+                    width: 350px;
+                    outline: none;
+                    box-shadow: none;
+                    background: #0e7cb5;
+                    border-radius: 100px;
+                    border: solid 1.5px rgba(51, 68, 77, 0.1);
+                    padding: 15px 30px;
+                    font-size: 0.75em;
+                    line-height: 0.88;
+                    text-align: center;
+                    margin: 20px;
+
+                    & h2{
+                      color: #ffffff;
+                    }
+
+                    &:hover {
+                         opacity: 0.9;
+                         background-color: #1694D7;
+                         transition: all 0.2s ease-in-out 0.1s;     
+                    }
+
+                    p {
+                         line-height: 23px;
+                    }
+               }
+          }
+     }
+}

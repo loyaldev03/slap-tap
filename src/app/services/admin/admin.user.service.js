@@ -56,6 +56,9 @@
             return adminApiService.rest.all('test-users').getList();
         };
 
+        self.getSlapStatus = function(userId) {
+            return adminApiService.rest.all('getSlapStatus').get(userId);            
+        }
         self.delete = function(user) {
             return adminApiService.rest.all('users').one(user._id).remove();
         };

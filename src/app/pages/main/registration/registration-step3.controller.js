@@ -71,6 +71,7 @@
                                     cellPhone: vm.cellPhone,
                                     contactMethod:'',
                                     textNotes:'',}
+            vm.isAmex = false;
             $auth.signup(vm.user)
             .then(
                 function (response) {                        
@@ -95,9 +96,14 @@
                         
                         if (response.data.token) {
                             $auth.setToken(response.data.token);
-                            $state.go('mindset.privilegeAndResponsibility');
+                            if (!productStorage.isRenew) {
+                                $state.go('mindset.privilegeAndResponsibility');
+                            }
+                            else {
+                                $state.go('mindset.slapStartDate');
+                            }
                             document.location.reload(true);
-                            return;
+                            return;                                
                         }
                         // $scope.errors = response.data.errors;
                     }
@@ -105,15 +111,18 @@
                 .catch( function(err) {
                     vm.buttonDisabled = false;
                     if (err.data.message != "Failed create customer") 
-                    toaster.pop({type: 'error', body: err.data.message ? err.data.message : err.data.errmsg });
-                    else addNotification(vm.notifications, {name: 'Server Error', type: 'error', message:"So sorry - something has gone wrong on our end.  Try again and if it still doesn't work email support@smallbizsilverlining.com", show: true});
+                        // toaster.pop({type: 'error', body: err.data.message ? err.data.message : err.data.errmsg });
+                        toaster.pop({type: 'error', body: "So sorry - something has gone wrong on our end.  Try again and if it still doesn't work email support@smallbizsilverlining.com.", timeout: 2000});
+                    else 
+                        toaster.pop({type: 'error', body: "So sorry - something has gone wrong on our end.  Try again and if it still doesn't work email support@smallbizsilverlining.com.", timeout: 2000});
+                        // addNotification(vm.notifications, {name: 'Server Error', type: 'error', message:"So sorry - something has gone wrong on our end.  Try again and if it still doesn't work email support@smallbizsilverlining.com", show: true});
                 });
         }
 
         function apply() {
-            if(vm.useCoupon) {
-                return;
-            }
+            // if(vm.useCoupon) {
+            //     return;
+            // }
             couponService.validCoupon(vm.user.code, vm.plan._id, vm.build ? vm.build._id : null)
                 .then(function(response) {
                     productStorage.setCoupon(response.data);
@@ -133,6 +142,13 @@
           e.preventDefault();
           var url = $state.href('tos')
           window.open(url, '_blank');
+        }
+
+        vm.useAmex = function() {
+            vm.isAmex = true;
+        }
+        vm.useStandard = function() {
+            vm.isAmex = false;
         }
 
         function addNotification(notifications, newNotification) {

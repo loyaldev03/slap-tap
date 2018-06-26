@@ -32,15 +32,6 @@
                 controller: 'EmailtemplatesManageController',
                 templateUrl: 'admin/pages/manage_data/emailtemplates/list/emailtemplates-manage.html'
             })
-            // .state('emailtemplates.add', {
-            //     data: {
-            //         access: 'admin',
-            //         isAdminPage: true
-            //     },
-            //     url: '/add',
-            //     controller: 'EmailtemplatesItemController',
-            //     templateUrl: 'admin/pages/manage_data/emailtemplates/item/emailtemplates-item.html'
-            // })
             .state('emailtemplates.item', {
                 data: {
                     access: 'admin',

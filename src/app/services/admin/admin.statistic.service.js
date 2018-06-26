@@ -8,7 +8,7 @@
     /* @ngInject */
     function adminStatisticService($q, adminApiService, $rootScope) {
                 
-        self.get = function () {
+        self.getStatisticalData = function () {
             return adminApiService.rest.all('statistic').getList();
         };
 

@@ -48,7 +48,7 @@
         }
 
         this.validCoupon = function(code,planId,buildId) {
-            return apiService.rest.all('coupon').one(code).one(planId).one(buildId).get();
+            return apiService.rest.all('coupon').post({code:code, planId: planId, buildId: buildId});
         }
     }
 }());

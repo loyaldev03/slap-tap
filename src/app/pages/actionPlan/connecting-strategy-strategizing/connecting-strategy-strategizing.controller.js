@@ -21,6 +21,7 @@
             topRatingStrategies: [],
             checkActionCompleted: checkActionCompleted,
             deleteAction: deleteAction,
+            deleteSelectedItems: deleteSelectedItems,
             autoExpand: autoExpand,
             init: init,
             revenues: [],
@@ -28,6 +29,7 @@
 
 
             checkValidity: checkValidity,
+            removeOriginalActionItem: removeOriginalActionItem,
             notifications: [],
             defaultStrategies: actionplanService.getDefaultConnectingStrategies(),
             filterActionItemsByMonth: filterActionItemsByMonth,
@@ -62,12 +64,23 @@
 
 
         for (var i = 0; i < 12; i++) 
-        $scope.actionItemsByMonth[i] = [];
+            $scope.actionItemsByMonth[i] = [];
         $scope.actionItems.forEach(function(item){
+            item.delete_selected = false;
             $scope.actionItemsByMonth[moment(item.dueDate).month()].push(item);
         });
        
-
+        for (var i = 0; i < 12; i++) {
+            for (var j = 0; j < $scope.actionItemsByMonth[i].length - 1; j++) {
+                for (var k = j+1; k < $scope.actionItemsByMonth[i].length; k++) {
+                    if ($scope.actionItemsByMonth[i][j].order > $scope.actionItemsByMonth[i][k].order) {
+                        var temp = $scope.actionItemsByMonth[i][j];
+                        $scope.actionItemsByMonth[i][j] = $scope.actionItemsByMonth[i][k];
+                        $scope.actionItemsByMonth[i][k] = temp;
+                    }
+                }
+            }
+        }
         function getData() {
             // var urls = _.get($state.current, 'params.prev.sref').split('.');
             var url = 'allMindsetUser';
@@ -229,6 +242,7 @@
         function checkActionCompleted(action, monthID, evt, currentIndex) {
             if (action.title.trim() != '') {
                 addNewActions(monthID, evt, currentIndex);
+                amplitude.getInstance().logEvent('ADDACTIONITEMBUILD');
             } else {
             }
         }
@@ -268,6 +282,15 @@
             });
         }
         
+        function removeOriginalActionItem(monthID, index) {
+            $scope.actionItemsByMonth[monthID].forEach(function(action_item, _index) {
+                if (_index != index && action_item.title == $scope.actionItemsByMonth[monthID][index].title) {
+                    $scope.actionItemsByMonth[monthID][_index] = angular.copy($scope.actionItemsByMonth[monthID][index]);
+                }
+            })
+            $scope.actionItemsByMonth[monthID].splice(index, 1);
+        }
+
         function sendData(direction) {
             //Validations Before sending Data
             if ((($scope.pageName == 'quarterlyGoals') || ($scope.pageName == 'commitToYourActionPlan')) && !checkQuaterUnitsValid()) { //quater units sum should same as quaterly goal.
@@ -346,13 +369,29 @@
                         else if(direction == 'backward')
                             $state.go(nextprevStep.prevStep.sref);
                     } else {
+                        for (var i = 0; i < 12; i++) {
+                            for (var j = 0; j < $scope.actionItemsByMonth[i].length; j++) {
+                                $scope.actionItemsByMonth[i][j].order = j;
+                            }
+                        }                        
                         $q.all($scope.actionItems.map(function(item){
+                            if (item._id == '5ada44da3c2bcd1d9d60845c') {
+                                console.log();
+                            }                            
+                            for (var i = 0; i < 12; i++) {
+                                for (var j = 0; j < $scope.actionItemsByMonth[i].length; j++) {
+                                    if ($scope.actionItemsByMonth[i][j]._id == item._id) {
+                                        item.order = $scope.actionItemsByMonth[i][j].order
+                                    }
+                                }
+                            }                        
+
                             if (item.title == '')
                                 return true;
-                            if (_.isUndefined(item._id)) {
+                            if (_.isUndefined(item._id) || !item._id) {
                                 return excuteItemService.createItem(item);
                             } else {
-                                return item.save();
+                                return excuteItemService.updateItem(item);
                             }
                         })).then(function(resp){
                             return stepService.sendApiData('worldAroundYou', data)
@@ -425,6 +464,19 @@
                 }
             }
         }           
+
+        function deleteSelectedItems() {
+            $scope.actionItems.forEach(function(action) {
+                if (action.delete_selected && !_.isUndefined(action._id)) {
+                    var month = moment(action.dueDate).month()
+                    action.remove().then(function(response){
+                        _.remove($scope.actionItemsByMonth[month], function (n) {
+                            return n === action;
+                        });
+                    });
+                }
+            })
+        }
 
         function autoExpand(e) {
             var elements = typeof e === 'object' ? [e.target] : [].slice.call(document.getElementsByClassName(e));

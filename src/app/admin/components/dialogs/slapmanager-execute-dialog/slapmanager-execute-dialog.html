@@ -1,0 +1,156 @@
+<md-dialog fullscreen="true" aria-label="" class="execute-dialog p-t-es-40">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>SLAPmanager Execute Call</h2>
+        </div>
+    </md-toolbar>
+    <!--di-cont-->
+    <md-dialog-content>
+
+        <section layout="column" class="m-t-es-30 p-r-es-15">
+
+            <form layout="row" layout-wrap layout-align="center center" name="form">
+                <!--new-->
+                <div class="date-slapmanager">
+
+                    <md-input-container flex="50">
+                        <label>Date</label>
+                        <md-datepicker ng-model="formData.extra.date" name="Date"></md-datepicker>
+                        <div ng-messages="form.date.$error">
+                            <div ng-message="valid">The entered value is not a date!</div>
+                            <div ng-message="required">This date is required!</div>
+                            <div ng-message="mindate">Date is too early!</div>
+                            <div ng-message="maxdate">Date is too late!</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex="25">
+                        <label>Hours</label>
+                        <md-select required name="hours" placeholder="Hours" ng-model="formData.extra.hours">
+
+                            <md-option ng-repeat="h in [] | range:10" ng-value={{h}}>{{h}}</md-option>
+
+                        </md-select>
+                        <div ng-messages="form.hours.$error" ng-hide="form.hours.$valid">
+                            <div ng-message-exp="['required']">
+
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="25">
+                        <label>Minutes</label>
+                        <md-select name="minutes" required placeholder="Minutes"
+                                   md-container-class="slapster-minutes-select" ng-model="formData.extra.minutes">
+
+                            <md-option ng-repeat="m in [] | range:4" ng-value={{m*15}}>{{m*15}}</md-option>
+
+                        </md-select>
+                        <div ng-messages="form.minutes.$error" ng-hide="form.minutes.$valid">
+                            <div ng-message-exp="['required']">
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <md-input-container flex="100">
+                    <input required name="notes"
+                           placeholder="How is the SLAPster doing? Did you learn anything new or of importance from your call?"
+                           ng-model="formData.extra.notes">
+                    <div ng-messages="form.notes.$error" ng-hide="form.notes.$valid">
+                        <div ng-message-exp="['required']"></div>
+                    </div>
+                </md-input-container>
+                    <md-input-container flex="50">
+                        <label>Is the SLAPster 100% complete his SLAPbuild and ready to Execute?</label>
+                        <md-select name="completeSlapbuild" ng-model="formData.extra.completeSlapBuild" required>
+                            <md-option ng-value=1>Yes</md-option>
+                            <md-option ng-value=2>No</md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="form.completeSlapbuild.$error">
+                            <div ng-message="required">Required</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="50">
+                        <label class="md-required">Did you share screens and do a deep tour of SLAPcenter Execute, Account, SLAPschool and SLAPworld with them?</label>
+                        <md-select name="shareScreen" ng-model="formData.extra.shareScreen" required>
+                            <md-option ng-value=1>Yes</md-option>
+                            <md-option ng-value=2>No</md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="form.shareScreen.$error">
+                            <div ng-message="required">Required</div>
+                        </div>
+                    </md-input-container>
+
+
+
+                    <md-input-container flex="50">
+                        <label>Did you review their Q1 Action Items and Sales Goals and really ensure they understand their first steps?</label>
+                        <md-select name="reviewQ1" ng-model="formData.extra.reviewQ1" required>
+                            <md-option ng-value=1>Yes</md-option>
+                            <md-option ng-value=2>No</md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="form.reviewQ1.$error">
+                            <div ng-message="required">Required</div>
+                        </div>
+                    </md-input-container>
+
+
+                    <md-input-container flex="50">
+                        <label>Did you talk through SLAPschool and show them how to access upcoming events, get access to past events and access all Trainings and Tools? </label>
+                        <md-select name="talkSlapSchool" ng-model="formData.extra.talkSlapSchool" required>
+                            <md-option ng-value="1">Yes</md-option>
+                            <md-option ng-value="3">No</md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="form.talkSlapSchool.$error">
+                            <div ng-message="required">Required</div>
+                        </div>
+                    </md-input-container>
+
+
+                    <md-input-container flex="50">
+                        <label>Did you talk to them about SLAPworld and what to expect and how to participate?</label>
+                        <md-select name="talkSlapWorld" ng-model="formData.extra.talkSlapWorld" required>
+                            <md-option ng-value="1">Yes</md-option>
+                            <md-option ng-value="2">No</md-option>
+
+                        </md-select>
+                        <div class="errors" ng-messages="form.talkSlapWorld.$error">
+                            <div ng-message="required">Required</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="50">
+                        <label>Did you review and reiterate their SLAPmanager and SLAPexpert calls and expectations</label>
+                        <md-select name="reviewSlapManager" ng-model="formData.extra.reviewSlapManager" required>
+                            <md-option ng-value="1">Yes</md-option>
+                            <md-option ng-value="2">No</md-option>
+
+                        </md-select>
+                        <div class="errors" ng-messages="form.reviewSlapManager.$error">
+                            <div ng-message="required">Required</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex="100">
+                        <md-heaader>
+                            <div class="md-slap-header">
+                                 If you made any commitment to the SLAPster during this call that we have to remember and follow up on, enter it here so that it creates a Ticket for the team to track
+                            </div>
+                        </md-heaader>                   
+                        <textarea name="commitment" ng-model="formData.extra.commitment"></textarea>
+                        <div ng-messages="form.commitment.$error" ng-hide="form.commitment.$valid">
+                            <div ng-message-exp="['required']">
+                            </div>
+                        </div>
+                    </md-input-container>                        
+            </form>
+        </section>
+    </md-dialog-content>
+    <!--di-cont-->
+    <md-dialog-actions>
+        <md-button ng-click="updateNotes($event, form)" class="md-primary">
+            Submit
+        </md-button>
+        <md-button ng-click="closeDialog()" class="md-primary">Close</md-button>
+
+    </md-dialog-actions>
+</md-dialog>

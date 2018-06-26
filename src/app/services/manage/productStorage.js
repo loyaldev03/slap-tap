@@ -129,8 +129,8 @@
         }
 
         this.getAmountCouponPlan = function(){
-            if ((_coupon.typeCoupon && !_coupon.plan) || (_coupon.plan && _coupon.plan._id == _plan._id)) {
-                if (_coupon.typeCoupon) {
+            if (_coupon.typeCoupon != null) {
+                if (_coupon.typeCoupon == 1) {
                     _plan.amountCoupon = (_plan.costProduct * _coupon.amount) / 100;
                     return _plan.amountCoupon;
                 }
@@ -157,7 +157,7 @@
 
         this._calculateCoupon = function() {
             
-            if ((_coupon.typeCoupon && !_coupon.plan) || (_coupon.plan && _coupon.plan._id == _plan._id)) {
+            if (_coupon.typeCoupon != null) {
                 this._calculateCouponForPlan();
                 
             }
@@ -196,7 +196,7 @@
         }
 
         this._calculateCouponForPlan = function () {
-            if (_coupon.typeCoupon) {
+            if (_coupon.typeCoupon == 1) {
                  _plan.costProduct = _plan.costProduct - (_plan.costProduct * _coupon.amount) / 100;
                 return _plan.costProduct = _plan.costProduct > 0 ? _plan.costProduct: 0;
             }

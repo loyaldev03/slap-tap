@@ -22,6 +22,7 @@
         $scope.downloadFinished = true;
         $scope.canRenew = false;
         $scope.startDate = Date;
+        $scope.forms = {};
         pageService
             .reset()
             .setShowBC(false)
@@ -63,10 +64,8 @@
             });
             if ($scope.userAllData && $scope.userAllData.slapMindset && $scope.userAllData.slapMindset.slapStartDate)
             {
-                var startDate = $scope.userAllData.slapMindset.slapStartDate;
-                var m = new Date(startDate.year+1,startDate.month-1,1);
-                $scope.startDate = moment(m);
-                if (moment().isAfter(moment($scope.startDate)))
+                $scope.startDate = moment($scope.userAllData.slapMindset.slapStartDate).add(8, 'months');
+                if (moment().isAfter($scope.startDate))
                     $scope.canRenew = true;
             }
         }
@@ -84,6 +83,7 @@
         }
 
         function saveBasic() {
+            amplitude.getInstance().logEvent('ACCOUNTUPDATE');
             userService.updateMe($scope.user).then(function(user){
                 $scope.user = user;
                 // toaster.pop({type: 'success', body: 'Info Saved!', timeout: 1000});
@@ -99,6 +99,7 @@
 
         
         function changePassword() {
+            amplitude.getInstance().logEvent('ACCOUNTUPDATE');
             userService.updateMe($scope.user).then(function(user){
                 $scope.user = user;
                 toaster.pop({type: 'success', body: 'Password Changed.', timeout: 1000});
@@ -120,11 +121,16 @@
             });     
         }
         function changeCreditCard() {
+            amplitude.getInstance().logEvent('CCUPDATE');
             userService.changeCreditCard($scope.user).then(function(user){
                 $scope.user = user;
                 $scope.user.card = null;
-                
-                // $scope.creditform.$setPristine();
+                $scope.forms.creditform.$setPristine();
+                $scope.forms.creditform.$setUntouched();
+                $scope.forms.creditform.creditCard.$setUntouched()
+                $scope.forms.creditform.expDate.$setUntouched()
+                $scope.forms.creditform.cvc.$setUntouched()
+                $scope.forms.creditform.address.$setUntouched()
                 toaster.pop({type: 'success', body: 'Credit Card Changed to ****-****-****-.' + $scope.user.last4, timeout: 2000});
             }).catch(function(err){
                 addNotification($scope.notifications_card, {name: 'Server Error', type: 'error', message:"We were unable to process your credit card. Please try again or use a new card.", show: true});
@@ -133,6 +139,7 @@
         
         function renewAccount() {
             //productStorage.resetStorage();
+            amplitude.getInstance().logEvent('ACCOUNTUPDATE');
             productStorage.setRenew();
             
             

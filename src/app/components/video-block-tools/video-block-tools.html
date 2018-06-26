@@ -11,7 +11,7 @@
 
     <div class="video-content video-tool sample-show-hide row sample-show-hide outline-0">
         <div>
-            <video controls preload="none" poster="{{$ctrl.video.poster}}" class="col-sm-12 hidden-xs main-video video-index-{{$ctrl.idvideo}}">
+            <video controls preload="none" poster="{{$ctrl.video.poster}}" class="col-sm-12 hidden-xs main-video video-index-{{$ctrl.idvideo}}" video-load-element>
                 <source ng-src="{{$ctrl.video.link }}" type="video/mp4">
 
             </video>

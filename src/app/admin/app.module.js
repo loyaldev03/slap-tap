@@ -17,8 +17,11 @@
                 'toaster',
                 'restangular',
                 'ngTable',
+                'ng-currency',
                 'frapontillo.bootstrap-switch',
                 'textAngular',
+                'ngJsonExportExcel',
+                'ngFileSaver',
 
                 'adminapp.filters',
                 'adminapp.components',

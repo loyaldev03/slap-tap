@@ -1,11 +1,3 @@
-        <div class="slapBtn">
-                <button class="to-state go-to">
-                    <a ui-sref="mindset.ourCommitment" href="#!/mindset/ourCommitment">Go To Build</a>
-                </button>
-                <button class="to-state go-to">
-                    <a ui-sref="slapExcute.main" href="#!/slapExcute/main">Go To Execute</a>
-                </button>
-            </div>
 <div class="container-fluid m-t-es-30" >
 
 <div class="row">
@@ -66,7 +58,7 @@
                         <img class="profile-pic" ng-if="!user.avatarId" ng-src="{{'/images/default.jpg'}}"  alt="">
                         <img class="profile-pic" id="avatar" ng-if="user.avatarId" ng-src="{{avatarUrl}}"  alt="">
                         <div ng-if="downloadFinished" class="btn-block">
-                            <span class="btn btn-primary change-picture-btn" ngf-select="onFileSelect($file)" ngf-pattern="'image/*'" ngf-max-size="5MB" ng-model="picFile"
+                            <span class="btn btn-primary change-picture-btn" ngf-select="onFileSelect($file)" ng-pattern="'image/*'" ngf-max-size="5MB" ng-model="picFile"
                                 ngf-accept="'image/*'">Change Image</span>
                         </div>
                         <div ng-if="!downloadFinished" class="progress width-150">
@@ -137,7 +129,7 @@
         <h3>Credit Card</h3>
         <!--TODO should show the credit card he's using-->
         <div>
-            <form layout="column" layout-wrap  name="creditform">
+            <form layout="column" layout-wrap  name="forms.creditform">
                 
                 <button class="btn btn-primary pull-right" ng-click="getCreditCard()">
                     Current Card Number
@@ -158,7 +150,7 @@
                             id="creditCard"
                             />
 
-                        <div ng-messages="creditform.creditCard.$error" ng-hide="creditform.creditCard.$valid || creditform.creditCard.$pristine">
+                        <div ng-messages="forms.creditform.creditCard.$error" ng-hide="forms.creditform.creditCard.$valid || forms.creditform.creditCard.$pristine || forms.creditform.creditCard.$untouched">
                             <div ng-message-exp="['required', 'pattern']">
                                 Enter a valid credit card number
                             </div>
@@ -175,7 +167,7 @@
                             id="exp_date"
                             />
 
-                        <div ng-messages="creditform.expDate.$error" ng-hide="creditform.expDate.$valid || creditform.expDate.$pristine">
+                        <div ng-messages="forms.creditform.expDate.$error" ng-hide="forms.creditform.expDate.$valid || forms.creditform.expDate.$pristine || forms.creditform.expDate.$untouched">
                             <div ng-message-exp="['required', 'pattern']">
                                 Enter a valid expiration date
                             </div>
@@ -189,8 +181,8 @@
                         <input name="cvc" required ng-model="user.card.cvc" type="password"
                             ng-maxlength="4" ng-minlength="3" id="code"/>
 
-                        <div ng-messages="creditform.cvc.$error"
-                             ng-hide="creditform.cvc.$valid || creditform.cvc.$pristine">
+                        <div ng-messages="forms.creditform.cvc.$error"
+                             ng-hide="forms.creditform.cvc.$valid || forms.creditform.cvc.$pristine || forms.creditform.cvc.$untouched">
                             <div ng-message-exp="['required', 'pattern']">
                                 Enter a valid security code (CVV)
                             </div>
@@ -202,7 +194,7 @@
                         <input name="address" required ng-model="user.card.billingAddress"
                             id="billing"/>
 
-                        <div ng-messages="creditform.address.$error" ng-hide="creditform.address.$valid || creditform.address.$pristine">
+                        <div ng-messages="forms.creditform.address.$error" ng-hide="forms.creditform.address.$valid || forms.creditform.address.$pristine || forms.creditform.address.$untouched">
                             <div ng-message-exp="['required', 'pattern']">
                                 Enter a valid billing address (ZIP code)
                             </div>
@@ -211,14 +203,15 @@
                 </div>
 
             </form>
-            <button class="btn btn-primary pull-right" ng-click="changeCreditCard()" ng-disabled="creditform.$invalid">
+            <button class="btn btn-primary pull-right" ng-click="changeCreditCard()" ng-disabled="forms.creditform.$invalid">
                 Change Credit Card
             </button>
             <div class="clearfix"></div>
         </div>
     </div>
 
-    <div class="panel panel-default p-es-10" ng-if="canRenew && !isAdmin">
+    <!-- <div class="panel panel-default p-es-10" ng-if="canRenew && !isAdmin"> -->
+    <div class="panel panel-default p-es-10">
         <h3> Start Building Next Year's SLAP </h3>
         <p>
             Once you are in Q4 you are able to set up your next year's SLAP account which will have your SLAPstatement, Ideal Client and all Account History pre-loaded and ready for you to take this year's lessons and apply them your SLAP for next year!

@@ -21,6 +21,10 @@
 
             resultPage: false,
             changeView: function() { 
+                if (!$scope.resultPage) {
+                    amplitude.getInstance().logEvent('REVIEW RESULTS');                
+
+                }
                 $scope.resultPage = !$scope.resultPage; 
                 $scope.filterSales();     //Main function to redraw grid
             },
@@ -71,13 +75,13 @@
             colorSales: '#00837f',
             colorReflextion: '#f8d144',
             colorProgress: '#38b636',
-            
             curMode: '',
             openItemDialog: openItemDialog,
             openDeleteItemDialog: openDeleteItemDialog,
             closeDialog: closeDialog,
             updateItem: updateItem,
             formData: {},
+            convertToStandardNumber: convertToStandardNumber,
 
             selectEmotion: selectEmotion,
             selectReflextWhat: selectReflextWhat,
@@ -275,6 +279,11 @@
 
         function filteredForListView(){
             var results = [];
+            var i = 0;
+            // _.each(_.sortBy($scope.excuteItems, ['order']), function(e_item) {
+            //     e_item.order = i;
+            //     i += 1;
+            // });
             _.each($scope.excuteItems, function(item){
                 var isValid = true;
 
@@ -332,8 +341,7 @@
                     results.push(item);
             });
             return _.sortBy(results, ['dueDate']);
-             
-            
+            // return _.sortBy(results, ['order']);
         }
 
         function filterSales() {
@@ -362,7 +370,7 @@
             _.each($scope.revenues, function(revenue){
                 var data = {}; 
                 var salesItems = $scope.filteredSalesItems.filter(function(item){ return +item.title == +revenue.id; });
-
+                // $scope.filter.showQ = $scope.currentQuater.nth;
                 var totalSalesItemCount = 0;
                 if ($scope.filter.showQ != 5) {  //Quater
                     totalSalesItemCount = $scope.quaters[$scope.filter.showQ - 1].units[revenue.name];
@@ -392,6 +400,10 @@
                 data.urlSync = false;
 
 
+                _.each(data.data, function(item) {
+                    item.dueDate = new Date(item.dueDate);
+                })
+                
                 $scope.gridData.push({
                     gridOptions: data,
                     gridActions: {},
@@ -474,7 +486,7 @@
                 });
 
             } else if (type == 'reflextion') {
-
+                amplitude.getInstance().logEvent('P&R');
                 if ($scope.curMode == 'add') {
                     $scope.tempReflextWhat = '';
                     var newForm = {
@@ -508,6 +520,7 @@
         function updateItem($event) {
             if ($scope.curMode == 'add') {
                 if ($scope.formData.type == 'action') {
+                    amplitude.getInstance().logEvent('ADDACTIONITEMEXECUTE');
                     // formData holds the data now.
                     if ($scope.formData.recurrency == 'No Recurrency') {
                         $scope.excuteItems.post({
@@ -573,6 +586,7 @@
                         });
                     }
                 } else if ($scope.formData.type == 'sales') {
+                    amplitude.getInstance().logEvent('ADDSALES');
                     $scope.excuteItems.post($scope.formData).then(function(item){
                         $scope.excuteItems.push(item.data);
                         showToast('Added!');
@@ -694,32 +708,37 @@
             _.each($scope.excuteItems, function(item){ //Count Actions
                 if(item.type != 'sales')
                     return;
-                if (item.progress == 100 && !$scope.revenues[+item.title - 1].deleted )
-                    tempClosedYearRevenue += item.saleUnit * +$scope.revenues[+item.title - 1].sellingPrice;
+                var item_revenue = getItemRevenue(+item.title);
+                if (item.progress == 100 && (item_revenue && !item_revenue.deleted) )
+                    if (item.saleUnit) {
+                        tempClosedYearRevenue += item.saleUnit * +item_revenue.sellingPrice;                        
+                    }
                 
-                if (!(moment(item.dueDate).isBetween($scope.quaters[$scope.filter.showQ - 1].start, $scope.quaters[$scope.filter.showQ - 1].end, 'day', '[]')))  
+                if (!(moment(item.dueDate).isBetween($scope.quaters[$scope.currentQuater.nth - 1].start, $scope.quaters[$scope.currentQuater.nth - 1].end, 'day', '[]')))  
                     return;
                 
                 // /tempTotalQuaterRevenue += item.saleUnit * +$scope.revenues[+item.title - 1].sellingPrice;
-                if (item.progress == 100 && !$scope.revenues[+item.title - 1].deleted )
-                    tempClosedQuaterRevenue += item.saleUnit * +$scope.revenues[+item.title - 1].sellingPrice;
+                if (item.progress == 100 && (item_revenue && !item_revenue.deleted) )
+                    if (item.saleUnit) {
+                        tempClosedQuaterRevenue += item.saleUnit * +item_revenue.sellingPrice;
+                    }
             });
 
-            _.each($scope.quaters, function(quater){
-
-                for(var key in quater.units) {
-                    var revenue = _.find($scope.revenues, {name: key});
-                    if(revenue  && revenue.deleted == false) {
-                        tempTotalYearRevenue += +revenue.sellingPrice * + quater.units[key];
-                    }
-                }  
+            _.each($scope.revenues, function(revenue) {
+                if (revenue && revenue.deleted == false) {
+                    tempTotalYearRevenue += (+revenue.sellingPrice) * (+revenue.unit);
+                }
             })
-
             for(var key in $scope.currentQuater.units) {
                 var revenue = _.find($scope.revenues, {name: key});
-                if(revenue  && revenue.deleted == false) {
-                    tempTotalQuaterRevenue += +revenue.sellingPrice * +$scope.currentQuater.units[key];
-                }
+                $scope.revenues.forEach(function(_revenue){
+                    if (!_revenue.deleted && _revenue.name == key) {
+                        revenue = _revenue;
+                    }
+                })
+                if(revenue  && !revenue.deleted) {
+                    tempTotalQuaterRevenue += (+revenue.sellingPrice) * (+$scope.currentQuater.units[key]);
+                }                    
             }
 
             if (tempTotalQuaterRevenue != 0)
@@ -747,6 +766,17 @@
         }
         function deleteItem(item) {
 
+        }
+
+        function getItemRevenue(id) {
+            var revenue = null;
+            _.each($scope.revenues, function(_revenue) {
+                if (_revenue.id == id) {
+                    revenue = _revenue;
+                    return;
+                }
+            });
+            return revenue;
         }
 
         function showToast(message) {
@@ -803,6 +833,10 @@
             }*/
         }
 
+        function convertToStandardNumber(number) {
+            return number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
         function addAllReflextion(type) {
             var datesList = [];
             var endDate = moment($scope.endDate);

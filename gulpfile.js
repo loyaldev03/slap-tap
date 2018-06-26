@@ -126,7 +126,8 @@ gulp.task('html', function () {
         .pipe(minifyHTML({
             empty: true,
             spare: true,
-            quotes: true
+            quotes: true,
+            collapseBooleanAttributes: false,
         }))
         .pipe(templateCache('templateСache.js', {standalone: true}))
         .pipe(gulp.dest(path.tmp));
@@ -143,7 +144,7 @@ gulp.task('css', function () {
 gulp.task('serve', function () {
     gulp.src(path.public)
         .pipe(webserver({
-            port:8001,
+            port:8002,
             livereload: true,
             // directoryListing: true,
             middleware: [ historyApiFallback({

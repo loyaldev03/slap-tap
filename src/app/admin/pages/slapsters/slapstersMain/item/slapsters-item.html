@@ -20,7 +20,7 @@
     <section class="  sample-show-hide"  ng-show="showAtAGlance">
 
         <form layout="row" layout-wrap layout-align="center start" name="form">
-            <section layout="column" flex="50">
+            <section layout="column" flex="50"j>
                 <md-input-container >
                     <label>Business Name</label>
                     <input ng-disabled="!isAdmin()" ng-model="user.businessName" required name="businessName">
@@ -126,7 +126,7 @@
 
                 <md-input-container ng-if="!user.stripeSubscription" >
                     <label>SLAPProgram</label>
-                    <md-select disabled ng-model="user.planId" aria-label="plan-select">
+                    <md-select ng-model="user.planId" aria-label="plan-select">
                         <md-option ng-repeat="product in programData | filter: {buildType: 1}" ng-value="product._id">{{product.productName}}</md-option>
                     </md-select>    
 					<div class="md-errors-spacer"></div>
@@ -189,17 +189,156 @@
     </section>
 </md-card>
 
+<md-card flex="100" class="p-es-30 m-es-40 slapster-stats"  ng-init="showStats = false">
+    <section layout="row" layout-align="space-between center">
 
+        <h3 class="no-capitalize">SLAPster Stats</h3>
+        <button-switch visible="showStats"></button-switch>
+    </section>
+    <section class="sample-show-hide"  ng-show="showStats">
+        <div layout="row" layout-wrap layout-align="center start">
+            <section layout="column" flex="25">
+                <section layout="column" class="slap-stats-common-section">
+                    <h4>SLAPster Goals</h4>
+                    <div>
+                        <span>% of Annual Goals Hit: </span>{{slapStatus.slapGoals.annual_goal.toFixed(2)}}
+                    </div>
+                    <div>
+                        <span>% of Quarterly Goals Hit: </span>{{slapStatus.slapGoals.quarterly_goal.toFixed(2)}}
+                    </div>                    
+                </section>
+                <section layout="column" class="slap-stats-common-section slap-stats-long-section">
+                    <h4>3 SLAPhabits</h4>
+                    <div>
+                        <span># of Action Item Updates: </span>
+                        {{slapStatus.slapHabits.number_of_action_items}}
+                    </div>
+                    <div>
+                        <span># of Sales Goals Updates: </span>
+                        {{slapStatus.slapHabits.number_of_sales_goals}}
+                    </div>
+                    <div>
+                        <span># of Pause & Reflects: </span>
+                        {{slapStatus.slapHabits.number_of_reflections}}
+                    </div>
+                </section>
+            </section>
+            <section layout="column" flex="50">
+                <section flex="100" layout="row"  class="slap-stats-common-section non-bottom-border-section">
+                    <section layout="column" flex="30" class="border-right-section">
+                        <h4>SLAPworld</h4>
+                    </section>
+                    <section layout="column" flex="40" class="border-right-section border-bottom-section">
+                        <h4>SLAPcenter Logins</h4>
+                        <div>
+                            {{slapStatus.fingers.slapcenter_logins}}
+                        </div>
+                    </section>
+                    <section layout="column" flex="30">
+                        <h4>SLAPschool</h4>
+                    </section>                    
+                </section>
+                <section flex="100" layout="row" class="slap-stats-common-section slap-stats-long-section non-top-border-section">
+                    <section layout="column" flex="50"  class="border-right-section">
+                        <h4>SLAPexpert Meetings</h4>
+                        <div>
+                            <span># of Scheduled SLAPexpert Calls: </span>
+                            {{slapStatus.fingers.slapexpert_meetings.number_of_scheduled_slap_expert_calls}}
+                        </div>
+                        <div>
+                            <span># of Attended SLAPexpert Calls: </span>
+                            {{slapStatus.fingers.slapexpert_meetings.number_of_attended_slap_expert_calls}}
+                        </div>
+                        <div>
+                            <span># of Missed SLAPexpert Calls: </span>
+                            {{slapStatus.fingers.slapexpert_meetings.number_of_missed_slap_expert_calls}}
+                        </div>
+                    </section>                    
+                    <section layout="column" flex="50">
+                        <h4>SLAPmanager Calls</h4>
+                        <div>
+                            <span># of Scheduled Accountability Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_scheduled_accountability_calls}}
+                        </div>
+                        <div>
+                            <span># of Attended Accountability Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_attended_accountability_calls}}
+                        </div>
+                        <div>
+                            <span># of Missed Accountability Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_missed_accountability_calls}}
+                        </div>                        
+                        <div>
+                            <span># of Scheduled Onboarding or Execute Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_scheduled_onboarding_execute_calls}}
+                        </div>                        
+                        <div>
+                            <span># of Attended Onboarding or Execute Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_attended_onboarding_execute_calls}}
+                        </div>                        
+                        <div>
+                            <span># of Missed Onboarding or Execute Calls: </span>
+                            {{slapStatus.fingers.slapmanager_calls.number_of_missed_onboarding_execute_calls}}
+                        </div>                        
+                    </section>                    
+                </section>
+            </section>
+            <section layout="column" flex="25">
+                <section flex="100" layout="column" class="slap-stats-common-section">
+                    <h4>SLAPscore</h4>
+                    <div>
+                        <span>{{slapStatus.slapScore.toFixed(0)}} out of 100</span>
+                    </div>
+                </section>
+                <section flex="100" layout="column" class="slap-stats-common-section slap-stats-long-section">
+                    <div class="slap-status">
+                        <h4> SLAPster Status </h4>
+                        <div  ng-if="slapStatus.activities.length != 0">
+                            <div class="most-recent-status">
+                                <span>Most Recent Status:</span>
+                                {{slapStatus.slapStatus.most_recent ? slapStatus.slapStatus.most_recent : "N/A"}}
+                            </div>
+                            <div class="overall-status">
+                                <span>Status- 30-day average:</span>{{slapStatus.slapStatus.last_30_status.overall_status ? slapStatus.slapStatus.last_30_status.overall_status : "N/A"}}
+                            </div>
+                            <div class="overall-status">
+                                <span>Status- Program start to current date:</span>{{slapStatus.slapStatus.entire_status.overall_status ? slapStatus.slapStatus.entire_status.overall_status : "N/A"}}
+                            </div>
+                            <div class="status-list" ng-if="isStatusReadMore != true">
+                                <div class="slapster-status" ng-repeat="activity in slapStatus.slapStatus.entire_status.activities">
+                                    <div  ng-if="activity.by.name && activity.by.name != ''">
+                                    {{activity.status}} by {{activity.by.name}} {{activity.by.lastName}} on {{activity.createdAt | monthName: 'MM'}} 
+                                    </div>
+                                    <div  ng-if="!(activity.by.name && activity.by.name != '')">
+                                    {{activity.status}} by Admin on {{activity.createdAt | monthName: 'MM'}} 
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="slapstatus-read-more">
+                                <md-button ng-disabled="!isAdmin()" ng-if="isStatusReadMore" ng-click="readMore()" class="md-primary" >
+                                    Read More
+                                </md-button>                        
+                                <md-button ng-disabled="!isAdmin()" ng-if="!isStatusReadMore" ng-click="readMore()" class="md-primary" >
+                                    Read Less
+                                </md-button>                        
+                            </div>
+                        </div>
+                        <div ng-if="slapStatus.activities.length == 0">
+                        </div>
+                    </div>                    
+                </section>
+            </section>
+        </div>
+    </section>
+</md-card>
 
-<md-card flex="100" class="p-es-30 m-es-40 slapster-ideal-client-journey"  ng-init="showJourney = false">
+<md-card flex="100" class="p-es-30 m-es-40 slapster-ideal-client-journey"  ng-init="showJourney = false" ng-if="!isSlapExpert()">
     <section layout="row" layout-align="space-between center">
 
         <h3>Ideal Client Journey</h3>
         <button-switch visible="showJourney"></button-switch>
     </section>
     <section class="  sample-show-hide"  ng-show="showJourney">
-
-        Ideal Client Journey
         <table class="table table-responsive ">
             <thead>
                 <tr>
@@ -224,12 +363,13 @@
                         {{isJouneyItemDone('onboard', 'Onboarding Call') ? '✔' : ''}}Call Happened {{isJouneyItemDone('onboard', 'Onboarding Call').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('onboard', 'SM Calls Set') ? '✔' : ''}}SM Calls Set {{isJouneyItemDone('onboard', 'SM Calls Set').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('start', 'SE Calls Set') ? '✔' : ''}}SE Calls Set {{isJouneyItemDone('start', 'SE Calls Set').createdAt | date:short}}<br/>
+                        {{isJouneyItemDone('onboard', 'Execute Call Set') ? '✔' : ''}}Execute Call Set {{isJouneyItemDone('onboard', 'Execute Call Set').createdAt | date:short}}<br/>                        
                     </td>
                     <td>
                         {{isJouneyItemDone('build', 'Step1 Done') ? '✔' : ''}}Step 1 Done {{isJouneyItemDone('build', 'Step1 Done').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('build', 'Step2 Done') ? '✔' : ''}}Step 2 Done {{isJouneyItemDone('build', 'Step2 Done').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('build', 'Step3 Done') ? '✔' : ''}}Step 3 Done {{isJouneyItemDone('build', 'Step3 Done').createdAt | date:short}}<br/>
-                        {{isJouneyItemDone('build', 'Step4 Done') ? '✔' : ''}}Step 4 Done {{isJouneyItemDone('build', 'Step4 Done').createdAt | date:short}}<br/>
+                        {{isJouneyItemDone('build', 'Step4 Done') ? '✔' : ''}}Step 4 Done {{isJouneyItemDone('build', 'Step4 Done').createdAt | date:short}}<br/>                        
                     </td>
                     <td>
                         {{isJouneyItemDone('approve', 'Review Done') ? '✔' : ''}}Review Done {{isJouneyItemDone('approve', 'Review Done').createdAt | date:short}}<br/>
@@ -246,7 +386,7 @@
                         {{anualInfo.quaterSale[0].progress.toFixed(2)}}% of Sales <br/>
                         {{quaters[0].quaterProgress['reflextion'] >= 100 ? '✔' : ''}}
                         {{quaters[0].quaterProgress['reflextion']}}% of P&R <br/>
-                        {{isJouneyItemDone('q1', 'Accountability Call') ? '✔' : ''}}Q1 Feedback Call {{isJouneyItemDone('q1', 'Accountability Call').createdAt | date:short}}<br/>
+                        {{isJouneyItemDone('q1', 'Q1 Feedback') ? '✔' : ''}}Q1 Feedback Call {{isJouneyItemDone('q1', 'Q1 Feedback').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('q1', 'SLAPstuff Sent') ? '✔' : ''}}SLAPstuff Out {{isJouneyItemDone('q1', 'SLAPstuff Sent').createdAt | date:short}}<br/>
                         {{isJouneyItemDone('q1', 'Quarterly Summary') ? '✔' : ''}}Quarterly Summary {{isJouneyItemDone('q1', 'Quarterly Summary').createdAt | date:short}}<br/>
                     </td>
@@ -383,7 +523,7 @@
 
 
 
-<md-card flex="100" class="p-es-30 m-es-40 slapster-payments"  ng-init="showPayments = false">
+<md-card flex="100" class="p-es-30 m-es-40 slapster-payments"  ng-init="showPayments = false" ng-if="!isSlapExpert()">
     <section layout="row" layout-align="space-between center">
 
         <h3>Payments</h3>
@@ -408,13 +548,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in paymentData">
+                    <tr ng-repeat="item in paymentData | orderBy: '-paymentDT'">
                         <td>{{item.programName}}</td>
                         <td>{{item.costProduct | currency}}</td>
                         <td>{{item.promoCode}}</td>
                         <td>{{item.discount | currency}}</td>
                         <td>{{item.amountCharges | currency}}</td>
-                        <td   ng-class="item.status ? '' : 'bg-danger' ">{{item.status == 0 ? 'Declined' : 'Paid'}}</td>
+                        <td   ng-class="item.status ? '' : 'bg-danger' ">{{item.amountCharges >= 0 ? item.status == 0 ? 'Declined' : 'Paid' : 'Refunded'}}</td>
                         <td>{{item.totalAmountOwed | currency }}</td>
                         <td>{{item.paymentDate}}</td>
                     </tr>
@@ -438,7 +578,7 @@
 </md-card>
 
 
-<md-card flex="100" class="p-es-30 m-es-40 slapster-slap-milestones"  ng-init="showSlapMilestones = false">
+<md-card flex="100" class="p-es-30 m-es-40 slapster-slap-milestones"  ng-init="showSlapMilestones = false" ng-if="!isSlapExpert()">
     <section layout="row" layout-align="space-between center">
 
         <h3>SLAPmanager Milestones</h3>
@@ -472,17 +612,20 @@
     </section>
     <section class=" sample-show-hide"  ng-show="showExpertHours">
         <section layout="row" flex="50" class="calls-ex-mn">
-                <button class="btn btn-primary" ng-click="openExpertDialog($event, item)">
+                <button class="btn btn-primary" ng-click="openExpertDialog($event, item)" ng-if="isPermittedAction('slapexpert call')">
                     SLAPexpert Call
                 </button>
-                <button class="btn  btn-primary" ng-click="openManagerAccountabilityDialog($event, item)">
+        </section>
+        <section layout="row" flex="50" class="calls-ex-mn">
+                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'onboarding')" ng-if="isPermittedAction('slapmanager onboarding call')">
+                    SLAPmanager Onboarding Call
+                </button>             
+                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'execute')"  ng-if="isPermittedAction('slapmanager execute call')">
+                    SLAPmanager Execute Call
+                </button>
+                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'accountability')"  ng-if="isPermittedAction('slapmanager accountability call')">
                     SLAPmanager Accountability Call
                 </button>
-                <button class="btn  btn-primary" ng-click="openManagerOnboardingDialog($event, item)">
-                    SLAPmanager Onboarding Call
-                </button>
-
-             
         </section>
     </section>
 </md-card>
@@ -496,7 +639,7 @@
     <section class="  sample-show-hide"  ng-show="showActivity">
 
         <section style="display: flex; justify-content: flex-end;" layout="row" flex="100">
-            <button class="btn btn-primary"  ng-click="openItemDialog($event, 'add')">
+            <button class="btn btn-primary"  ng-click="openItemDialog($event, 'add')" ng-if="isPermittedAction('create activity')">
                 Create Activity
             </button>
         </section>
@@ -621,11 +764,11 @@
                                 {{item.createdTime}}
                             </td>
                             <td>
-                                <a style="margin:0px" ng-click="openNotes($event, item)">Read more</a>
+                                <a style="margin:0px" ng-click="openNotes($event, item)" ng-if="isItemReadMoreAvailable(item)">Read more</a>
                             </td>
                             
                             <td>
-                                <a ng-click="openItemDialog($event, 'edit', item)"style="margin:0px">
+                                <a ng-click="openItemDialog($event, 'edit', item)" ng-if="isItemEditable(item)" style="margin:0px">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </a>
                                 <a ng-click="openDeleteItemDialog($event, item)" style="margin:0px">

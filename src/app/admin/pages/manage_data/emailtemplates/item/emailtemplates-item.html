@@ -7,21 +7,60 @@
                     <form name="emailTemplateForm" novalidate>
                         <div class="col-xs-12">
                             <div class="text-right col-xs-12">
+                                <button class="btn btn-primary" ng-click="!emailTemplate.state ? activate() : deactivate()">{{!emailTemplate.state ? 'Activate' : 'Deactivate'}}</button>
                                 <button type="submit" class="btn btn-primary" ng-click="save()">Save</button>
-                                <!--<button type="submit" class="btn btn-default" ng-click="apply()" ng-show="productID">Apply</button>-->
                                 <a class="btn btn-danger" ui-sref="emailtemplates.list">Cancel</a>
                             </div>
                         </div>
-
-
                         <br>
                         <hr>
+                        <md-input-container flex="40">
+                            <label class="type-lable">Name</label>
+                            <textarea ng-model="emailTemplate.name"></textarea>
+                            <div class="md-errors-spacer"></div>
+                        </md-input-container>                                
+                        <br/>
+                        <md-input-container flex="40">
+                            <label class="type-lable">Type</label>
+                            <md-select ng-model="emailTemplate.version_type">
+                                <md-option ng-value="true">HTML</md-option>
+                                <md-option ng-value="false">TEXT</md-option>
+                            </md-select>                                
+                            <div class="md-errors-spacer"></div>
+                        </md-input-container>                                
+                        <br/>
+                        <md-input-container flex="40">
+                            <label class="type-lable">Receiver</label>
+                            <textarea ng-model="emailTemplate.receiver" disabled></textarea>
+                            <!-- this should be slapmanager or slapster -->
+                        </md-input-container>                                
+                        <br/>
                         <md-input-container class="md-block">
-                            <label>Title</label>
+                            <label>Description</label>
+                            <textarea ng-model="emailTemplate.templateDescription"></textarea>
+                        
+                        </md-input-container>
+                        <br/>
+                        <md-input-container class="md-block">
+                            <label>Email Subject Line</label>
                             <input required type="text" name="subject" ng-model="emailTemplate.subject"/>
                         </md-input-container>
                         <br/>
                         <br/>
+                        <div ng-if="emailTemplate.templateName == 'weekly-report'">
+                            <md-input-container class="md-block">
+                                <label>Inspirational Quote</label>
+                                <textarea ng-model="emailTemplate.inspirational_quote"></textarea>
+                            </md-input-container>
+                            <br/>
+                            <br/>
+                            <md-input-container class="md-block">
+                                <label>Important Updates For Silver Lining</label>
+                                <textarea ng-model="emailTemplate.important_updates"></textarea>
+                            </md-input-container>
+                            <br/>
+                            <br/>         
+                        </div>               
                         <md-input-container class="md-block">
                             <label>Html Version</label>
                             <textarea ng-model="emailTemplate.html"></textarea>
@@ -41,6 +80,8 @@
                             <textarea ng-model="emailTemplate.scss"></textarea>
                         
                         </md-input-container>
+                        <br/>
+                                                
                         <!--<md-input-container class="md-block">
                             <label>Html Version</label>
                             <text-angular ng-model="emailTemplate.html"></textatext-angularrea>

@@ -23,7 +23,7 @@
                 .then(
                     function (response) {
                         toaster.pop({type: 'success', body: "Welcome!", timeout: 1000});
-
+                        amplitude.getInstance().logEvent('LOGIN');
                         // update user data
                         userService.loadUser(true).then(function (user) {
                             if(user.role == adminUserService.ROLE_ADMIN)

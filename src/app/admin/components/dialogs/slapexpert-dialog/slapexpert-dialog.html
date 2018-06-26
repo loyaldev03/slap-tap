@@ -1,7 +1,7 @@
 <md-dialog aria-label="List dialog" class="activity-dialog p-t-es-40">
 	<md-toolbar>
 		<div class="md-toolbar-tools">
-			<h2>Attended Meeting</h2>
+			<h2>Attended SLAPexpert Meeting</h2>
 		</div>
 	</md-toolbar>
 
@@ -60,10 +60,10 @@
 					<md-input-container flex="100">
 						<textarea required name="priorities" placeholder="What were key priorities that came out for the SLAPster to focus on until your next call?" ng-model="formData.extra.priorities">
 						<div ng-messages="form.priorities.$error" ng-hide="form.priorities.$valid">
-								<div ng-message-exp="['required']">
-								</div>
+							<div ng-message-exp="['required']">
 							</div>
-					</md-input-container>
+						</div>
+				</md-input-container>
 
 					<md-input-container flex="100">
 						<textarea required name="specific" placeholder="Are there any specific items the SLAPmanagers should follow up on?" ng-model="formData.extra.spec">
@@ -89,7 +89,7 @@
 						</div>
 				</md-input-container>
 
-				<md-input-container md-no-float flex="50" style="margin-top: 100px !important">
+				<md-input-container md-no-float flex="50" style="">
 					<md-heaader>Rate SLAPmindset</md-heaader>
 					<md-select required name="slapmindset" placeholder="" ng-model="formData.extra.mindset">
 						<md-option ng-value=1>1</md-option>
@@ -181,6 +181,7 @@
 						<md-option ng-value=5>Completely Off Track</md-option>
 						<md-option ng-value=6>They are unhappy with Silver Lining / SLAP</md-option>
 						<md-option ng-value=7>Ego / Something in the way of them accepting our help</md-option>
+						<md-option ng-value=8>Doing Great but in a Seasonal Period (ie- tax season)</md-option>
 					</md-select>
 					<div ng-messages="form.slapmanager.$error" ng-hide="form.slapmanager.$valid">
 							<div ng-message-exp="['required']">
@@ -189,6 +190,31 @@
 						</div>
 				</md-input-container>
 
+				<md-input-container flex="100">
+					<md-heaader>
+						<div class="md-slap-header">
+							Based on the SLAPmindset Rating and the SLAP Status you gave this SLAPster - do you have any other feedback or comments as to where they are at and/or why you gave this rating?
+						</div>
+					</md-heaader>					
+					<textarea name="feedback" ng-model="formData.extra.feedback">
+					<div ng-messages="form.feedback.$error" ng-hide="form.feedback.$valid">
+						<div ng-message-exp="['required']">
+						</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container flex="100">
+					<md-heaader>
+						<div class="md-slap-header">
+							 Based on this call or your overall experience - do you have any suggestions for Silver Lining that we could do to help you or our SLAPsters achieve more success?
+						</div>
+					</md-heaader>					
+					<textarea name="suggestions" ng-model="formData.extra.suggestions">
+					<div ng-messages="form.suggestions.$error" ng-hide="form.suggestions.$valid">
+						<div ng-message-exp="['required']">
+						</div>
+					</div>
+				</md-input-container>
 
 			</form>
 		</section>

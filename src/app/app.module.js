@@ -18,9 +18,8 @@
                 'ngAria',
                 'ngMessages',
                 'AngularPrint',
-
                 'ngTable',
-                
+                                
                 'angular-loading-bar',
                 'restangular',
                 'satellizer',
@@ -44,7 +43,8 @@
                 'app.components',
                 'app.directives',
                 'app.pages',
-                'ngFileUpload'
+                'ngFileUpload',
+                'dndLists'
             ]
         )
 })();

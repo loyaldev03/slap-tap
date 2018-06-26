@@ -233,12 +233,26 @@
                             <md-option ng-value=5>Completely Off Track</md-option>
                             <md-option ng-value=6>They are unhappy with Silver Lining / SLAP</md-option>
                             <md-option ng-value=7>Ego / Something in the way of them accepting our help</md-option>
+                            <md-option ng-value=8>Doing Great but in a Seasonal Period (ie- tax season)</md-option>                            
                         </md-select>
                         <div class="errors" ng-messages="form.slapmanager.$error">
                             <div ng-message="required">Required</div>
                         </div>
                     </md-input-container>
                 </div>
+
+                <md-input-container flex="100">
+                    <md-heaader>
+                        <div class="md-slap-header">
+                             If you made any commitment to the SLAPster during this call that we have to remember and follow up on, enter it here so that it creates a Ticket for the team to track
+                        </div>
+                    </md-heaader>                   
+                    <textarea name="commitment" ng-model="formData.extra.commitment"></textarea>
+                    <div ng-messages="form.commitment.$error" ng-hide="form.commitment.$valid">
+                        <div ng-message-exp="['required']">
+                        </div>
+                    </div>
+                </md-input-container>                                
             </form>
         </section>
     </md-dialog-content>
