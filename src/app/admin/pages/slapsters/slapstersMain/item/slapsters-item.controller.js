@@ -41,6 +41,7 @@
             isItemReadMoreAvailable: isItemReadMoreAvailable,
             isItemEditable: isItemEditable, 
             isSlapExpert: isSlapExpert,
+            isPermittedAction: isPermittedAction,
 
             //Journey
             isJouneyItemDone: isJouneyItemDone,
@@ -952,6 +953,10 @@
 
         function isSlapExpert() {
             return ($scope.curUser.role == 2)            
+        }
+
+        function isPermittedAction(action_name) {
+            return permissionService.isPermittedAction(action_name);
         }
 }
 }());

@@ -126,7 +126,8 @@ gulp.task('html', function () {
         .pipe(minifyHTML({
             empty: true,
             spare: true,
-            quotes: true
+            quotes: true,
+            collapseBooleanAttributes: false,
         }))
         .pipe(templateCache('templateСache.js', {standalone: true}))
         .pipe(gulp.dest(path.tmp));

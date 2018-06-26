@@ -112,10 +112,7 @@
                     gridActions: {},
                 };
                 $scope.dataReady = true;
-            })
-            // $scope.$apply(function () {
-            // });
-            
+            })            
         }
 
         function deleteItem(event, item) {

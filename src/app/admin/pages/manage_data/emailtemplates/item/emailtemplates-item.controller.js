@@ -35,10 +35,6 @@
         }
 
         $scope.save = function() {
-            // if(!$scope.emailTemplateForm.$valid) {
-            //     toaster.pop({type: 'error', body: 'Please fill all fields required'});
-            //     return;
-            // }
             var send_test_yes = function(){
                 $scope.apply().then(function () {
                     emailTemplateService.sendTestEmail($scope.emailTemplate.templateName)
@@ -60,12 +56,8 @@
         $scope.apply = function() {
             return $scope.update().then(
                 function () {
-                    // toaster.pop({type: 'success', body: 'Success'});
                 },
                 function (err) {
-                    // err.data.forEach(function (item) {
-                    //     $scope.errors[item.param] = item.msg;
-                    // });
                     console.log(err);
                 })
         };

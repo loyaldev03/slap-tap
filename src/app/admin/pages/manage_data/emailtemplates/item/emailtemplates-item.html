@@ -9,14 +9,17 @@
                             <div class="text-right col-xs-12">
                                 <button class="btn btn-primary" ng-click="!emailTemplate.state ? activate() : deactivate()">{{!emailTemplate.state ? 'Activate' : 'Deactivate'}}</button>
                                 <button type="submit" class="btn btn-primary" ng-click="save()">Save</button>
-                                <!--<button type="submit" class="btn btn-default" ng-click="apply()" ng-show="productID">Apply</button>-->
                                 <a class="btn btn-danger" ui-sref="emailtemplates.list">Cancel</a>
                             </div>
                         </div>
-
-
                         <br>
                         <hr>
+                        <md-input-container flex="40">
+                            <label class="type-lable">Name</label>
+                            <textarea ng-model="emailTemplate.name"></textarea>
+                            <div class="md-errors-spacer"></div>
+                        </md-input-container>                                
+                        <br/>
                         <md-input-container flex="40">
                             <label class="type-lable">Type</label>
                             <md-select ng-model="emailTemplate.version_type">
@@ -28,11 +31,8 @@
                         <br/>
                         <md-input-container flex="40">
                             <label class="type-lable">Receiver</label>
-                            <md-select ng-model="emailTemplate.receiver">
-                                <md-option ng-value="'slapmanager'" ng-selected="true">Slapmanager</md-option>
-                                <md-option ng-value="'slapster'">Slapster</md-option>
-                            </md-select>                                
-                            <div class="md-errors-spacer"></div>
+                            <textarea ng-model="emailTemplate.receiver" disabled></textarea>
+                            <!-- this should be slapmanager or slapster -->
                         </md-input-container>                                
                         <br/>
                         <md-input-container class="md-block">

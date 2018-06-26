@@ -37,6 +37,13 @@
             
         ];
 
+        me.permActions = [
+            {role: self.ROLE_ADMIN, not_permitted_actions: ['slapexpert call']},
+            {role: self.ROLE_SLAPEXPERT, not_permitted_actions: ['create activity', 'slapmanager onboarding call', 'slapmanager execute call', 'slapmanager accountability call']},
+            {role: self.ROLE_SLAPMANAGER, not_permitted_actions: ['slapexpert call']},
+            {role: self.ROLE_PARTNER, not_permitted_actions: ['slapexpert call']},
+        ];
+
         me.menuModel = [
             {
                 menuName: 'Reports', 
@@ -167,5 +174,18 @@
             });
         };
 
+        me.isPermittedAction = function(action_name) {
+            var not_permitted_actions = [];
+            me.permActions.forEach(function(action) {
+                if (action.role == me.user.role) {
+                    not_permitted_actions = action.not_permitted_actions;
+                }
+            })
+            if (not_permitted_actions.length > 0 && not_permitted_actions.indexOf(action_name) > -1) {
+                return false;
+            } else {                   
+                return true;
+            }
+        }
     }
 })();

@@ -612,18 +612,18 @@
     </section>
     <section class=" sample-show-hide"  ng-show="showExpertHours">
         <section layout="row" flex="50" class="calls-ex-mn">
-                <button class="btn btn-primary" ng-click="openExpertDialog($event, item)">
+                <button class="btn btn-primary" ng-click="openExpertDialog($event, item)" ng-if="isPermittedAction('slapexpert call')">
                     SLAPexpert Call
                 </button>
         </section>
         <section layout="row" flex="50" class="calls-ex-mn">
-                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'onboarding')">
+                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'onboarding')" ng-if="isPermittedAction('slapmanager onboarding call')">
                     SLAPmanager Onboarding Call
                 </button>             
-                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'execute')">
+                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'execute')"  ng-if="isPermittedAction('slapmanager execute call')">
                     SLAPmanager Execute Call
                 </button>
-                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'accountability')">
+                <button class="btn  btn-primary" ng-click="openManagerDialog($event, item, 'accountability')"  ng-if="isPermittedAction('slapmanager accountability call')">
                     SLAPmanager Accountability Call
                 </button>
         </section>
@@ -639,7 +639,7 @@
     <section class="  sample-show-hide"  ng-show="showActivity">
 
         <section style="display: flex; justify-content: flex-end;" layout="row" flex="100">
-            <button class="btn btn-primary"  ng-click="openItemDialog($event, 'add')">
+            <button class="btn btn-primary"  ng-click="openItemDialog($event, 'add')" ng-if="isPermittedAction('create activity')">
                 Create Activity
             </button>
         </section>
