@@ -174,10 +174,10 @@
             });
         };
 
-        me.isPermittedAction = function(action_name) {
+        me.isPermittedAction = function(user, action_name) {
             var not_permitted_actions = [];
             me.permActions.forEach(function(action) {
-                if (action.role == me.user.role) {
+                if (action.role == user.role) {
                     not_permitted_actions = action.not_permitted_actions;
                 }
             })
@@ -185,7 +185,7 @@
                 return false;
             } else {                   
                 return true;
-            }
+            }                
         }
     }
 })();
