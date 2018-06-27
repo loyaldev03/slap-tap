@@ -213,12 +213,20 @@
                 <section layout="column" class="slap-stats-common-section slap-stats-long-section">
                     <h4>3 SLAPhabits</h4>
                     <div>
-                        <span># of Action Item Updates: </span>
+                        <span># of Action Item Updated: </span>
                         {{slapStatus.slapHabits.number_of_action_items}}
+                    </div>
+                    <div>
+                        <span># of Action Items Completed: </span>
+                        {{slapStatus.slapHabits.number_of_action_items_completed}}
                     </div>
                     <div>
                         <span># of Sales Goals Updates: </span>
                         {{slapStatus.slapHabits.number_of_sales_goals}}
+                    </div>
+                    <div>
+                        <span># of Sales Goals Updates: </span>
+                        {{slapStatus.slapHabits.number_of_sales_goals_completed}}
                     </div>
                     <div>
                         <span># of Pause & Reflects: </span>
@@ -288,9 +296,13 @@
             </section>
             <section layout="column" flex="25">
                 <section flex="100" layout="column" class="slap-stats-common-section">
-                    <h4>SLAPscore</h4>
+                    <h4>SLAPscore For YTD</h4>
                     <div>
-                        <span>{{slapStatus.slapScore.toFixed(0)}} out of 100</span>
+                        <span>{{slapStatus.slapScore.final_score_for_ytd.toFixed(0)}}%</span>
+                    </div>
+                    <h4>SLAPscore For QTD</h4>
+                    <div>
+                        <span>{{slapStatus.slapScore.final_score_for_qtd.toFixed(0)}}%</span>
                     </div>
                 </section>
                 <section flex="100" layout="column" class="slap-stats-common-section slap-stats-long-section">
@@ -302,10 +314,10 @@
                                 {{slapStatus.slapStatus.most_recent ? slapStatus.slapStatus.most_recent : "N/A"}}
                             </div>
                             <div class="overall-status">
-                                <span>Status- 30-day average:</span>{{slapStatus.slapStatus.last_30_status.overall_status ? slapStatus.slapStatus.last_30_status.overall_status : "N/A"}}
+                                <span>Status Month To Date:</span>{{slapStatus.slapStatus.last_30_status.overall_status ? slapStatus.slapStatus.last_30_status.overall_status : "N/A"}}
                             </div>
                             <div class="overall-status">
-                                <span>Status- Program start to current date:</span>{{slapStatus.slapStatus.entire_status.overall_status ? slapStatus.slapStatus.entire_status.overall_status : "N/A"}}
+                                <span>Status Year To Date:</span>{{slapStatus.slapStatus.entire_status.overall_status ? slapStatus.slapStatus.entire_status.overall_status : "N/A"}}
                             </div>
                             <div class="status-list" ng-if="isStatusReadMore != true">
                                 <div class="slapster-status" ng-repeat="activity in slapStatus.slapStatus.entire_status.activities">
@@ -321,7 +333,7 @@
                                 <md-button ng-if="isStatusReadMore" ng-click="readMore()" class="md-primary" >
                                     Read More
                                 </md-button>                        
-                                <md-button ng-disabled="!isAdmin()" ng-if="!isStatusReadMore" ng-click="readMore()" class="md-primary" >
+                                <md-button ng-if="!isStatusReadMore" ng-click="readMore()" class="md-primary" >
                                     Read Less
                                 </md-button>                        
                             </div>
