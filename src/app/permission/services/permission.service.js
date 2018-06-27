@@ -39,7 +39,7 @@
 
         me.permActions = [
             {role: self.ROLE_ADMIN, not_permitted_actions: ['slapexpert call']},
-            {role: self.ROLE_SLAPEXPERT, not_permitted_actions: ['create activity', 'slapmanager onboarding call', 'slapmanager execute call', 'slapmanager accountability call']},
+            {role: self.ROLE_SLAPEXPERT, not_permitted_actions: ['create activity', 'slapmanager onboarding call', 'slapmanager execute call', 'slapmanager accountability call', 'slapprogram', 'promo codes', 'partner/affiliate', 'slapexpert']},
             {role: self.ROLE_SLAPMANAGER, not_permitted_actions: ['slapexpert call']},
             {role: self.ROLE_PARTNER, not_permitted_actions: ['slapexpert call']},
         ];

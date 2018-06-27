@@ -126,7 +126,7 @@
 
                 <md-input-container ng-if="!user.stripeSubscription" >
                     <label>SLAPProgram</label>
-                    <md-select ng-model="user.planId" aria-label="plan-select">
+                    <md-select ng-disabled="!isAdmin()" ng-model="user.planId" aria-label="plan-select" ng-disabled="!isPermittedAction('slapprogram')">
                         <md-option ng-repeat="product in programData | filter: {buildType: 1}" ng-value="product._id">{{product.productName}}</md-option>
                     </md-select>    
 					<div class="md-errors-spacer"></div>
@@ -191,10 +191,13 @@
 
 <md-card flex="100" class="p-es-30 m-es-40 slapster-stats"  ng-init="showStats = false">
     <section layout="row" layout-align="space-between center">
-
-        <h3 class="no-capitalize">SLAPster Stats</h3>
+        <div>
+            <h3 class="no-capitalize">SLAPster Stats</h3>
+            <p>The Stats in this section are all based on year-to-date counts and calculations unless otherwise noted as quarter-to-date stats.</p>
+        </div>
         <button-switch visible="showStats"></button-switch>
     </section>
+
     <section class="sample-show-hide"  ng-show="showStats">
         <div layout="row" layout-wrap layout-align="center start">
             <section layout="column" flex="25">
@@ -315,7 +318,7 @@
                                 </div>
                             </div>
                             <div class="slapstatus-read-more">
-                                <md-button ng-disabled="!isAdmin()" ng-if="isStatusReadMore" ng-click="readMore()" class="md-primary" >
+                                <md-button ng-if="isStatusReadMore" ng-click="readMore()" class="md-primary" >
                                     Read More
                                 </md-button>                        
                                 <md-button ng-disabled="!isAdmin()" ng-if="!isStatusReadMore" ng-click="readMore()" class="md-primary" >
