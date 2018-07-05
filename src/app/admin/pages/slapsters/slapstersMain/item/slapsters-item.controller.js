@@ -956,7 +956,7 @@
         }
 
         function isPermittedAction(action_name) {
-            return permissionService.isPermittedAction(action_name);
+            return permissionService.isPermittedAction($scope.curUser, action_name);
         }
 }
 }());

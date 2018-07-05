@@ -39,7 +39,7 @@
 
         me.permActions = [
             {role: self.ROLE_ADMIN, not_permitted_actions: ['slapexpert call']},
-            {role: self.ROLE_SLAPEXPERT, not_permitted_actions: ['create activity', 'slapmanager onboarding call', 'slapmanager execute call', 'slapmanager accountability call']},
+            {role: self.ROLE_SLAPEXPERT, not_permitted_actions: ['create activity', 'slapmanager onboarding call', 'slapmanager execute call', 'slapmanager accountability call', 'slapprogram', 'promo codes', 'partner/affiliate', 'slapexpert']},
             {role: self.ROLE_SLAPMANAGER, not_permitted_actions: ['slapexpert call']},
             {role: self.ROLE_PARTNER, not_permitted_actions: ['slapexpert call']},
         ];
@@ -174,10 +174,10 @@
             });
         };
 
-        me.isPermittedAction = function(action_name) {
+        me.isPermittedAction = function(user, action_name) {
             var not_permitted_actions = [];
             me.permActions.forEach(function(action) {
-                if (action.role == me.user.role) {
+                if (action.role == user.role) {
                     not_permitted_actions = action.not_permitted_actions;
                 }
             })
@@ -185,7 +185,7 @@
                 return false;
             } else {                   
                 return true;
-            }
+            }                
         }
     }
 })();

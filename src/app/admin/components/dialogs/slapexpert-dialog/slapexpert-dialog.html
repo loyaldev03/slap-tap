@@ -66,7 +66,12 @@
 				</md-input-container>
 
 					<md-input-container flex="100">
-						<textarea required name="specific" placeholder="Are there any specific items the SLAPmanagers should follow up on?" ng-model="formData.extra.spec">
+						<md-heaader><!-- 
+							<div class="md-slap-header">
+								Based on the SLAPmindset Rating and the SLAP Status you gave this SLAPster - do you have any other feedback or comments as to where they are at and/or why you gave this rating?
+							</div>
+						</md-heaader>							 -->
+						<textarea name="specific" placeholder="List any specific items that the SLAPmanagers need to follow up on with this SLAPster. Leave blank if there are no action items." ng-model="formData.extra.spec">
 						<div ng-messages="form.specific.$error" ng-hide="form.specific.$valid">
 								<div ng-message-exp="['required']">
 								</div>
@@ -76,11 +81,8 @@
 				<md-input-container md-no-float flex="50">
 					<md-heaader>Tool used for call</md-heaader>
 					<md-select required name="tool" placeholder="" ng-model="formData.extra.tool">
-						<md-option ng-value=1>Zoom video call</md-option>
-						<md-option ng-value=2>Appear</md-option>
-						<md-option ng-value=3>In video call</md-option>
-						<md-option ng-value=4>Line2 Phone</md-option>
-						<md-option ng-value=5>Personal cell phone</md-option>
+						<md-option ng-value=1>Zoom video call(good!)</md-option>
+						<md-option ng-value=2>Other (bad!)</md-option>
 					</md-select>
 					<div ng-messages="form.tool.$error" ng-hide="form.tool.$valid">
 							<div ng-message-exp="['required']">
@@ -206,7 +208,7 @@
 				<md-input-container flex="100">
 					<md-heaader>
 						<div class="md-slap-header">
-							 Based on this call or your overall experience - do you have any suggestions for Silver Lining that we could do to help you or our SLAPsters achieve more success?
+							 Please give us your feedback! Give us any ideas or suggestions you have to make the SLAPexperience better for you and our SLAPsters. All of your feedback is read by Carissa and our team!
 						</div>
 					</md-heaader>					
 					<textarea name="suggestions" ng-model="formData.extra.suggestions">

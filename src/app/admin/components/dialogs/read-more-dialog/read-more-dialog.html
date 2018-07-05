@@ -48,36 +48,33 @@
                 </md-input-container>
 
                 <md-input-container flex="100">
-                    <label>
-                        Based on the SLAPmindset Rating and the SLAP Status you gave this SLAPster - do you have any other feedback or comments as to where they are at and/or why you gave this rating?
-                    </label>
+                    <md-heaader>
+                        <div class="md-slap-header">
+                            Based on the SLAPmindset Rating and the SLAP Status you gave this SLAPster - do you have any other feedback or comments as to where they are at and/or why you gave this rating?
+                        </div>
+                    </md-heaader>
                     <textarea ng-model="item.extra.feedback"  style="margin-top: 30px;" disabled>
                 </md-input-container>
 
 
                 <md-input-container flex="100">
-                    <label>
-                        Based on this call or your overall experience - do you have any suggestions for Silver Lining that we could do to help you or our SLAPsters achieve more success?
-                    </label>
-                    </md-heaader>                               
+                    <md-heaader>
+                        <div class="md-slap-header">
+                             Please give us your feedback! Give us any ideas or suggestions you have to make the SLAPexperience better for you and our SLAPsters. All of your feedback is read by Carissa and our team!
+                        </div>
+                    </md-heaader>                                 
                     <textarea ng-model="item.extra.suggestions"  style="margin-top: 30px;" disabled>
                 </md-input-container>
 
                 <md-input-container flex="100">
-						<textarea
-                                placeholder="Are there any specific items the SLAPmanagers should follow up on?"
-                                ng-model="item.extra.spec" disabled>
-                        </textarea>
+                    <textarea name="specific" placeholder="List any specific items that the SLAPmanagers need to follow up on with this SLAPster. Leave blank if there are no action items." ng-model="item.extra.spec" disabled>
                 </md-input-container>
 
                 <md-input-container md-no-float flex="100">
                     <lable>Tool used for call</lable>
                     <md-select ng-model="item.extra.tool" disabled>
-                        <md-option ng-value=1>Zoom video call</md-option>
-                        <md-option ng-value=2>Appear</md-option>
-                        <md-option ng-value=3>In video call</md-option>
-                        <md-option ng-value=4>Line2 Phone</md-option>
-                        <md-option ng-value=5>Personal cell phone</md-option>
+                        <md-option ng-value=1>Zoom video call(good!)</md-option>
+                        <md-option ng-value=2>Other (bad!)</md-option>                        
                     </md-select>
                 </md-input-container>
 
