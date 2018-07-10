@@ -21779,6 +21779,31 @@ ul li {
     display: none ;
   }
 }
+.slap-expert-item-wrapper {
+  width: 80%;
+}
+.slap-expert-item-wrapper img {
+  width: 80%;
+  min-height: 300px;
+  max-height: 500px;
+}
+.slap-expert-item-wrapper .dropzone {
+  width: 36%;
+  height: 118%;
+  position: absolute;
+}
+.slap-expert-item-wrapper .dropzone:hover {
+  cursor: pointer;
+}
+.slap-expert-item-wrapper .progress-bar-striped {
+  width: 35.5%;
+  height: 50px;
+  font-size: 30px;
+  padding: 13px;
+  margin-top: -50px;
+  position: absolute;
+  background: rgba(8, 69, 101, 0.8);
+}
 .coupon-form h4 {
   text-align: center;
 }

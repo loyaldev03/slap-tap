@@ -8,6 +8,7 @@
             'manage.users.module',
             'manage.emailtemplates.module',
             'manage.partners.module',
+            'manage.experts.module',
             'manage.testusers.module'
         ]);
 }());

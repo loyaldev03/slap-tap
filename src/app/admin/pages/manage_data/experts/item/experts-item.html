@@ -1,0 +1,115 @@
+<div layout="column" style="width: 100%;" class="slap-expert-item-wrapper">
+    <md-card flex="100" class="p-es-30 m-w-es-40">
+        <form layout="row" layout-wrap layout-align="center center" name="form">
+            <section layout="column" flex="50">
+                <div class="dropzone" file-dropzone="[image/png, image/jpeg, image/gif]"
+                              file="image" originalfile="avatar_file" file-name="imageFileName" data-max-file-size="100" ng-click="fileUpload()">
+                    <span></span>
+                </div>
+                <div class="image-container">
+                    <img ng-if="!image" ng-src="{{'/images/default.jpg'}}"/>
+                    <img ng-if="image" ng-src={{image}} />
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+                            CHANGE IMAGE
+                    </div>                
+                </div>          
+            </section>
+
+            <section flex="50">
+                <div layout="column">
+                    <md-input-container flex="100">
+                        <label>Name</label>
+                        <input ng-model="expert.name" required name="name">
+                        <div ng-messages="form.name.$error">
+                            <ng-message when="required">Name is required.</ng-message>
+                        </div>
+                    </md-input-container>
+
+                    <div layout="row" flex="100">
+                        <md-input-container flex="33">
+                            <label>City</label>
+                            <input ng-model="expert.city" required name="city">
+                            <div ng-messages="form.city.$error">
+                                <ng-message when="required">Last Name is required.</ng-message>
+                            </div>
+                        </md-input-container>
+                        
+                        <md-input-container flex="33">
+                            <label>State</label>
+                            <input ng-model="expert.state" required name="state">
+                            <div ng-messages="form.state.$error">
+                                <ng-message when="required">State is required.</ng-message>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container flex="33">
+                            <label>Country</label>
+                            <input ng-model="expert.country" required name="country">
+                            <div ng-messages="form.country.$error">
+                                <ng-message when="required">Country is required.</ng-message>
+                            </div>
+                        </md-input-container>
+                    </div>
+
+                    <md-input-container flex="100">
+                        <textarea name="brief_bio" ng-model="expert.brief_bio" placeholder="Brief Bio" required>
+                        </textarea>
+                        <div ng-messages="form.brief_bio.$error">
+                            <ng-message when="required">Brief Bio is required.</ng-message>
+                        </div>
+                    </md-input-container>
+
+                    <div class="md-slap-header">
+                        3 Personality / Expert Style Words
+                    </div>
+                    <div layout="row" flex="100">
+                        <md-input-container flex="33">
+                            <md-select ng-model="expert.personality1">
+                                <md-option ng-value="personality" ng-repeat="personality in personalities">{{ personality }}</md-option>                       
+                            </md-select>                   
+                        </md-input-container>
+                        <md-input-container flex="33">             
+                            <md-select ng-model="expert.personality2">
+                                <md-option ng-value="personality" ng-repeat="personality in personalities">{{ personality }}</md-option>                       
+                            </md-select>    
+                        </md-input-container>
+                        <md-input-container flex="33">                            
+                            <md-select ng-model="expert.personality3">
+                                <md-option ng-value="personality" ng-repeat="personality in personalities">{{ personality }}</md-option>                       
+                            </md-select>                                
+                        </md-input-container>
+                    </div>
+                    <md-input-container flex="100">
+                        <textarea name="why_slapexpert" ng-model="expert.why_slapexpert" placeholder="Why a SLAPexpert" required>
+                        </textarea>
+                        <div ng-messages="form.why_slapexpert.$error">
+                            <ng-message when="required">Why a SLAPexpert is required.</ng-message>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="50">
+                        <label>Video Introduction</label>
+                        <input ng-model="expert.video_introduction" required name="video_introduction">
+                        <div ng-messages="form.video_introduction.$error">
+                            <ng-message when="required">Video Introduction is required.</ng-message>
+                        </div>
+                    </md-input-container>
+                    <section layout="row" layout-align="end center" flex="100">
+                        <md-button ng-click="setupCalendarAvailability()" class="md-primary">
+                            Set up Calendar Availability
+                        </md-button>
+                    </section>
+                    <section layout="row" layout-align="end center" flex="100">
+                        <md-button ng-click="createOrSave($event)" class="md-primary">
+                            {{expertId ? 'Save' : 'Create'}}
+                        </md-button>
+                    </section>
+                </div>
+            </section>
+
+        </form>
+        <form action style="display:none;">
+            <input class="avatar-file" type="file" originalfile="avatar_file" fileread="image" style="display:none;">
+        </form>    
+    </md-card>
+</div>
