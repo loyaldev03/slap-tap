@@ -29,5 +29,8 @@
             return expert.remove();
         }
 
+        this.getExpertWithUserId = function(user_id) {
+            return adminApiService.rest.all('getExpertWithUserId').get(user_id);
+        }
     }
 }());

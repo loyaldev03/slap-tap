@@ -62,7 +62,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <!--<li><a ui-sref="payments">Payments</a></li>-->
-                        <li><a ui-sref="admin.myaccounts">Settings</a></li>
+                        <li><a ui-sref="admin.myaccounts" ng-if="!$ctrl.isSlapExpert()">Settings</a></li>
+                        <li><a ui-sref="experts.item" ng-if="$ctrl.isSlapExpert()">Settings</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a ng-click="$ctrl.logout()">Logout</a></li>
                     </ul>

@@ -11,8 +11,8 @@
 
         me.user = null;
         me.rolePermModel = [
-            {role: self.ROLE_ADMIN, perms: ['canAdmin', 'canSlpasters', 'canPartners', 'canExperts', 'canBuildReports', 'canPartnerReports', 'canSLAPexpertReports', 'canPlans', 'canPromocodes', 'canEmailTemplates', 'canUsers', 'canDelete','canTestUsers']},
-            {role: self.ROLE_SLAPEXPERT, perms: ['canAdmin', 'canSlpasters']},
+            {role: self.ROLE_ADMIN, perms: ['canAdmin', 'canSlpasters', 'canPartners', 'canBuildReports', 'canPartnerReports', 'canSLAPexpertReports', 'canPlans', 'canPromocodes', 'canEmailTemplates', 'canUsers', 'canDelete','canTestUsers']},
+            {role: self.ROLE_SLAPEXPERT, perms: ['canAdmin', 'canSlpasters', 'canExperts']},
             {role: self.ROLE_SLAPMANAGER, perms: ['canAdmin', 'canSlpasters', 'canBuildReports', 'canPartnerReports', 'canPlans', 'canPromocodes', 'canEmailTemplates', 'canUsers', 'canDelete','canTestUsers']},
             {role: self.ROLE_SLAPSTER, perms: ['canBuild']},
             { role: self.ROLE_TEST, perms: ['canBuild'] },
@@ -27,7 +27,7 @@
             {permName: 'canPlans', 'sref': 'plans.list', 'name': 'Plans'},
             {permName: 'canPromocodes', 'sref': 'coupon.list', 'name': 'Promo Codes'},
             {permName: 'canPartners', 'sref': 'partners.list', 'name': 'Partners' },
-            {permName: 'canExperts', 'sref': 'experts.list', 'name': 'Experts' },
+            {permName: 'canExperts', 'sref': 'experts.item', 'name': 'Experts' },
             {permName: 'canEmailTemplates', 'sref': 'emailtemplates.list', 'name': 'Email Templates'},
             {permName: 'canUsers', 'sref': 'users.list', 'name': 'Users'},
             {permName: 'canTestUsers', 'sref': 'testusers.list', 'name': 'Test Users' },
@@ -60,7 +60,6 @@
                 children: [
                     {menuName: 'Plans', needPerm: 'canPlans'},
                     {menuName: 'Partners', needPerm: 'canPartners'},
-                    {menuName: 'Experts', needPerm: 'canExperts'},
                     {menuName: 'Promo Codes', needPerm: 'canPromocodes'},
                     {menuName: 'Email Templates', needPerm: 'canEmailTemplates'},
                     {menuName: 'Users', needPerm: 'canUsers'},
@@ -175,6 +174,12 @@
                     );
             });
         };
+
+        me.isSlapExpert = function() {
+            return userService.loadUser().then(function (user) {
+                return (user.role == adminUserService.ROLE_SLAPEXPERT);
+            })
+        }
 
         me.isPermittedAction = function(user, action_name) {
             var not_permitted_actions = [];

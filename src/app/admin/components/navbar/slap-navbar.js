@@ -50,6 +50,9 @@
                 $window.location.reload();
                 $state.go('login');
             }
+            this.isSlapExpert = function() {
+                return vm.user.role === adminUserService.ROLE_SLAPEXPERT
+            }
             $scope.$watch($auth.isAuthenticated, function(newValue) {
                 vm.isAuthenticated = newValue;
             });
