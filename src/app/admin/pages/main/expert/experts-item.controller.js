@@ -70,8 +70,8 @@
                 }).then(function (resp) {
                     $scope.expert.avatarId = resp.data;
                     update().then(function () {
-                        toaster.pop({ type: 'success', body: 'Expert Saved!', timeout: 1000 });
-                        $state.go('experts.list');
+                        toaster.pop({ type: 'success', body: 'Profile Updated!', timeout: 1000 });
+                        $state.go('slapsters.list');
                     }).catch(function (err) {
                         toaster.pop({ type: 'error', body: err.data.message });
                     });
@@ -83,7 +83,7 @@
             else {
                 update().then(function () {
                     toaster.pop({ type: 'success', body: 'Expert Saved!', timeout: 1000 });
-                    $state.go('experts.list');
+                    $state.go('slapsters.list');
                 }).catch(function (err) {
                     toaster.pop({ type: 'error', body: err.data.message });
                 });
