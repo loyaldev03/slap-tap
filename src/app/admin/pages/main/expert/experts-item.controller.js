@@ -57,8 +57,10 @@
                 expertService.getExpertWithUserId(user._id)
                 .then(function(res) {
                     $scope.expert = res.data;
-                    $scope.originalImage = CONFIG.api + "/v1/user/avatar/" + $scope.expert.avatarId; 
-                    $scope.image = CONFIG.api + "/v1/user/avatar/" + $scope.expert.avatarId;
+                    if ($scope.expert && $scope.expert.avatarId) {
+                        $scope.originalImage = CONFIG.api + "/v1/user/avatar/" + $scope.expert.avatarId; 
+                        $scope.image = CONFIG.api + "/v1/user/avatar/" + $scope.expert.avatarId;                        
+                    }
                 })    
             })
         }

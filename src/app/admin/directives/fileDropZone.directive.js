@@ -41,7 +41,7 @@
           };
 
           isTypeValid = function(type) {
-            if ((validMimeTypes === (void 0) || validMimeTypes === '') || validMimeTypes.indexOf(type) > -1) {
+            if (type && ((validMimeTypes === (void 0) || validMimeTypes === '') || validMimeTypes.indexOf(type) > -1)) {
               return true;
             } else {
               alert("Invalid file type.  File must be one of following types " + validMimeTypes);
