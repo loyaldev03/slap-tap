@@ -128,6 +128,7 @@
             updateItem: updateItem,
             updateNotes: updateNotes,
             formData: {},
+
         });
 
 
@@ -681,6 +682,7 @@
                 },
                 notes: '',
                 userId: $scope.userID,
+                updatedBy: $scope.curUser._id
             };
             
             $scope.formData = newForm;
