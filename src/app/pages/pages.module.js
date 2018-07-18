@@ -18,7 +18,8 @@
             'app.pages.slapWorld',
             'app.pages.slapChallenge',
             'app.pages.slapBenefits',
-            'app.pages.tos'
+            'app.pages.tos',
+            'app.pages.slapsterCalendar'
             // 'app.pages.cart',
             // 'app.pages.media',
             // 'app.pages.clients'

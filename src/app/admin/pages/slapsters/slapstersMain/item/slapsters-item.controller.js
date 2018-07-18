@@ -687,15 +687,15 @@
             
             $scope.formData = newForm;
             
-        $mdDialog.show({
-            clickOutsideToClose: true,
-            targetEvent: $event,
-            scope: $scope, 
-            preserveScope: true,
-            templateUrl: 'admin/components/dialogs/slapexpert-dialog/slapexpert-dialog.html',
-            controller: 'SlapexpertDialogController',
-            autoWrap: true
-        });
+            $mdDialog.show({
+                clickOutsideToClose: true,
+                targetEvent: $event,
+                scope: $scope, 
+                preserveScope: true,
+                templateUrl: 'admin/components/dialogs/slapexpert-dialog/slapexpert-dialog.html',
+                controller: 'SlapexpertDialogController',
+                autoWrap: true
+            });
         }
 
         function openExpertDialog($event, item) {

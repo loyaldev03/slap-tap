@@ -66,11 +66,11 @@
 				</md-input-container>
 
 					<md-input-container flex="100">
-						<md-heaader><!-- 
+						<md-header><!-- 
 							<div class="md-slap-header">
 								Based on the SLAPmindset Rating and the SLAP Status you gave this SLAPster - do you have any other feedback or comments as to where they are at and/or why you gave this rating?
 							</div>
-						</md-heaader>							 -->
+						</md-header>							 -->
 						<textarea name="specific" placeholder="List any specific items that the SLAPmanagers need to follow up on with this SLAPster. Leave blank if there are no action items." ng-model="formData.extra.spec">
 						<div ng-messages="form.specific.$error" ng-hide="form.specific.$valid">
 								<div ng-message-exp="['required']">
@@ -79,7 +79,7 @@
 					</md-input-container>
 
 				<md-input-container md-no-float flex="50">
-					<md-heaader>Tool used for call</md-heaader>
+					<md-header>Tool used for call</md-header>
 					<md-select required name="tool" placeholder="" ng-model="formData.extra.tool">
 						<md-option ng-value=1>Zoom video call(good!)</md-option>
 						<md-option ng-value=2>Other (bad!)</md-option>
@@ -92,7 +92,7 @@
 				</md-input-container>
 
 				<md-input-container md-no-float flex="50" style="">
-					<md-heaader>Rate SLAPmindset</md-heaader>
+					<md-header>Rate SLAPmindset</md-header>
 					<md-select required name="slapmindset" placeholder="" ng-model="formData.extra.mindset">
 						<md-option ng-value=1>1</md-option>
 						<md-option ng-value=2>2</md-option>
@@ -108,11 +108,11 @@
 				</md-input-container>
 
 				<md-input-container md-no-float flex="50" style="margin-top: 10px !important">
-					<md-heaader>
+					<md-header>
 						<div class="md-slap-header">
 							 How well do they know and use their SLAPstatement?
 						</div>
-					</md-heaader>
+					</md-header>
 
 					<md-select required name="slapstatement" placeholder="" ng-model="formData.extra.statement">
 						<md-option ng-value=1>1</md-option>
@@ -129,12 +129,12 @@
 				</md-input-container>
 
 				<md-input-container md-no-float flex="50">
-					<md-heaader>
+					<md-header>
 						<div class="md-slap-header">
 							 How well do they know and understand their annual and quarterly goals?
 						</div>
 
-					</md-heaader>
+					</md-header>
 					<md-select required name="guaterly" placeholder="" ng-model="formData.extra.goals">
 						<md-option ng-value=1>1</md-option>
 						<md-option ng-value=2>2</md-option>
@@ -150,11 +150,11 @@
 				</md-input-container>
 
 				<md-input-container md-no-float flex="50">
-					<md-heaader>
+					<md-header>
 						<div class="md-slap-header">
 							 How well do they know and understand their current Connecting Strategy and Action Items?
 						</div>
-					</md-heaader>
+					</md-header>
 					<md-select required name="connecting" placeholder="" ng-model="formData.extra.items">
 						<md-option ng-value=1>1</md-option>
 						<md-option ng-value=2>2</md-option>
@@ -170,11 +170,11 @@
 				</md-input-container>
 
 				<md-input-container md-no-float flex="50">
-					<md-heaader>
+					<md-header>
 						<div class="md-slap-header">
 							 Rate their status that our SLAPmanagers can use to support them until your next call
 						</div>
-					</md-heaader>
+					</md-header>
 					<md-select required name="slapmanager" md-container-class="slapster-rate-select" ng-model="formData.extra.rate">
 						<md-option ng-value=1>SLAPstar!</md-option>
 						<md-option ng-value=2>Doing ok but needs to use SLAP better/more</md-option>
@@ -193,11 +193,11 @@
 				</md-input-container>
 
 				<md-input-container flex="100">
-					<md-heaader>
+					<md-header>
 						<div class="md-slap-header">
 							Based on the SLAPmindset Rating and the SLAP Status you gave this SLAPster - do you have any other feedback or comments as to where they are at and/or why you gave this rating?
 						</div>
-					</md-heaader>					
+					</md-header>					
 					<textarea name="feedback" ng-model="formData.extra.feedback">
 					<div ng-messages="form.feedback.$error" ng-hide="form.feedback.$valid">
 						<div ng-message-exp="['required']">
@@ -206,11 +206,11 @@
 				</md-input-container>
 
 				<md-input-container flex="100">
-					<md-heaader>
+					<md-header>
 						<div class="md-slap-header">
 							 Please give us your feedback! Give us any ideas or suggestions you have to make the SLAPexperience better for you and our SLAPsters. All of your feedback is read by Carissa and our team!
 						</div>
-					</md-heaader>					
+					</md-header>					
 					<textarea name="suggestions" ng-model="formData.extra.suggestions">
 					<div ng-messages="form.suggestions.$error" ng-hide="form.suggestions.$valid">
 						<div ng-message-exp="['required']">

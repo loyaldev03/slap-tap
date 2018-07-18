@@ -88,6 +88,10 @@
                 $state.go('mySlap');
             }
 
+            this.gotoMyCalendar = function() {
+                $state.go('slapster-calendar');
+            }
+
             this.gotoPaymentHistory = function() {
                 amplitude.getInstance().logEvent('PAYMENTS');
                 $state.go('payments');                

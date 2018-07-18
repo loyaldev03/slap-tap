@@ -67,6 +67,23 @@
                         templateUrl: 'pages/settingsUser/myaccounts/myaccounts.html'
                     }
                 }
+            })
+
+            .state('admin.mycalendar', {
+                data: {
+                    access: 'admin',
+                    isAdminPage: true
+                },
+                parent: 'admin',
+                url: '/mycalendar',
+                resolve: {
+                },
+                views: {
+                    content: {
+                        controller: 'myCalendarController',
+                        templateUrl: 'admin/pages/main/mycalendar/my-calendar.html'
+                    }
+                }
             });
     }
 }());
