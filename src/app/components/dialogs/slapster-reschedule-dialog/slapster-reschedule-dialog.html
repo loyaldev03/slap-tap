@@ -1,0 +1,48 @@
+<md-dialog aria-label="List dialog" class="activity-dialog p-t-es-40">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Reschedule</h2>
+		</div>
+	</md-toolbar>
+
+	<md-dialog-content>
+		<section layout="column">
+			<form layout="row" layout-wrap layout-align="center center" name="form">
+				<md-input-container flex="100">
+                    <md-header>
+                        <div class="md-slap-header">
+                             Why are you rescheduling this call?
+                        </div>
+                    </md-header>                   
+                    <textarea name="why_rescheduling" ng-model="formData.extra.why_rescheduling" required></textarea>
+                    <div ng-messages="form.why_rescheduling.$error" ng-hide="form.why_rescheduling.$valid">
+                        <div ng-message-exp="['required']">
+                        </div>
+                    </div>
+				</md-input-container>
+
+				<md-input-container flex="100">
+                    <md-header>
+                        <div class="md-slap-header">
+                             Choose the time that works best: 
+                        </div>
+                    </md-header>                   
+                    <md-select ng-model="formData.extra.when_rescheduling"  aria-label="partner-select">
+                        <md-option ng-repeat="date in available_dates" ng-value="date.time">{{date.time}}</md-option>
+                    </md-select>
+                    <div class="md-errors-spacer"></div>
+				</md-input-container>
+			</form>
+		</section>
+	</md-dialog-content>
+
+	<md-dialog-actions >
+        <md-button ng-click="noTimeWorkReschedule($event, form)" class="md-primary">
+            No Times Work For Me
+        </md-button>
+		<md-button ng-click="submitReschedule($event, form)" class="md-primary">
+			Submit
+		</md-button>
+		<md-button ng-click="closeDialog()" class="md-primary">Close</md-button>
+	</md-dialog-actions>
+</md-dialog>

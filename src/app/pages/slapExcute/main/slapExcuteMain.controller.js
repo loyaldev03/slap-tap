@@ -834,7 +834,12 @@
         }
 
         function convertToStandardNumber(number) {
-            return number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            if (number) {
+                return number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            else {
+                return 0;
+            }
         }
         
         function addAllReflextion(type) {

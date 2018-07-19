@@ -11,15 +11,16 @@
         angular.extend($scope, {
             expert: {},
             personalities: [
-                "Listening Ear",
-                "A Friend Who Gets Me",
-                "Someone to brainstorm with",
-                "Really good advice",
-                "Lots of experience sharing",
-                "Structure",
-                "Clear strategic guidance",
-                "Tough Love",
-                "Accountability that won't let me get away with my crap"
+                "Tough",
+                "Empathetic",
+                "Sincere",
+                "Direct",
+                "Casual",
+                "Structured",
+                "Business-like",
+                "Social",
+                "Advisor",
+                "Partner"
             ],
             expertId: $stateParams.expert_id,
             coupons: coupons,

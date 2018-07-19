@@ -196,10 +196,49 @@
     			adminId: '5ada06983c2bcd1d9d6083b4'
     		}
     	]
+  		
+	this.available_dates = [
+		{
+			time: '07/30/2018'
+		},
+		{
+			time: '08/01/2018'
+		},
+		{
+			time: '08/02/2018'
+		},
+		{
+			time: '08/03/2018'
+		},
+		{
+			time: '08/04/2018'
+		},
+		{
+			time: '08/05/2018'
+		},
+		{
+			time: '08/06/2018'
+		},
+		{
+			time: '08/07/2018'
+		},
+		{
+			time: '08/08/2018'
+		},
+		{
+			time: '08/09/2018'
+		}
+	];
   		this.getSchedules = function(_id) {
   			var deferred = $q.defer();
   			deferred.resolve(this.test_schedules);
   			return deferred.promise;
   		}  	
+
+  		this.getAvailableDates = function(_id) {
+  			var deferred = $q.defer();
+  			deferred.resolve(this.available_dates);
+  			return deferred.promise;
+  		}
     }
 })
