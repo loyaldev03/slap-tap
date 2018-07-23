@@ -21664,6 +21664,12 @@ md-dialog.execute-dialog md-datepicker input {
 #partner-report .slapster-detail {
   width: 500px;
 }
+#partner-report h3 {
+  text-align: center;
+}
+#partner-report th {
+  width: 50%;
+}
 .partner-reports {
   padding-left: 50px !important;
 }
@@ -21803,6 +21809,12 @@ ul li {
   margin-top: -50px;
   position: absolute;
   background: rgba(8, 69, 101, 0.8);
+}
+#expert-report h3 {
+  text-align: center;
+}
+#expert-report th {
+  width: 50%;
 }
 .coupon-form h4 {
   text-align: center;

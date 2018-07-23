@@ -64,7 +64,8 @@
                     $scope.report = resolve.data;
                     $scope.gridData = {
                         gridOptions: {
-                            data: $scope.report.slapsters,
+                            // data: $scope.report.slapsters,
+                            data: $scope.report,
                             urlSync: false, 
                         },
                         gridActions: {},

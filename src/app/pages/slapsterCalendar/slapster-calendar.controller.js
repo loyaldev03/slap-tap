@@ -47,6 +47,7 @@
 
         function reschedule($event, item) {
             if (calcBusinessDays(moment(), moment(item.date)) > 0 && calcBusinessDays(moment(), moment(item.date)) < 5) {
+                
                 ForceToReschedule($event, item);
             }
             else {
