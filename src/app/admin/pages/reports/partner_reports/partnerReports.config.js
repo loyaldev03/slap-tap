@@ -52,19 +52,7 @@
                     isAdminPage: true
 
                 },
-
                 resolve: {
-                    // allProducts: function (productsService, $state) {
-                    //     return productsService.getAllProducts().then(function(response) {
-                    //         return  response.data;
-                    //     }).catch(function(err) { console.log(err); $state.go('reports.list'); });
-                    // },
-                    // allCoupons: function (couponService, $state) {
-                    //     return couponService.list()
-                    //         .then(function (response) {
-                    //             return response.data;
-                    //         }).catch(function(err) { console.log(err); $state.go('reports.list'); });
-                    // },
                     allPartners: function (partnerService, $state) {
                         return partnerService.list()
                         .then(function (response) {
@@ -76,6 +64,26 @@
                 url: '/{partner_report_id}',
                 controller: 'AdminPartnerReportsItemController',
                 templateUrl: 'admin/pages/reports/partner_reports/item/partnerReports-item.html'
+            })
+            .state('reports.partner.growth-report', {
+                data: {
+                    access: 'admin',
+                    isAdminPage: true
+
+                },
+                resolve: {
+                    allPartners: function (partnerService, $state) {
+                        return partnerService.list()
+                        .then(function (response) {
+                            return response.data;
+                        })
+                        .catch(function(err) { console.log(err); $state.go('reports.partner.item'); });
+                    }
+                },
+                url: '/growth-report/{partner_report_id}',
+                controller: 'AdminGrowthPartnerReportsItemController',
+                templateUrl: 'admin/pages/reports/partner_reports/item/growthPartnerReports-item.html'
             });
+
     }
 }());

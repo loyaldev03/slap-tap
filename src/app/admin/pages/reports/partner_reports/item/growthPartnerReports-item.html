@@ -1,0 +1,246 @@
+
+<div layout="column" style="width: 100%;" class="reports-item-container report-search admin-partner-reports">
+    <md-card flex="100" class="p-es-50 m-w-es-40">
+        <div class="pull-right" layout="row" layout-align="end start">
+            <button class="print" ng-click="printSlap()">
+                <i class="fa fa-print" aria-hidden="true"></i>
+                Print
+            </button>
+        </div>
+        <form layout="row" layout-wrap layout-align="center end" name="form">
+            <md-input-container flex="30">
+                <label>Which Partner</label>
+                <md-select ng-model="partner" required>
+                    <md-option ng-repeat="user in users" ng-value="user._id">{{user.businessName}}</md-option>
+                </md-select>
+                <div class="md-errors-spacer"></div>
+            </md-input-container>
+            <md-input-container flex="30">
+                <label>Select Year</label>
+                <md-select ng-model="selectedYear" required>
+                    <md-option ng-repeat="year in getYears()" ng-value="year">
+                      {{ year }}
+                    </md-option>
+                </md-select>
+                <div class="md-errors-spacer"></div>
+            </md-input-container>
+            <md-input-container flex="30">
+                <label>Select Month</label>
+                <md-select ng-model="selectedMonth" required>
+                    <md-option ng-repeat="month in getMonths()" ng-value="month">
+                      {{ month }}
+                    </md-option>
+                </md-select>
+                <div class="md-errors-spacer"></div>
+            </md-input-container>                 
+            <md-button class="md-primary mar-button" ng-click="buildReport()" ng-disabled="disableButton">
+                Build Report
+            </md-button>
+        </form>
+    </md-card>
+</div>
+<div id="partner-report" print-section>
+    <div class="title-div">
+        <h2 class="h2-title">Partner Report</h2>
+    </div>
+
+    <div layout="column" style="width: 100%;" class="reports" ng-class="(visibleMess)? 'animated fadeIn' : 'hideReport'">
+        <md-card flex="100" class="p-es-50 m-w-es-40 ">
+            <h1>No reports for this date range.</h1>
+        </md-card>
+    </div>
+    <div layout="column" style="width: 100%;" class="reports" ng-class="(visibleReport)? 'animated fadeIn' : 'hideReport'">
+        <md-card  flex="100" class="p-es-50 m-w-es-40">
+            <h3>Silver Success Metrics</h3>
+            <div>Total Number Of Clients: {{ report.silver_success_metrics ? report.silver_success_metrics.total_slapsters.length : 0 }}</div>
+            <div># of NEW SLAPsters: {{ report.silver_success_metrics ? report.silver_success_metrics.new_slapsters.length : 0  }}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.silver_success_metrics && report.silver_success_metrics.new_slapsters.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>                    
+                <tbody>
+                    <tr ng-repeat="slapster in report.silver_success_metrics.new_slapsters">
+                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
+                    </tr>                    
+                </tbody>
+            </table>
+            <div># of LOST SLAPsters: {{ report.silver_success_metrics ? report.silver_success_metrics.lost_slapsters.length : 0  }}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.silver_success_metrics && report.silver_success_metrics.lost_slapsters.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in report.silver_success_metrics.lost_slapsters">
+                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </md-card>
+        <md-card  flex="100" class="p-es-50 m-w-es-40">
+            <h3>SLAPgoals</h3>
+            <h5>This is the percent of total Sales Revenue completely Sold (not Projected) out of total Revenue Goal for the Quarter shown by Month. SLAPsters with more than 15% during 1st Month, 40% during 2nd Month, and 55% during the 3rd Month are considered on track.</h5>
+            <div>Month 1 Results Progress: {{ report.slapgoals ? report.slapgoals.month1.percent : 0  }}%</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.slapgoals && report.slapgoals.month1.slapsters.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Progress</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in report.slapgoals.month1.slapsters">
+                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
+                        <td>{{ slapster.quarterly_goal  }}%</td>
+                    </tr>                    
+                </tbody>
+            </table>
+            <div>Month 2 Results Progress: {{ report.slapgoals ? report.slapgoals.month2.percent : 0  }}%</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.slapgoals && report.slapgoals.month2.slapsters.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Progress</th>
+                    </tr>                        
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in report.slapgoals.month2.slapsters">
+                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
+                        <td>{{ slapster.quarterly_goal  }}%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>Month 3 Results Progress: {{ report.slapgoals ? report.slapgoals.month3.percent : 0  }}%</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.slapgoals && report.slapgoals.month3.slapsters.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Progress</th>
+                    </tr>                        
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in report.slapgoals.month3.slapsters">
+                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
+                        <td>{{ slapster.quarterly_goal  }}%</td>
+                    </tr>                        
+                </tbody>
+            </table>
+        </md-card>
+        <md-card  flex="100" class="p-es-50 m-w-es-40">
+            <h3>Ideal Client Journey</h3>
+            <h5>Take a look at SLAPster status within SLAPcenter. SLAPsters are to take a maximum of 30 days to complete their SLAPbuild and is recommended they log into SLAPcenter every week. See below the number of SLAPsters in Build and Execute. SLAPsters who have been in build for more than 30 days are considered SLAPstuck and SLAPsters who have not logged into SLAPcenter in over 10 days are considered stuck in Execute.</h5>
+            <div># of clients in Build: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_build.length : 0  }}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.ideal_client_journey && report.ideal_client_journey.slapsters_in_build.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in report.ideal_client_journey.slapsters_in_build">
+                        <td>{{ report.ideal_client_journey.slapsters_in_build[i].name + " " + report.ideal_client_journey.slapsters_in_build[i].lastName }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div># of clients in Execute: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_execute.length : 0  }}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.ideal_client_journey && report.ideal_client_journey.slapsters_in_execute.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>                        
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in report.ideal_client_journey.slapsters_in_execute">
+                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
+                    </tr>                        
+                </tbody>
+            </table>
+            <div># of clients in Build-Stuck: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_buildstuck.length : 0  }}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.ideal_client_journey && report.ideal_client_journey.slapsters_in_buildstuck.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in report.ideal_client_journey.slapsters_in_buildstuck">
+                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div># of clients in Execute-Stuck: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_executestuck.length : 0  }}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.ideal_client_journey && report.ideal_client_journey.slapsters_in_executestuck.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>                        
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in report.ideal_client_journey.slapsters_in_executestuck">
+                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-card>
+
+        <md-card  flex="100" class="p-es-50 m-w-es-40">
+            <h3>Monthly Revenue Share</h3>
+            <div>Projected Revenue Share ${{ locals.monthly_revenue_share ? locals.monthly_revenue_share.projected_revenue_share.projected_revenue_share : 0}}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover"  cellspacing="10" cellpadding="10" ng-if="locals.monthly_revenue_share && locals.monthly_revenue_share.projected_revenue_share.slapsters.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Revenue</th>                            
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in locals.monthly_revenue_share.projected_revenue_share.slapsters">
+                        <td>{{ slapster.name + " " + slapster.lastName}}</td>
+                        <td>${{ slapster.projected_revenue_share }}</td>
+                    </tr>                        
+                </tbody>
+            </table>
+            <div>Actual Revenue Share ${{ locals.monthly_revenue_share ? locals.monthly_revenue_share.actual_revenue_share.actual_revenue_share : 0}}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover"  cellspacing="10" cellpadding="10" ng-if="locals.monthly_revenue_share && locals.monthly_revenue_share.actual_revenue_share.slapsters.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Revenue</th>
+                    </tr>                                
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapster in locals.monthly_revenue_share.actual_revenue_share.slapsters">
+                        <td>{{ slapster.name + " " + slapster.lastName}}</td>
+                        <td>${{ slapster.actual_revenue_share }}</td>
+                    </tr>                    
+                </tbody>
+            </table>
+            <div>Total Income Collected From SLAPster ${{ locals.monthly_revenue_share ? locals.monthly_revenue_share.total_income_collected.total_income_collected : 0}}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="locals.monthly_revenue_share && locals.monthly_revenue_share.total_income_collected.slapsters.length != 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Revenue</th>                            
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="slapstrer in locals.monthly_revenue_share.total_income_collected.slapsters">
+                        <td>{{ slapster.name + " " + slapster.lastName}}</td>
+                        <td>${{ slapster.total_income_collected }}</td>
+                    </tr>                        
+                </tbody>
+                <tr>
+            </table>
+        </div>                  
+        </md-card>
+    </div>
+
+    <hr class="footer-hr">
+    <div class="footer-print">
+        <img src="/images/silverLining.jpg" alt="">
+        <span>www.smallbizsilverlining.com</span>
+    </div>
+</div>

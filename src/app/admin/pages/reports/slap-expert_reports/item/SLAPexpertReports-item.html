@@ -16,31 +16,27 @@
                 </md-select>
                 <div class="md-errors-spacer"></div>
             </md-input-container>
-            <div flex="70"  class="partner-reports" layout-align="center end">
-                <md-input-container flex="35">
-                    <label>Start Date</label>
-                    <md-datepicker ng-model="startDate"  name="startDate" ></md-datepicker>
-                    <div ng-messages="form.startDate.$error">
-                        <div ng-message="valid">The entered value is not a date!</div>
-                        <div ng-message="required">This date is required!</div>
-                        <div ng-message="mindate">Date is too early!</div>
-                        <div ng-message="maxdate">Date is too late!</div>
-                    </div>
-                </md-input-container>
-                <md-input-container flex="35">
-                    <label>End Date</label>
-                    <md-datepicker ng-model="endDate" md-min-date="startDate" name="endDate" required></md-datepicker>
-                    <div ng-messages="form.endDate.$error">
-                        <div ng-message="valid">The entered value is not a date!</div>
-                        <div ng-message="required">This date is required!</div>
-                        <div ng-message="mindate">Date is too early!</div>
-                        <div ng-message="maxdate">Date is too late!</div>
-                    </div>
-                </md-input-container>
-                <md-button class="md-primary mar-button" ng-click="buildReport()" ng-disabled="disableButton">
-                    Build Report
-                </md-button>
-            </div>
+            <md-input-container flex="30">
+                <label>Select Year</label>
+                <md-select ng-model="selectedYear" required>
+                    <md-option ng-repeat="year in getYears()" ng-value="year">
+                      {{ year }}
+                    </md-option>
+                </md-select>
+                <div class="md-errors-spacer"></div>
+            </md-input-container>
+            <md-input-container flex="30">
+                <label>Select Month</label>
+                <md-select ng-model="selectedMonth" required>
+                    <md-option ng-repeat="month in getMonths()" ng-value="month">
+                      {{ month }}
+                    </md-option>
+                </md-select>
+                <div class="md-errors-spacer"></div>
+            </md-input-container>                 
+            <md-button class="md-primary mar-button" ng-click="buildReport()" ng-disabled="disableButton">
+                Build Report
+            </md-button>
         </form>
     </md-card>
 </div>

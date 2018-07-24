@@ -3,10 +3,10 @@
 
     angular
         .module('reports.partnerReports.module')
-        .controller('AdminPartnerReportsItemController', AdminPartnerReportsItemController);
+        .controller('AdminGrowthPartnerReportsItemController', AdminGrowthPartnerReportsItemController);
 
     /* @ngInject */
-    function AdminPartnerReportsItemController($scope, $state, partnerReportService, pageService, allPartners, adminUserService, NgTableParams, $mdToast, $q, Restangular, $mdDialog, $timeout, $rootScope, commonDialogService, $stateParams, toaster, reportService, actionplanService, $window) {
+    function AdminGrowthPartnerReportsItemController($scope, $state, partnerReportService, pageService, allPartners, adminUserService, NgTableParams, $mdToast, $q, Restangular, $mdDialog, $timeout, $rootScope, commonDialogService, $stateParams, toaster, reportService, actionplanService, $window) {
         
         angular.extend($scope,  {
             gridData: {
