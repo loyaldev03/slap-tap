@@ -21724,13 +21724,14 @@ ul li {
   background: inherit !important;
   color: #50cfe3;
 }
-@media print and (color) {
+@media print {
   body {
-    min-height: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
-  @page {
-    size: auto;
-    margin: 5mm;
+  #partner-report {
+    flex: 1 0 auto;
   }
   .print-logo {
     margin-top: 20px;
@@ -21765,6 +21766,8 @@ ul li {
   .h2-title {
     display: inline;
     text-align: center;
+    position: fixed;
+    top: 0;
   }
   .footer-hr {
     display: block;
@@ -21773,16 +21776,25 @@ ul li {
     display: none;
   }
   .footer-print {
-    width: 300px;
+    width: 100%;
     margin: 0 auto;
     display: block;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
   }
   .footer-print img {
     width: 50px;
     height: 50px;
   }
+  .reports-content {
+    display: block;
+  }
+  .printable-section {
+    page-break-inside: avoid;
+  }
   .report-search {
-    display: none ;
+    display: none;
   }
 }
 .slap-expert-item-wrapper {

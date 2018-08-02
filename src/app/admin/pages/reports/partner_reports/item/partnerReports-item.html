@@ -41,7 +41,7 @@
 </div>
 <div id="partner-report" print-section>
     <div class="title-div">
-        <h2 class="h2-title">Partner Report</h2>
+        <h2 class="h2-title">Impact Partner Report</h2>
     </div>
 
     <!-- <div class="test-print">
@@ -134,7 +134,7 @@
             <h1>No reports for this date range.</h1>
         </md-card>
     </div>
-    <div layout="column" style="width: 100%;" class="reports" ng-class="(visibleReport)? 'animated fadeIn' : 'hideReport'">
+    <div layout="column" style="display: block; width: 100%; position: relative;" class="reports reports-content" ng-class="(visibleReport)? 'animated fadeIn' : 'hideReport'">
 <!--         <md-card flex="100" class="p-es-50 m-w-es-40 ">
             <md-input-container class='container-report' flex="100" layout="column" >
                 <span>Partner Name: <mark class="blue-mark">{{report.businessName}}</mark></span>
@@ -216,7 +216,7 @@
                 </table> 
             </div>   
         </md-card> -->
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>Silver Success Metrics</h3>
             <div>Total Number Of Clients: {{ report.silver_success_metrics ? report.silver_success_metrics.total_slapsters.length : 0 }}</div>
             <div># of NEW SLAPsters: {{ report.silver_success_metrics ? report.silver_success_metrics.new_slapsters.length : 0  }}</div>
@@ -246,7 +246,7 @@
                 </tbody>
             </table>
         </md-card>
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>SLAPgoals</h3>
             <h5>This is the percent of total Sales Revenue completely Sold (not Projected) out of total Revenue Goal for the Quarter shown by Month. SLAPsters with more than 15% during 1st Month, 40% during 2nd Month, and 55% during the 3rd Month are considered on track.</h5>
             <div>Month 1 Results Progress: {{ report.slapgoals ? report.slapgoals.month1.percent : 0  }}%</div>
@@ -295,7 +295,7 @@
                 </tbody>
             </table>
         </md-card>
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>SLAPhabits</h3>
             <h5>Our 3 SLAPhabits: Take Action, Close Sales, and Pause & Reflect. Take a look at SLAPhabits completed per SLAPster  for the previous month.
             </h5>
@@ -347,7 +347,7 @@
             </table>
         </md-card>
 
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section ideal-client-journey-printable-section">
             <h3>Ideal Client Journey</h3>
             <h5>Take a look at SLAPster status within SLAPcenter. SLAPsters are to take a maximum of 30 days to complete their SLAPbuild and is recommended they log into SLAPcenter every week. See below the number of SLAPsters in Build and Execute. SLAPsters who have been in build for more than 30 days are considered SLAPstuck and SLAPsters who have not logged into SLAPcenter in over 10 days are considered stuck in Execute.</h5>
             <div># of clients in Build: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_build.length : 0  }}</div>
@@ -404,7 +404,7 @@
             </table>
         </md-card>
 
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>5 Fingers</h3>
             <h5>Our 5 pillars of behaviour change support: SLAPexpert, SLAPmanager, SLAPcenter, SLAPworld, SLAPschool and how each SLAPster interacted with each pillar during the previous month.</h5>
             <div>Login-Daily/SLAPster</div>
@@ -515,17 +515,12 @@
                     </tr>
                 </tbody>
             </table>
+            <div>Downloaded SLAPschool Training & Templates: Coming Soon</div>
+            <div>Watched an archived SLAPschool Video: Coming Soon</div>
+            <div>SLAPworld: Coming Soon</div>                        
         </md-card>
     
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
-            <h3>Attended SLAPschool</h3>           
-            <h5>Coming Soon</h5>
-            <div>Downloaded SLAPschool Training & Templates: 0</div>
-            <div>Watched an archived SLAPschool Video: 0</div>
-            <div>SLAPworld: 0</div>            
-        </md-card>
-
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>SLAPscore/Status</h3>
             <h5>SLAPscore is the score given to a SLAPster’s overall progress by an algorithm taking into consideration their SLAPscore, SLAPhabits, SLAPstatus and 5 Fingers performance. SLAPstatus is the status rating given to each SLAPster during each interaction with a SLAPexpert or a SLAPmanager.</h5>
             <div>SLAPster Rating - Average</div>
