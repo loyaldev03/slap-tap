@@ -41,7 +41,7 @@
 </div>
 <div id="partner-report" print-section>
     <div class="title-div">
-        <h2 class="h2-title">Partner Report</h2>
+        <h2 class="h2-title">Growth Partner Report</h2>
     </div>
 
     <div layout="column" style="width: 100%;" class="reports" ng-class="(visibleMess)? 'animated fadeIn' : 'hideReport'">
@@ -49,8 +49,8 @@
             <h1>No reports for this date range.</h1>
         </md-card>
     </div>
-    <div layout="column" style="width: 100%;" class="reports" ng-class="(visibleReport)? 'animated fadeIn' : 'hideReport'">
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+    <div layout="column" style="width: 100%;" class="reports reports-content" ng-class="(visibleReport)? 'animated fadeIn' : 'hideReport'">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>Silver Success Metrics</h3>
             <div>Total Number Of Clients: {{ report.silver_success_metrics ? report.silver_success_metrics.total_slapsters.length : 0 }}</div>
             <div># of NEW SLAPsters: {{ report.silver_success_metrics ? report.silver_success_metrics.new_slapsters.length : 0  }}</div>
@@ -80,7 +80,7 @@
                 </tbody>
             </table>
         </md-card>
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>SLAPgoals</h3>
             <h5>This is the percent of total Sales Revenue completely Sold (not Projected) out of total Revenue Goal for the Quarter shown by Month. SLAPsters with more than 15% during 1st Month, 40% during 2nd Month, and 55% during the 3rd Month are considered on track.</h5>
             <div>Month 1 Results Progress: {{ report.slapgoals ? report.slapgoals.month1.percent : 0  }}%</div>
@@ -129,7 +129,7 @@
                 </tbody>
             </table>
         </md-card>
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>Ideal Client Journey</h3>
             <h5>Take a look at SLAPster status within SLAPcenter. SLAPsters are to take a maximum of 30 days to complete their SLAPbuild and is recommended they log into SLAPcenter every week. See below the number of SLAPsters in Build and Execute. SLAPsters who have been in build for more than 30 days are considered SLAPstuck and SLAPsters who have not logged into SLAPcenter in over 10 days are considered stuck in Execute.</h5>
             <div># of clients in Build: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_build.length : 0  }}</div>
@@ -186,7 +186,7 @@
             </table>
         </md-card>
 
-        <md-card  flex="100" class="p-es-50 m-w-es-40">
+        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>Monthly Revenue Share</h3>
             <div>Projected Revenue Share ${{ locals.monthly_revenue_share ? locals.monthly_revenue_share.projected_revenue_share.projected_revenue_share : 0}}</div>
             <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover"  cellspacing="10" cellpadding="10" ng-if="locals.monthly_revenue_share && locals.monthly_revenue_share.projected_revenue_share.slapsters.length != 0">
@@ -237,10 +237,10 @@
         </div>                  
         </md-card>
     </div>
-
     <hr class="footer-hr">
     <div class="footer-print">
         <img src="/images/silverLining.jpg" alt="">
         <span>www.smallbizsilverlining.com</span>
     </div>
+
 </div>

@@ -22,7 +22,7 @@
         me.permModel = [
             {permName: 'canSlapsters', 'sref': 'slapsters.list', 'name': 'Slapsters'},
             {permName: 'canBuildReports', 'sref': 'reports.list', 'name': 'Report Builder'},
-            {permName: 'canPartnerReports', 'sref': 'reports.partner.item', 'name': 'Partner Reports'},
+            {permName: 'canPartnerReports', 'sref': 'reports.partner.item', 'name': 'Impact Partner Reports'},
             {permName: 'canGrowthPartnerReports', 'sref': 'reports.partner.growth-report', 'name': 'Growth Partner Reports'},
             {permName: 'canSLAPexpertReports', 'sref': 'reports.slapexpert.item', 'name': 'SLAPexpert Reports'},
             {permName: 'canPlans', 'sref': 'plans.list', 'name': 'Plans'},
@@ -51,7 +51,7 @@
                 menuName: 'Reports', 
                 children: [
                     {menuName: 'Report Builder', needPerm: 'canBuildReports'},
-                    {menuName: 'Partner Reports', needPerm: 'canPartnerReports'},
+                    {menuName: 'Impact Partner Reports', needPerm: 'canPartnerReports'},
                     {menuName: 'Growth Partner Reports', needPerm: 'canGrowthPartnerReports'},
                     {menuName: 'SLAPexpert Reports', needPerm: 'canSLAPexpertReports'},
                     {menuName: 'Archived Accounts', needPerm: 'canDelete'},
