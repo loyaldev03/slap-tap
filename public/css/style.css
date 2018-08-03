@@ -21724,17 +21724,23 @@ ul li {
   background: inherit !important;
   color: #50cfe3;
 }
+.header-print {
+  display: none;
+}
 @media print {
   body {
     height: 100%;
     display: flex;
     flex-direction: column;
   }
+  @page {
+    size: auto;
+    margin: 0mm;
+  }
   #partner-report {
     flex: 1 0 auto;
   }
   .print-logo {
-    margin-top: 20px;
     width: 60px;
     position: relative;
     visibility: visible;
@@ -21758,43 +21764,68 @@ ul li {
   h1 {
     display: none;
   }
-  .title-div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  .h2-title {
-    display: inline;
-    text-align: center;
-    position: fixed;
-    top: 0;
-  }
   .footer-hr {
     display: block;
   }
   .footer {
     display: none;
   }
-  .footer-print {
-    width: 100%;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-  }
-  .footer-print img {
-    width: 50px;
-    height: 50px;
-  }
   .reports-content {
     display: block;
   }
-  .printable-section {
-    page-break-inside: avoid;
-  }
   .report-search {
     display: none;
+  }
+  md-card {
+    display: block;
+    padding: 0px;
+    margin: 0px;
+  }
+  md-card div {
+    page-break-inside: avoid;
+  }
+  md-card h5 {
+    page-break-inside: avoid;
+  }
+  table thead {
+    display: table-header-group;
+  }
+  table tfoot {
+    display: table-footer-group;
+  }
+  table tbody {
+    height: 8000px;
+  }
+  .table-footer-print {
+    height: 100px;
+  }
+  .table-title-div {
+    height: 120px;
+  }
+  .header-print {
+    display: block;
+    background-color: #4bc1e1 !important;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  .footer-print {
+    display: block;
+    padding: 20px;
+    color: #0e7cb5 !important;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .footer-print div {
+    width: 100%;
+    text-align: center;
+  }
+  .footer-print div.footer-content {
+    text-align: left;
+    padding-left: calc(50% - 120px);
   }
 }
 .slap-expert-item-wrapper {
