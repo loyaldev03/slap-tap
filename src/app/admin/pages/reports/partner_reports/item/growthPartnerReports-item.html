@@ -204,8 +204,8 @@
 
         <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>Monthly Revenue Share</h3>
-            <div>Projected Revenue Share ${{ locals.monthly_revenue_share ? locals.monthly_revenue_share.projected_revenue_share.projected_revenue_share : 0}}</div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover"  cellspacing="10" cellpadding="10" ng-if="locals.monthly_revenue_share && locals.monthly_revenue_share.projected_revenue_share.slapsters.length != 0">
+            <div>Projected Revenue Share ${{ report.monthly_revenue_share ? report.monthly_revenue_share.projected_revenue_share.projected_revenue_share : 0}}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover"  cellspacing="10" cellpadding="10" ng-if="report.monthly_revenue_share && report.monthly_revenue_share.projected_revenue_share.slapsters.length != 0">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -213,14 +213,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="slapster in locals.monthly_revenue_share.projected_revenue_share.slapsters">
+                    <tr ng-repeat="slapster in report.monthly_revenue_share.projected_revenue_share.slapsters">
                         <td>{{ slapster.name + " " + slapster.lastName}}</td>
                         <td>${{ slapster.projected_revenue_share }}</td>
                     </tr>                        
                 </tbody>
             </table>
-            <div>Actual Revenue Share ${{ locals.monthly_revenue_share ? locals.monthly_revenue_share.actual_revenue_share.actual_revenue_share : 0}}</div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover"  cellspacing="10" cellpadding="10" ng-if="locals.monthly_revenue_share && locals.monthly_revenue_share.actual_revenue_share.slapsters.length != 0">
+            <div>Actual Revenue Share ${{ report.monthly_revenue_share ? report.monthly_revenue_share.actual_revenue_share.actual_revenue_share : 0}}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover"  cellspacing="10" cellpadding="10" ng-if="report.monthly_revenue_share && report.monthly_revenue_share.actual_revenue_share.slapsters.length != 0">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -228,14 +228,14 @@
                     </tr>                                
                 </thead>
                 <tbody>
-                    <tr ng-repeat="slapster in locals.monthly_revenue_share.actual_revenue_share.slapsters">
+                    <tr ng-repeat="slapster in report.monthly_revenue_share.actual_revenue_share.slapsters">
                         <td>{{ slapster.name + " " + slapster.lastName}}</td>
                         <td>${{ slapster.actual_revenue_share }}</td>
                     </tr>                    
                 </tbody>
             </table>
-            <div>Total Income Collected From SLAPster ${{ locals.monthly_revenue_share ? locals.monthly_revenue_share.total_income_collected.total_income_collected : 0}}</div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="locals.monthly_revenue_share && locals.monthly_revenue_share.total_income_collected.slapsters.length != 0">
+            <div>Total Income Collected From SLAPster ${{ report.monthly_revenue_share ? report.monthly_revenue_share.total_income_collected.total_income_collected : 0}}</div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.monthly_revenue_share && report.monthly_revenue_share.total_income_collected.slapsters.length != 0">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -243,7 +243,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="slapstrer in locals.monthly_revenue_share.total_income_collected.slapsters">
+                    <tr ng-repeat="slapster in report.monthly_revenue_share.total_income_collected.slapsters">
                         <td>{{ slapster.name + " " + slapster.lastName}}</td>
                         <td>${{ slapster.total_income_collected }}</td>
                     </tr>                        

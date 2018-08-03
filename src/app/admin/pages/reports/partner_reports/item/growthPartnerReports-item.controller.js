@@ -44,7 +44,7 @@
             var startDate = new Date($scope.selectedYear, $scope.selectedMonth - 1, 1)
             var endDate = new Date($scope.selectedYear, $scope.selectedMonth, 0)
             if ($scope.partner && startDate && endDate){
-                return partnerReportService.post({partnerId: $scope.partner, from: startDate, to: endDate})
+                return partnerReportService.postGrowthReport({partnerId: $scope.partner, from: startDate, to: endDate})
                 .then(function (resolve) {
                     $scope.report = resolve.data;
                     $scope.gridData = {
