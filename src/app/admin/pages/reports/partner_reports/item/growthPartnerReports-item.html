@@ -40,16 +40,32 @@
     </md-card>
 </div>
 <div id="partner-report" print-section>
-    <div class="title-div">
-        <h2 class="h2-title">Growth Partner Report</h2>
-    </div>
-
     <div layout="column" style="width: 100%;" class="reports" ng-class="(visibleMess)? 'animated fadeIn' : 'hideReport'">
         <md-card flex="100" class="p-es-50 m-w-es-40 ">
             <h1>No reports for this date range.</h1>
         </md-card>
     </div>
     <div layout="column" style="width: 100%;" class="reports reports-content" ng-class="(visibleReport)? 'animated fadeIn' : 'hideReport'">
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        <div class="table-title-div">
+                        </div>                
+                    </td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td>
+                        <td class="table-footer-print">
+                        </td>
+                    </td>
+                </tr>
+            </tfoot>            
+            <tbody>
+                <tr>
+                    <td class="reports-content">
         <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
             <h3>Silver Success Metrics</h3>
             <div>Total Number Of Clients: {{ report.silver_success_metrics ? report.silver_success_metrics.total_slapsters.length : 0 }}</div>
@@ -234,13 +250,22 @@
                 </tbody>
                 <tr>
             </table>
-        </div>                  
-        </md-card>
+        </md-card>                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>  
     </div>
-    <hr class="footer-hr">
-    <div class="footer-print">
-        <img src="/images/silverLining.jpg" alt="">
-        <span>www.smallbizsilverlining.com</span>
-    </div>
-
+    <div class="header-print" style="height:100px; line-height:100px">
+        <img src="http://slapcenter.com/images/slap_logo.png" style="max-height:100px" />
+    </div>                
+    <div class="footer-print" style="background-image: url('http://slapcenter.com/images/silver_lining_logo.png'); background-repeat: no-repeat; background-position: right; background-size: 70px; " >
+        <div class="footer-title">
+            <b>Thank you for working with us to help small business owners around the world succeed!</b><br/><br/>
+        </div>
+        <div class="footer-content">
+            <b>Call</b>: 844.393.SLAP x 198<br/>
+            <b>Email</b>: amelia@smallbizsilverlining.com <br/>
+        </div>
+    </div>   
 </div>
