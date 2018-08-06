@@ -61,6 +61,27 @@
                 controller: 'YourCommitmentController',
                 templateUrl: 'pages/mindset/your-commitment/your-commitment.html'
             })
+            .state('mindset.chooseSlapexpert', {
+                url: '/chooseslapexpert',
+                resolve: {
+                    activeStep: function (stepService, $state) {
+                        return stepService.resolveActiveStep(this)
+                            .then(function (active) {
+
+                                if (active) {
+                                    return active;
+                                }
+
+                                return stepService.getLastFinished()
+                                    .then(function (finishedStep) {
+                                        $state.go(finishedStep.sref);
+                                    });
+                            })
+                    }                    
+                },
+                controller: 'ChooseSlapexpertController',
+                templateUrl: 'pages/mindset/choose-slapexpert/choose-slapexpert.html'
+            })
             .state('mindset.slapMindset', {
                 url: '/SLAPmindset',
                 resolve: {

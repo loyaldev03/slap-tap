@@ -26,15 +26,15 @@
                     data: null
                 },
                 videoUrl: 'http://content.jwplatform.com/videos/plhYBAOo-CZ1S4g0I.mp4'
-            }, /*{
-                name: 'Get the SLAPmindset',
-                sref: 'mindset.slapMindset',
+            }, {
+                name: 'Choose Your SLAPexpert',
+                sref: 'mindset.chooseSlapexpert',
                 model: {
                     showInfoBlock: false,
                     showVideoBlock: false,
                     showStaticTextBlock: false
                 }
-            },*/ {
+            }, {
                 name: 'Privilege and Responsibility',
                 sref: 'mindset.privilegeAndResponsibility',
                 model: {
