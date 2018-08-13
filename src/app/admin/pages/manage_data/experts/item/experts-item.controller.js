@@ -29,7 +29,9 @@
             image: null,
             imageFileName: null,
             avatar_file: null,
-            Upload: Upload
+            Upload: Upload,
+            isCalendarSetupAvailable: isCalendarSetupAvailable,
+            setupCalendarAvailability: setupCalendarAvailability            
         });
         pageService
             .reset()
@@ -80,5 +82,12 @@
             }
         }
 
+        function isCalendarSetupAvailable() {
+            return $scope.is_calendar_setup_available;
+        }
+
+        function setupCalendarAvailability() {
+            $scope.is_calendar_setup_available = true;
+        }
     }
 }());

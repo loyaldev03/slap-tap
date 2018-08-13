@@ -5,7 +5,7 @@
         .module('app.services')
         .service('mindsetService', mindsetService);
 
-    function mindsetService() {
+    function mindsetService($q, apiService, $rootScope) {
         var _sliders = [
             {
                 name: 'I totally understand that accepting structure and accountability is necessary to succeed',
@@ -146,7 +146,7 @@
 
         this.getSliders = getSliders;
         this.getStuckSliders = getStuckSliders;
-
+        this.getSlapExpertsWithPersonalities = getSlapExpertsWithPersonalities;
         ////////////////////////////
 
         function getSliders() {
@@ -155,6 +155,13 @@
 
         function getStuckSliders() {
             return  _stuckSliders;
+        }
+
+        function getSlapExpertsWithPersonalities(personalities) {
+            return apiService.rest.all('getSlapExpertsWithPersonalities').post({personalities: personalities})
+            .then(function(res) {
+                return res.data;
+            })
         }
     }
 }());

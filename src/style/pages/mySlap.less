@@ -138,6 +138,18 @@
 .print-footer {
     display: none;
 }
+.footer-print {
+    display: none;
+}
+
+.blue-mark {
+  background: inherit !important;
+  color: #50cfe3;
+}
+
+.header-print {
+  display: none;
+}
 
 
 @media print and (color){
@@ -151,14 +163,6 @@
         margin: 5mm;
     }
 
-
-
-    .print-logo {
-        margin-top: 20px;
-        width: 60px;
-        position: relative;
-        visibility: visible;
-    }
     .slap-header {
         display: none;
     }
@@ -246,11 +250,63 @@
     }
 
 
-    .fourth-step {
-        page-break-inside: avoid;
+  table {
+    thead {
+      display: table-header-group;
+    }    
+    tfoot {
+      display: table-footer-group;
     }
+    tbody {
+    }
+  }
+  .table-footer-print {
+    height: 100px;
+  }
+  .table-title-div {
+    height: 120px;
+  }
 
-    .revenue-summary li {
-        page-break-inside: avoid;
+  .header-print {
+    display: block;
+    background-color: #4bc1e1 !important;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .footer-print {
+    display: block;
+    padding: 20px;
+    color: #0e7cb5 !important;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    div {
+        width: 100%;
+        text-align:center;
+        &.footer-content {
+            text-align: left;
+            padding-left: calc(~"50% - 120px");            
+        }
     }
+  }    
+  .summary3 {
+    page-break-after: always;
+  }
+  .summary4 {
+    page-break-before: always;
+    .summary4-content {
+        display: inline-block;
+        width: 100%;
+        .block {
+            width: 100%;
+        }
+    }
+  }
+  .empty-avatar-div {
+    display: block;
+  }
 }

@@ -24,14 +24,17 @@
             ],
             expertId: $stateParams.expert_id,
             coupons: coupons,
-            //deleteItem: deleteItem,
-            createOrSave: createOrSave,
-            fileUpload: fileUpload,
             image: null,
             originalImage: null,
             imageFileName: null,
             avatar_file: null,
-            Upload: Upload
+            is_calendar_setup_available: false,
+            //deleteItem: deleteItem,
+            Upload: Upload,
+            createOrSave: createOrSave,
+            fileUpload: fileUpload,
+            isCalendarSetupAvailable: isCalendarSetupAvailable,
+            setupCalendarAvailability: setupCalendarAvailability
         });
         pageService
             .reset()
@@ -105,5 +108,12 @@
             }
         }
 
+        function isCalendarSetupAvailable() {
+            return $scope.is_calendar_setup_available;
+        }
+
+        function setupCalendarAvailability() {
+            $scope.is_calendar_setup_available = true;
+        }
     }
 }());

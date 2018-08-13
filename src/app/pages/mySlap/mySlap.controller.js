@@ -176,7 +176,7 @@
         }
         
         $scope.printSlap = function () {
-            window.print();
+            $window.print();
         };
 
         //var vm = this;

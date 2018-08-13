@@ -94,11 +94,25 @@
                             <ng-message when="required">Video Introduction is required.</ng-message>
                         </div>
                     </md-input-container>
+                    <md-input-container flex="100" ng-if="isCalendarSetupAvailable()">
+                        <label>Ideal number of SLAPexpert Hours Per Month</label>
+                        <input type="number" ng-model="expert.number_of_hours_per_month" name="number_of_hours_per_month">
+                    </md-input-container>
+
+                    <md-input-container flex="100" ng-if="isCalendarSetupAvailable()">
+                        <textarea name="available_hours" ng-model="expert.available_hours" placeholder="Please block off hours you are available!" >
+                        </textarea>
+                        <div ng-messages="form.available_hours.$error">
+                            <ng-message when="required">Why a SLAPexpert is required.</ng-message>
+                        </div>
+                    </md-input-container>
+
                     <section layout="row" layout-align="end center" flex="100">
                         <md-button ng-click="setupCalendarAvailability()" class="md-primary">
                             Set up Calendar Availability
                         </md-button>
                     </section>
+
                     <section layout="row" layout-align="end center" flex="100">
                         <md-button ng-click="createOrSave($event)" class="md-primary">
                             Save
