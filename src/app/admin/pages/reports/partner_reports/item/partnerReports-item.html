@@ -365,7 +365,7 @@
 
                         <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section ideal-client-journey-printable-section">
                             <h3>Ideal Client Journey</h3>
-                            <h5>Take a look at SLAPster status within SLAPcenter. SLAPsters are to take a maximum of 30 days to complete their SLAPbuild and is recommended they log into SLAPcenter every week. See below the number of SLAPsters in Build and Execute. SLAPsters who have been in build for more than 30 days are considered SLAPstuck and SLAPsters who have not logged into SLAPcenter in over 10 days are considered stuck in Execute.</h5>
+                            <h5>SLAPsters are to take a maximum of 30 days to complete their SLAPbuild and is recommended they log into SLAPcenter every week. See below the number of SLAPsters in Build and Execute. SLAPsters who have been in build for more than 30 days are considered SLAPstuck and SLAPsters who have not logged into SLAPcenter in over 10 days are considered stuck in Execute.</h5>
                             <div># of clients in Build: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_build.length : 0  }}</div>
                             <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.ideal_client_journey && report.ideal_client_journey.slapsters_in_build.length != 0">
                                 <thead>
@@ -375,7 +375,7 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="slapster in report.ideal_client_journey.slapsters_in_build">
-                                        <td>{{slapstrer.name + " " + slapster.lastName }}</td>
+                                        <td>{{slapster.name + " " + slapster.lastName }}</td>
                                     </tr>
                                 </tbody>
                             </table>

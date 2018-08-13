@@ -30,8 +30,8 @@
         pageService
             .reset() 
             .setShowBC(true)
-            .addCrumb({name: 'Partner Reports', path: 'reports.partner.item'})
-            .setPageTitle('Partner Reports');
+            .addCrumb({name: 'Impact Partner Reports', path: 'reports.partner.item'})
+            .setPageTitle('Impact Partner Reports');
 
 
         $scope.printSlap = function () {

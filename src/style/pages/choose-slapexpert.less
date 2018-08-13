@@ -1,0 +1,245 @@
+.choose-slapexpert-page {
+	.panel-body {
+		& {
+			.choose-slapexpert-sub-header {
+				margin-bottom: 50px;
+			}
+			.choose-slapexpert-sub-footer {
+				margin-top: 50px;
+				.select-personality1-continue {
+					border: 1px solid rgb(3,169,244);
+				    color: #000;
+				    width: 150px;
+				    border-radius: 20px;					
+				}
+				.select-personality2-continue {
+					border: 1px solid #fcbfbf;
+				    color: #fcbfbf;
+				    width: 150px;
+				    border-radius: 20px;
+				}
+				.select-personality3-continue {
+					border: 1px solid #4be1a4;
+				    color: #fff;
+				    background-color: #4be1a4;
+				    width: 150px;
+				    border-radius: 20px;	
+				}
+				button[disabled] {
+					color: rgba(0,0,0,0.38);
+				}
+			}
+		}
+
+		.personality-choose {
+			.personality-content {
+				width:50%;
+				min-width: 300px;
+				margin: 0 auto;	
+				.personality-item {
+					left: 10%;
+					margin-bottom: 10px;
+					cursor: pointer;
+
+					&:focus {
+						outline: none;
+					}
+
+					.personality-circle {
+						width: 20px;
+						height: 20px;
+						border-radius: 50%;
+						border: 1px solid #0e7cb5;
+						float: left;
+						margin: 5px 10px 0 0;
+						&.selected {
+							background-color: #4be1a4;
+							border-color: #4be1a4;
+						}
+
+					}
+					.personality-name {
+						&.disabled {
+							font-weight: bold;
+						}
+					}
+				}
+			}
+		}
+
+		.slapexpert-choose {
+			width: 100%;
+			margin: 0 auto;
+			.avatars {
+			  display: inline-flex;
+			  flex-direction: row-reverse;
+			  padding-left:50px;
+			}
+
+			.avatar {
+			  margin-left: -40px;
+			  position: relative;
+			  border:1px solid #fff;
+			  border-radius: 50%;
+			  overflow:hidden;
+			  width:80px;
+			  height:80px;
+			  margin-top: 250px;
+			}
+
+			.avatar img {
+			  width:80px;
+			  height:80px;
+			}			
+			.selected-slapexpert-detail {
+				width: 50%;
+				.slapexpert-choose-content {
+					text-align: center;
+					.slapexpert-image {
+						width: 150px;
+						height: 150px;
+						border-radius: 50%;
+					}
+					.slapexpert-number {
+						border-radius: 50%;
+						width: 30px;
+					    height: 30px;
+					    margin: 0 auto;
+					    &.active {
+							background-color: #247db3;
+							color: #fff;
+					    }
+					}
+					.carousel-btn {
+						color: #247db3;
+					}
+					.profile {
+						height: 250px;
+						.profile-sub-header {
+							text-align: left;
+						}
+						p {
+							text-align: left;
+						}
+						.profile-switch {
+							width: 20px;
+							height: 20px;
+							border: 1px solid #4be1a4;
+							border-radius: 50%;
+
+							&.selected {
+								background-color: #4be1a4;
+							}
+						}
+					}
+					.slapexpert-numbers-pagination {
+						display: inline-block;
+						.item {
+						    color: #000;
+						    float: left;
+						    text-decoration: none;
+						    border-radius: 50%;
+						    width: 30px;
+						    height: 30px;
+						    margin: 10px 10px;
+
+							&:focus { 
+								outline: none;
+							}
+
+							&.pagination-arrow {
+								color: #247db3;
+								border-radius: 50%;
+								width: 50px;
+								height: 50px;
+								margin: 0 auto; 	
+								border: 1px solid #247db3;
+								line-height: 50px;
+
+								&.prev {
+									margin-right: 50px;
+								}
+
+								&.next {
+									margin-left: 50px;
+								}
+
+								&:hover {
+									cursor: pointer;
+								}
+							}							
+						    &.active {
+								background-color: #247db3;
+								color: #fff;
+						    }				
+						    &.disabled {
+							    color: #ababab;
+							    border-color: #ababab;
+							    &:hover {
+								    cursor: initial;
+							    }
+						    }			
+						}
+					}
+				}
+			}
+		}
+		.sync-with-slapexpert {
+			.sync-with-slapexpert-content {			
+				.connect-your-calendar {
+				    padding: 0 50px;
+					.connect-your-calendar-header {
+					    text-align: center;
+					    background-color: #247db3;
+					    color: white;
+					    padding: 10px;
+					    border-radius: 10px;									
+					}
+					.connect-your-calendar-content {
+						box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+						padding: 20px;
+						text-align: center;
+						.calendar-option {
+							width: 150px;
+							margin: 0px auto 20px;
+							border: 1px solid #247db3;										
+							border-radius: 10px;
+							text-align: center;
+							background-color: #fff;
+						} 
+					}
+				}
+				.sync-with-icon {
+					text-align: center;
+					padding:50px;
+				}
+				.slapexpert-avatar {
+					text-align: center;
+					.slapexpert-image {
+						border-radius: 50%;
+					}
+				}
+			}
+			.choose-slapexpert-sub-footer {
+				.need-help-btn {
+					color: #fb90b6;
+					border: 1px solid #fb90b6;
+				    width: 150px;
+				    border-radius: 20px;		
+				    background-color: #fff;				
+				}
+				.continue-btn {
+					border: 1px solid #4be1a4;
+				    color: #fff;
+				    background-color: #4be1a4;
+				    width: 150px;
+				    border-radius: 20px;	
+				    a {
+				    	text-decoration: none;
+				    	color: #fff;
+				    }
+				}
+			}
+		}
+	}	
+}
