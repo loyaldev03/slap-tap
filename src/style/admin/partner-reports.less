@@ -85,6 +85,9 @@
   display: none;
 }
 
+.p-es-50-customize {
+  padding: 0 50px 25px;
+}
 @media print {
 
   body {
@@ -96,6 +99,7 @@
   @page {
     size: auto;
     margin: 0mm;
+    counter-increment: page 
   }
 
   #partner-report {
@@ -172,11 +176,15 @@
       height: 8000px;
     }
   }
+  #tfoot:after {
+    counter-increment: page;
+    content: counter(page);  
+  }
   .table-footer-print {
-    height: 100px;
+    height: 110px;
   }
   .table-title-div {
-    height: 120px;
+    height: 110px;
   }
 
   .header-print {
@@ -205,5 +213,9 @@
         }
     }
   }  
+  .reports {
+    margin-top: 0px;
+  }
+
 }
 

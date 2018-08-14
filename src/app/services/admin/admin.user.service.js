@@ -6,7 +6,7 @@
         .service('adminUserService', adminUserService);
 
     /* @ngInject */
-    function adminUserService($q, adminApiService, $rootScope) {
+    function adminUserService($q, adminApiService, $rootScope, $window) {
                 
 
         self.ROLE_ADMIN = 1;
@@ -31,6 +31,15 @@
             {id: 'active', name: "Active"},
             {id: 'inactive', name: "Inactive"}
             ];
+
+        self.getStoredUser = function() {
+            var user = $window.localStorage.getItem('slapuser');
+            if(user) {
+                return JSON.parse(user);
+            } else {
+                $state.go('login');
+            }
+        }
 
         self.get = function (id) {
             // console.log(user);

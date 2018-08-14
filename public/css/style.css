@@ -21727,6 +21727,9 @@ ul li {
 .header-print {
   display: none;
 }
+.p-es-50-customize {
+  padding: 0 50px 25px;
+}
 @media print {
   body {
     height: 100%;
@@ -21736,6 +21739,7 @@ ul li {
   @page {
     size: auto;
     margin: 0mm;
+    counter-increment: page;
   }
   #partner-report {
     flex: 1 0 auto;
@@ -21796,11 +21800,15 @@ ul li {
   table tbody {
     height: 8000px;
   }
+  #tfoot:after {
+    counter-increment: page;
+    content: counter(page);
+  }
   .table-footer-print {
-    height: 100px;
+    height: 110px;
   }
   .table-title-div {
-    height: 120px;
+    height: 110px;
   }
   .header-print {
     display: block;
@@ -21826,6 +21834,9 @@ ul li {
   .footer-print div.footer-content {
     text-align: left;
     padding-left: calc(50% - 120px);
+  }
+  .reports {
+    margin-top: 0px;
   }
 }
 .slap-expert-item-wrapper {

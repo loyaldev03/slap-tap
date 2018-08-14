@@ -11,7 +11,7 @@
             <md-input-container flex="30">
                 <label>Which Partner</label>
                 <md-select ng-model="partner" required>
-                    <md-option ng-repeat="user in users" ng-value="user._id">{{user.businessName}}</md-option>
+                    <md-option ng-repeat="user in users" ng-value="user">{{user.businessName}}</md-option>
                 </md-select>
                 <div class="md-errors-spacer"></div>
             </md-input-container>
@@ -66,8 +66,8 @@
             <tbody>
                 <tr>
                     <td class="reports-content">
-        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
-            <h3>Silver Success Metrics</h3>
+        <md-card  flex="100" class="p-es-50-customize m-w-es-40 printable-section">
+            <h3>Silver Success Metrics for {{partner.businessName}}</h3>
             <div>Total Number Of Clients: {{ report.silver_success_metrics ? report.silver_success_metrics.total_slapsters.length : 0 }}</div>
             <div># of NEW SLAPsters: {{ report.silver_success_metrics ? report.silver_success_metrics.new_slapsters.length : 0  }}</div>
             <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.silver_success_metrics && report.silver_success_metrics.new_slapsters.length != 0">
@@ -96,9 +96,9 @@
                 </tbody>
             </table>
         </md-card>
-        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
+        <md-card  flex="100" class="p-es-50-customize m-w-es-40 printable-section">
             <h3>SLAPgoals</h3>
-            <h5>This is the percent of total Sales Revenue completely Sold (not Projected) out of total Revenue Goal for the Quarter shown by Month. SLAPsters with more than 15% during 1st Month, 40% during 2nd Month, and 55% during the 3rd Month are considered on track.</h5>
+            <h5>This is the percent of total Sales Revenue completely Sold (not Projected) out of total Revenue Goal for the Quarter shown by Month. SLAPsters with more than 15% during 1st Month, 40% during 2nd Month, and 55% during the 3rd Month are considered on track.Note that you will only see details on the SLAPsters who are currently Executing their SLAPs. If one or more of your SLAPsters are still in Build or have finished all 12 months of their SLAP Execute cycle you will not see them in this section but you will see their data in the following sections.</h5>
             <div>Month 1 Results Progress: {{ report.slapgoals ? report.slapgoals.month1.percent : 0  }}%</div>
             <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.slapgoals && report.slapgoals.month1.slapsters.length != 0">
                 <thead>
@@ -145,63 +145,7 @@
                 </tbody>
             </table>
         </md-card>
-<!--         <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
-            <h3>Ideal Client Journey</h3>
-            <h5>Take a look at SLAPster status within SLAPcenter. SLAPsters are to take a maximum of 30 days to complete their SLAPbuild and is recommended they log into SLAPcenter every week. See below the number of SLAPsters in Build and Execute. SLAPsters who have been in build for more than 30 days are considered SLAPstuck and SLAPsters who have not logged into SLAPcenter in over 10 days are considered stuck in Execute.</h5>
-            <div># of clients in Build: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_build.length : 0  }}</div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.ideal_client_journey && report.ideal_client_journey.slapsters_in_build.length != 0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>                    
-                </thead>
-                <tbody>
-                    <tr ng-repeat="slapster in report.ideal_client_journey.slapsters_in_build">
-                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div># of clients in Execute: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_execute.length : 0  }}</div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.ideal_client_journey && report.ideal_client_journey.slapsters_in_execute.length != 0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>                        
-                </thead>
-                <tbody>
-                    <tr ng-repeat="slapster in report.ideal_client_journey.slapsters_in_execute">
-                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
-                    </tr>                        
-                </tbody>
-            </table>
-            <div># of clients in Build-Stuck: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_buildstuck.length : 0  }}</div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.ideal_client_journey && report.ideal_client_journey.slapsters_in_buildstuck.length != 0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>                    
-                </thead>
-                <tbody>
-                    <tr ng-repeat="slapster in report.ideal_client_journey.slapsters_in_buildstuck">
-                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div># of clients in Execute-Stuck: {{ report.ideal_client_journey ? report.ideal_client_journey.slapsters_in_executestuck.length : 0  }}</div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.ideal_client_journey && report.ideal_client_journey.slapsters_in_executestuck.length != 0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>                        
-                </thead>
-                <tbody>
-                    <tr ng-repeat="slapster in report.ideal_client_journey.slapsters_in_executestuck">
-                        <td>{{ slapster.name + " " + slapster.lastName }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </md-card> -->
-        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
+        <md-card  flex="100" class="p-es-50-customize m-w-es-40 printable-section">
             <h3>SLAPscore/Status</h3>
             <h5>SLAPscore is the score given to a SLAPster’s overall progress by an algorithm taking into consideration their SLAPscore, SLAPhabits, SLAPstatus and 5 Fingers performance. SLAPstatus is the status rating given to each SLAPster during each interaction with a SLAPexpert or a SLAPmanager.</h5>
             <div>SLAPster Rating - Average</div>
@@ -236,9 +180,9 @@
             </table>            
         </md-card>  
 
-        <md-card  flex="100" class="p-es-50 m-w-es-40 printable-section">
+        <md-card  flex="100" class="p-es-50-customize m-w-es-40 printable-section">
             <h3>Monthly Revenue Share</h3>
-            <h5>Your Total Projected Revenue Share is the amount we expect to pay you based on our agreed upon revenue share with you and the amount each SLAPster is paying for their SLAP each month.  The Actual Revenue Share is how much we will issue to you based on the actual amount of money collected from the SLAPster for this month.  Note that if we collected less money from the SLAPster than was projected it is usually do to cashflow issues on their end and we will always do our best to support them and help them get back on track.</h5>
+            <h5>Your Total Projected Revenue Share is the amount we expect to pay you based on our agreed upon revenue share with you and the amount each SLAPster is paying for their SLAP each month.  The Actual Revenue Share is how much we will issue to you based on the actual amount of money collected from the SLAPster for this month.  Note that if we collected less money from the SLAPster than was projected it is usually due to cashflow issues on their end and we will always do our best to support them and help them get back on track.</h5>
             <div>Projected Revenue Share ${{ report.monthly_revenue_share ? report.monthly_revenue_share.projected_revenue_share.projected_revenue_share : 0}}</div>
             <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover"  cellspacing="10" cellpadding="10" ng-if="report.monthly_revenue_share && report.monthly_revenue_share.projected_revenue_share.slapsters.length != 0">
                 <thead>
@@ -269,22 +213,6 @@
                     </tr>                    
                 </tbody>
             </table>
-            <!-- <div>Total Income Collected From SLAPster ${{ report.monthly_revenue_share ? report.monthly_revenue_share.total_income_collected.total_income_collected : 0}}</div>
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-responsive table-hover" cellspacing="10" cellpadding="10" ng-if="report.monthly_revenue_share && report.monthly_revenue_share.total_income_collected.slapsters.length != 0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Revenue</th>                            
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="slapster in report.monthly_revenue_share.total_income_collected.slapsters">
-                        <td>{{ slapster.name + " " + slapster.lastName}}</td>
-                        <td>${{ slapster.total_income_collected }}</td>
-                    </tr>                        
-                </tbody>
-                <tr>
-            </table> -->
         </md-card>                        
                     </td>
                 </tr>
@@ -296,7 +224,7 @@
     </div>                
     <div class="footer-print" style="background-image: url('http://slapcenter.com/images/silver_lining_logo.png'); background-repeat: no-repeat; background-position: right; background-size: 70px; " >
         <div class="footer-title">
-            <b>Thank you for working with us to help small business owners around the world succeed!</b><br/><br/>
+            <b>Thank you for working with us to help small business owners around the world succeed!</b>
         </div>
         <div class="footer-content">
             <b>Call</b>: 844.393.SLAP x 198<br/>
