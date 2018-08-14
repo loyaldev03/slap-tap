@@ -20685,6 +20685,9 @@ md-select-menu {
   .panel .panel-default {
     margin-bottom: 0;
   }
+  .slap-page {
+    margin: 0;
+  }
   .slap-page p,
   span {
     color: #576875 !important;
@@ -20744,7 +20747,7 @@ md-select-menu {
     top: 0;
     width: 100%;
   }
-  .footer-print {
+  .myslap-page .footer-print {
     display: block;
     padding: 20px;
     color: #0e7cb5 !important;
@@ -20753,13 +20756,13 @@ md-select-menu {
     bottom: 0;
     width: 100%;
   }
-  .footer-print div {
+  .myslap-page .footer-print div {
     width: 100%;
     text-align: center;
   }
-  .footer-print div.footer-content {
+  .myslap-page .footer-print div.footer-content {
     text-align: left;
-    padding-left: calc(50% - 120px);
+    padding-left: calc(50% - 250px);
   }
   .summary3 {
     page-break-after: always;

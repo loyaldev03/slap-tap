@@ -1,5 +1,7 @@
 * { -webkit-print-color-adjust: exact; }
-
+.myslap-page {
+    
+}
 .print {
     width: 72px;
     height: 24px;
@@ -202,6 +204,9 @@
         margin-bottom: 0;
     }
 
+    .slap-page {
+        margin: 0;
+    }
     .slap-page p , span {
         color: #576875 !important;
     }
@@ -276,23 +281,25 @@
     width: 100%;
   }
 
-  .footer-print {
-    display: block;
-    padding: 20px;
-    color: #0e7cb5 !important;
-    background-color: #fff;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    div {
+  .myslap-page {
+      .footer-print {
+        display: block;
+        padding: 20px;
+        color: #0e7cb5 !important;
+        background-color: #fff;
+        position: fixed;
+        bottom: 0;
         width: 100%;
-        text-align:center;
-        &.footer-content {
-            text-align: left;
-            padding-left: calc(~"50% - 120px");            
+        div {
+            width: 100%;
+            text-align:center;
+            &.footer-content {
+                text-align: left;
+                padding-left: calc(~"50% - 250px");            
+            }
         }
-    }
-  }    
+      }    
+  }
   .summary3 {
     page-break-after: always;
   }
