@@ -60,7 +60,9 @@
     "ng-currency": "^1.2.5",
     "angular-drag-and-drop-lists": "^2.1.0",
     "json-export-excel": "ng-json-export-excel#^1.0.2",
-    "angular-file-saver": "^1.1.3"
+    "angular-file-saver": "^1.1.3",
+    "angular-carousel": "^1.1.0",
+    "angular-ui-carousel": "^0.1.10"
   },
   "resolutions": {
     "angular": "1.6.5",

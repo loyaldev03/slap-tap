@@ -1,0 +1,137 @@
+<div class="slap-page choose-slapexpert-page" scroll-top>
+
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+        	<div class="personality-choose" ng-if="isActiveStep('PERSONALITY_CHOOOSE')">
+	        	<div class="choose-slapexpert-sub-header" align="center">
+		    		<h1 class="md-display-1">I want my slapexpert to be...</h1>
+		    		<h1 class="md-subhead">Select 3 words that describe your ideal slapexpert</h1>
+		    	</div>
+	    		<div class="personality-content">
+				  <div class="col-xs-6 personality-item" ng-repeat="item in personalities" ng-click="selectPersonality(item)">
+				    <div class="personality-circle" ng-class="{'selected': isPersonalitySelected(item)}"></div>
+				    <div class="personality-name" ng-class="{'disabled': isPersonalityDisabled(item)}">{{item}}</div>
+				  </div>
+				</div>
+				<div style='clear: both'></div>
+				<div class="choose-slapexpert-sub-footer" align="center">
+					<md-button class="md-primary select-personality1-continue" ng-if="isActiveStep('SELECT_PERSONALITY1')" ng-disabled="!current_selected_personality" ng-click="moveToNextStep()">Continue</md-button>
+					<md-button class="md-primary select-personality2-continue" ng-if="isActiveStep('SELECT_PERSONALITY2')" ng-disabled="!current_selected_personality" ng-click="moveToNextStep()">Select3</md-button>
+					<md-button class="md-primary select-personality3-continue" ng-if="isActiveStep('SELECT_PERSONALITY3')" ng-disabled="!current_selected_personality" ng-click="moveToNextStep()">Continue</md-button>
+				</div>
+			</div>
+			<div class="slapexpert-choose" flex="100" ng-if="isActiveStep('SLAPEXPERT_CHOOSE')" layout="row">
+				<div class="left-side-avatars" flex="25">
+					<div class="avatars">
+					    <span class="avatar" ng-repeat="slapexpert in getLeftSlapExperts()">
+					        <img src="{{getSlapExpertImageUrl(slapexpert)}}"/>
+					    </span>
+					</div>
+				</div>
+				<div class="selected-slapexpert-detail" flex="50">
+					 <div class="choose-slapexpert-sub-header" align="center">
+						<h1 class="md-display-1">Find your slapexpert!</h1>
+						<h1 class="md-subhead">These are your best maches</h1>
+					 </div>
+					 <div class="slapexpert-choose-content">
+						<img class="slapexpert-image" src="{{getSlapExpertImageUrl(current_slapexpert)}}">
+						<div class="slapexpert-name">{{current_slapexpert.name}}</div>
+						<div class="profile">
+							<ui-carousel 
+							  slides="current_slapexpert_details"
+							  slides-to-show="1"
+							  slides-to-scroll="1"
+							  initial-slide="1"
+							  autoplay="false"
+							  autoplay-speed="2000"
+							  dots="true">
+							 
+							  <carousel-item>
+									<div class="profile-sub-header">{{item.header}}</div>
+									<p>
+										{{item.description}}
+								</p>
+							  </carousel-item>
+							  <carousel-prev ng-hide="true">
+							  </carousel-prev>
+
+							  <carousel-next>
+							    <button class="carousel-btn"><</button>
+							  </carousel-next>					  
+
+							</ui-carousel>
+						</div>
+						<div class="slapexpert-numbers-pagination">
+						    <div class="item pagination-arrow prev" ng-click="gotoPrevPage()" ng-class="{'disabled': isPrevDisabled()}">
+						    	<
+						    </div>
+					    	<div class="item" ng-repeat="number in getCurrentNumbers()" ng-class="{'active': current_slapexpert_number == number}" ng-click="changeSlapExpert(number)">
+					    		{{ number }}
+					    	</div>
+						    <div class="item pagination-arrow next" ng-click="gotoNextPage()" ng-class="{'disabled': isNextDisabled()}">
+						    	>
+						   	</div>
+						</div>
+					</div>
+					<div class="choose-slapexpert-sub-footer" align="center">
+						<md-button class="md-primary select-slapexpert-continue" ng-click="moveToNextStep()">Continue</md-button>
+					</div>					
+				</div>
+				<div class="right-side-avatars" flex="25">
+					<div class="avatars">
+					    <span class="avatar" ng-repeat="slapexpert in getRightSlapExperts()">
+					        <img src="{{getSlapExpertImageUrl(slapexpert)}}"/>
+					    </span>
+					</div>
+
+				</div>				
+			</div>
+        	<div class="sync-with-slapexpert" ng-if="isActiveStep('SYNC_WITH_SLAPEXPERT')" flex="100" layout="column">
+	        	<div class="choose-slapexpert-sub-header" align="center">
+		    		<h1 class="md-display-1">Sync with your slapexpert!</h1>
+		    		<h1 class="md-subhead">Connect your calendar to find matching time slots with your slapexpert</h1>
+		    	</div>
+	    		<div class="sync-with-slapexpert-content" flex="100" layout="row">
+	    			<div class="connect-your-calendar" flex="40">
+	    				<div class="connect-your-calendar-header">
+	    					Connect Your Calendar
+	    				</div>
+	    				<div class="connect-your-calendar-content">
+	    					<button class="calendar-option">
+	    						Google
+	    					</button>
+	    					<button class="calendar-option">
+	    						Outlook
+	    					</button>
+	    					<button class="calendar-option">
+	    						Other
+	    					</button>
+	    				</div>
+	    			</div>
+	    			<div class="sync-with-icon" flex="20">
+	    				<img src="/images/sync-with-icon.png" width="100" height="100" />
+	    			</div>
+	    			<div class="slapexpert-avatar" flex="40">
+						<img class="slapexpert-image" src="{{getSlapExpertImageUrl(current_slapexpert)}}" width="200" height="200">
+						<div class="slapexpert-name">{{current_slapexpert.name}}</div>
+
+	    			</div>
+				</div>
+				<div class="choose-slapexpert-sub-footer" align="center">
+					<md-button class="md-primary need-help-btn" ng-click="moveToNextStep()">
+						I Need Help
+					</md-button>
+					<button class="md-primary continue-btn">
+						<a href="https://bookeo.com/starintegration" target="_blank">
+							Continue
+						</a>
+					</button>
+				</div>
+			</div>			
+        </div>
+    </div>
+
+</div>
+
+<slap-footer send="sendData" forward="forward"></slap-footer>

@@ -37,6 +37,7 @@
                 'dataGrid', 
                 'pagination',
                 'ui.router',
+                'ui.carousel',
                 //Sub modules
                 'app.services',
                 'app.filters',
