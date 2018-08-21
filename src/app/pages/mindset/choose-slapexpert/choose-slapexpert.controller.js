@@ -262,7 +262,7 @@
                     return '<label color="red">Available</label>';
                 }
             });       
-            return '<label color="red">Available</label>';
+            return '';
             // var selected_date = moment(date);
             // var slot_date = moment($scope.selected_slot.startTime);
             // if (slot_date.isSame(selected_date, 'day')) {
