@@ -2,11 +2,11 @@
 
     <div class="panel panel-default">
 
-        <div class="panel-body">
-        	<div class="personality-choose" ng-if="isActiveStep('PERSONALITY_CHOOOSE')">
+        <div class="panel-body">	    				
+        	<div class="personality-choose" ng-if="isActiveStep('PERSONALITY_CHOOOSE')">      		
 	        	<div class="choose-slapexpert-sub-header" align="center">
-		    		<h1 class="md-display-1">I want my slapexpert to be...</h1>
-		    		<h1 class="md-subhead">Select 3 words that describe your ideal slapexpert</h1>
+		    		<h1 class="md-display-1">I Want My SLAPexpert To Be...</h1>
+		    		<h1 class="md-subhead">Select 3 words that describe your ideal SLAPexpert</h1>
 		    	</div>
 	    		<div class="personality-content">
 				  <div class="col-xs-6 personality-item" ng-repeat="item in personalities" ng-click="selectPersonality(item)">
@@ -16,9 +16,7 @@
 				</div>
 				<div style='clear: both'></div>
 				<div class="choose-slapexpert-sub-footer" align="center">
-					<md-button class="md-primary select-personality1-continue" ng-if="isActiveStep('SELECT_PERSONALITY1')" ng-disabled="!current_selected_personality" ng-click="moveToNextStep()">Continue</md-button>
-					<md-button class="md-primary select-personality2-continue" ng-if="isActiveStep('SELECT_PERSONALITY2')" ng-disabled="!current_selected_personality" ng-click="moveToNextStep()">Select3</md-button>
-					<md-button class="md-primary select-personality3-continue" ng-if="isActiveStep('SELECT_PERSONALITY3')" ng-disabled="!current_selected_personality" ng-click="moveToNextStep()">Continue</md-button>
+					<md-button class="md-primary select-personality1-continue" ng-if="isActiveStep('SELECT_PERSONALITY')" ng-disabled="!isContinueAvailable('SELECT_PERSONALITY')" ng-click="moveToNextStep()">Continue</md-button>
 				</div>
 			</div>
 			<div class="slapexpert-choose" flex="100" ng-if="isActiveStep('SLAPEXPERT_CHOOSE')" layout="row">
@@ -31,13 +29,14 @@
 				</div>
 				<div class="selected-slapexpert-detail" flex="50">
 					 <div class="choose-slapexpert-sub-header" align="center">
-						<h1 class="md-display-1">Find your slapexpert!</h1>
-						<h1 class="md-subhead">These are your best maches</h1>
+						<h1 class="md-display-1">Find Your SLAPexpert!</h1>
+						<h1 class="md-subhead">Based on what you are looking for in a SLAPexpert, these are your best matches! Review all of the best match SLAPexperts and click on the one you would like to work with for this SLAPyear and then click Continue to save your choice.</h1>
 					 </div>
 					 <div class="slapexpert-choose-content">
 						<img class="slapexpert-image" src="{{getSlapExpertImageUrl(current_slapexpert)}}">
 						<div class="slapexpert-name">{{current_slapexpert.name}}</div>
 						<div class="profile">
+							<div class="profile-sub-header">SLAPexpert Introduction</div>
 							<ui-carousel 
 							  slides="current_slapexpert_details"
 							  slides-to-show="1"
@@ -45,21 +44,17 @@
 							  initial-slide="1"
 							  autoplay="false"
 							  autoplay-speed="2000"
-							  dots="true">
-							 
+							  dots="true">					
 							  <carousel-item>
-									<div class="profile-sub-header">{{item.header}}</div>
-									<p>
+									<textarea disabled>
 										{{item.description}}
-								</p>
+									</textarea>
 							  </carousel-item>
 							  <carousel-prev ng-hide="true">
 							  </carousel-prev>
-
 							  <carousel-next>
 							    <button class="carousel-btn"><</button>
 							  </carousel-next>					  
-
 							</ui-carousel>
 						</div>
 						<div class="slapexpert-numbers-pagination">
@@ -87,6 +82,44 @@
 
 				</div>				
 			</div>
+        	<div class="schedule-slapexpert-call" ng-if="isActiveStep('SCHEDULE_SLAPEXPERT_CALL') && isReady">      		
+	        	<div class="schedule-slapexpert-call-sub-header" align="center">
+		    		<h1 class="md-display-1">Schedule Your SLAPexpert Call</h1>
+		    	</div>        		
+	    		<div class="schedule-slapexpert-call-content" flex="100" layout="row">
+	    			<div class="calendar-content" flex="60">
+						<calendar-md flex layout layout-fill
+							  calendar-direction="direction"
+							  on-prev-month="prevMonth"
+							  on-next-month="nextMonth"
+							  on-day-click="dayClick"
+							  title-format="'MMMM y'"
+							  ng-model='selectedDate'
+							  day-format="'d'"
+							  day-label-format="'EEE'"
+							  day-label-tooltip-format="'EEEE'"
+							  day-tooltip-format="'fullDate'"
+							  week-starts-on="firstDayOfWeek"
+							  day-content="setDayContent">
+						</calendar-md>  	 
+					</div>
+					<div class="slots-content" flex="40">
+						<h3>
+							Available Hours
+						</h3>
+						<md-list class="text-color-main">
+							<md-list-item ng-repeat-start="slot in available_slots_for_day track by $index" tracklayout="row" ng-click="selectSlot(slot)" ng-class="{'selected': isSlotSelected(slot)}">
+								{{getDurationFromSlot(slot)}}
+							</md-list-item>
+							<md-divider ng-if="!$last" ng-repeat-end></md-divider>
+						</md-list>						
+					</div>
+				</div>
+				<div style='clear: both'></div>
+				<div class="schedule-slapexpert-call-sub-footer" align="center">
+					<md-button class="md-primary select-personality1-continue"  ng-disabled="!isContinueAvailable('SCHEDULE_SLAPEXPERT_CALL')" ng-click="moveToNextStep()">Confirm My Meeting Time</md-button>
+				</div>
+			</div>			
         	<div class="sync-with-slapexpert" ng-if="isActiveStep('SYNC_WITH_SLAPEXPERT')" flex="100" layout="column">
 	        	<div class="choose-slapexpert-sub-header" align="center">
 		    		<h1 class="md-display-1">Sync with your slapexpert!</h1>
@@ -115,7 +148,6 @@
 	    			<div class="slapexpert-avatar" flex="40">
 						<img class="slapexpert-image" src="{{getSlapExpertImageUrl(current_slapexpert)}}" width="200" height="200">
 						<div class="slapexpert-name">{{current_slapexpert.name}}</div>
-
 	    			</div>
 				</div>
 				<div class="choose-slapexpert-sub-footer" align="center">
@@ -127,9 +159,9 @@
 							Continue
 						</a>
 					</button>
-				</div>
+				</div>				
 			</div>			
-        </div>
+        </div>        
     </div>
 
 </div>

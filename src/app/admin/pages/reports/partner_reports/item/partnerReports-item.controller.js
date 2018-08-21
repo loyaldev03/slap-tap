@@ -17,6 +17,7 @@
             report: {},
             reportID: $stateParams.report_id,
             users: allPartners,
+            user: adminUserService.getStoredUser(),
             partner: '',
             startDate: '',
             endDate: '',
@@ -30,8 +31,8 @@
         pageService
             .reset() 
             .setShowBC(true)
-            .addCrumb({name: 'Partner Reports', path: 'reports.partner.item'})
-            .setPageTitle('Partner Reports');
+            .addCrumb({name: 'Impact Partner Reports', path: 'reports.partner.item'})
+            .setPageTitle('Impact Partner Reports');
 
 
         $scope.printSlap = function () {
@@ -43,8 +44,8 @@
             $scope.dataReady = false;
             var startDate = new Date($scope.selectedYear, $scope.selectedMonth - 1, 1)
             var endDate = new Date($scope.selectedYear, $scope.selectedMonth, 0)
-            if ($scope.partner && startDate && endDate){
-                return partnerReportService.post({partnerId: $scope.partner, from: startDate, to: endDate})
+            if ($scope.partner._id && startDate && endDate){
+                return partnerReportService.post({partnerId: $scope.partner._id, from: startDate, to: endDate})
                 .then(function (resolve) {
                     $scope.report = resolve.data;
                     $scope.gridData = {

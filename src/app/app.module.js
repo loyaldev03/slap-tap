@@ -38,6 +38,7 @@
                 'pagination',
                 'ui.router',
                 'ui.carousel',
+                'materialCalendar',
                 //Sub modules
                 'app.services',
                 'app.filters',

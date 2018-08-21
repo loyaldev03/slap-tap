@@ -37,8 +37,8 @@
             $scope.disableButton = true;
             $scope.startDate = new Date($scope.selectedYear, $scope.selectedMonth - 1, 1)
             $scope.endDate = new Date($scope.selectedYear, $scope.selectedMonth, 0)
-            if ($scope.expert && $scope.startDate && $scope.endDate){
-                return expertReportService.post({expertId: $scope.expert, from: $scope.startDate, to: $scope.endDate})
+            if ($scope.expert._id && $scope.startDate && $scope.endDate){
+                return expertReportService.post({expertId: $scope.expert._id, from: $scope.startDate, to: $scope.endDate})
                     .then(function (resolve) {
                         $scope.report = resolve.data;
                         if($scope.report){

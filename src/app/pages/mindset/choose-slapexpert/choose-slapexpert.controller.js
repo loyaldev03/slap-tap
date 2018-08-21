@@ -6,30 +6,34 @@
         .controller('ChooseSlapexpertController', ChooseSlapexpertController);
 
     /* @ngInject */
-    function ChooseSlapexpertController($scope, pageService, activeStep, stepService,$state, $rootScope, mindsetService, CONFIG) {
+    function ChooseSlapexpertController($scope, pageService, activeStep, stepService,$state, $rootScope, mindsetService, CONFIG, myCalendarService, userService) {
         $scope.videoUrl = activeStep.videoUrl;
         angular.extend($scope, activeStep.model, {
             forward: true,
             chosen_slapexperts: [],
             selected_personalities: [],
-            slapexpert_number_array: [],
             current_step: 0,
             current_selected_personality: '',
             current_slapexpert_details: [],
             current_slapexpert_number: 1, 
             slapexpert_current_numbers: [1,2,3,4,5],
+            current_user: null,
+            available_slots: [],
+            available_slots_for_day: [],
+            selected_slot: null, 
+            isReady: false,
 
             sendData: sendData,
             isActiveStep: isActiveStep,
             selectPersonality: selectPersonality,   
             isPersonalitySelected: isPersonalitySelected,
             isPersonalityDisabled: isPersonalityDisabled,
+            isContinueAvailable: isContinueAvailable,
             moveToNextStep: moveToNextStep,
             changeProfileSwitch: changeProfileSwitch,
             onCarouselInit: onCarouselInit,
             onCarouselBeforeChange: onCarouselBeforeChange,
             onCarouselAfterChange: onCarouselAfterChange,
-            getSlapexpertDetails: getSlapexpertDetails,
             getSlapExpertsWithPersonalities: getSlapExpertsWithPersonalities,
             selectSlapExpert: selectSlapExpert,
             changeSlapExpert: changeSlapExpert,
@@ -42,6 +46,12 @@
             reorderSlapexpertPagination: reorderSlapexpertPagination,
             isPrevDisabled: isPrevDisabled,
             isNextDisabled: isNextDisabled,
+            setDayContent: setDayContent,
+            dayClick: dayClick,
+            getDurationFromSlot: getDurationFromSlot,
+            selectSlot: selectSlot,
+            isSlotSelected: isSlotSelected,
+
             saved: false
         });
         
@@ -66,13 +76,13 @@
                 'Partner'
             ];
             $scope.steps = [
-                'SELECT_PERSONALITY1',
-                'SELECT_PERSONALITY2',
-                'SELECT_PERSONALITY3',
+                'SELECT_PERSONALITY',
                 'SLAPEXPERT_CHOOSE',
+                'SCHEDULE_SLAPEXPERT_CALL',
                 'SYNC_WITH_SLAPEXPERT'
             ];
             $scope.getSlapExpertsWithPersonalities();
+            $scope.current_user = userService.getStoredUser();
         }
         function sendData(direction) {
             stepService.updateActiveModel($scope);
@@ -103,7 +113,14 @@
         }
 
         function selectPersonality(item) {
-            $scope.current_selected_personality = item;
+            // $scope.current_selected_personality = item;
+            var index = $scope.selected_personalities.indexOf(item);
+            if (index > -1) {
+                $scope.selected_personalities.splice(index, 1);
+            }
+            else if ($scope.selected_personalities.length < 3) {
+                $scope.selected_personalities.push(item);                
+            }
         }
         
         function isPersonalitySelected(item) {
@@ -120,8 +137,14 @@
 
         function moveToNextStep() {
             $scope.current_step += 1;
-            $scope.selected_personalities.push($scope.current_selected_personality);
-            $scope.current_selected_personality = '';
+            if ($scope.current_step == 2) {
+                $scope.isReady = false
+                myCalendarService.getAvailableSlots($scope.current_user._id, $scope.current_slapexpert.userId)
+                .then(function(res) {
+                    $scope.available_slots = res.data;
+                    $scope.isReady = true;
+                })
+            }
         }
 
         function changeProfileSwitch(switch_number) {
@@ -139,45 +162,16 @@
         function onCarouselAfterChange() {
 
         }
-
-        function getSlapexpertDetails() {
-            var details = [
-                {
-                    header: 'Biography',
-                    description: "The header lines were kept separate because they looked like mail headers and I have mailmode on.  The same thing applies to Bozo's quoted text.  Mailmode doesn't screw things up very often, but since most people are usually converting non-mail, it's off by default."
-                },
-                {
-                    header: 'Career Highlights',
-                    description: 'description'
-                    // description: "The header lines were kept separate because they looked like mail headers and I have mailmode on.  The same thing applies to Bozo's quoted text.  Mailmode doesn't screw things up very often, but since most people are usually converting non-mail, it's off by default."
-                }                
-            ];
-            return details;
-        }
         
         function getSlapExpertsWithPersonalities() {
             mindsetService.getSlapExpertsWithPersonalities($scope.selected_personalities)
             .then(function(chosen_slapexperts) {
                 $scope.chosen_slapexperts = chosen_slapexperts;
-                $scope.slapexpert_number_array = [];
-                for ( var i = 1; i <= chosen_slapexperts.length; i++) {
-                    $scope.slapexpert_number_array.push({
-                        number: i,
-                        callback: $scope.changeSlapExpert,
-                        current_slapexpert_number: $scope.current_slapexpert_number
-                    });
+                var max = Math.min(chosen_slapexperts.length, 5);
+                $scope.slapexpert_current_numbers = [];
+                for (var  i = 1; i <= max; i++) {
+                    $scope.slapexpert_current_numbers.push(i);
                 }
-                // console.log('------------slapexpert number array---------------', $scope.slapexpert_number_array);
-                $scope.current_slapexpert_details = [ 
-                    {
-                        header: 'Biography',
-                        description: "The header lines were kept separate because they looked like mail headers and I have mailmode on.  The same thing applies to Bozo's quoted text.  Mailmode doesn't screw things up very often, but since most people are usually converting non-mail, it's off by default."
-                    },
-                    {
-                        header: 'Career Highlights',
-                        description: "The header lines were kept separate because they looked like mail headers and I have mailmode on.  The same thing applies to Bozo's quoted text.  Mailmode doesn't screw things up very often, but since most people are usually converting non-mail, it's off by default."
-                    }                
-                ];      
                 $scope.changeSlapExpert(1);          
             });
 
@@ -199,22 +193,20 @@
 
             $scope.current_slapexpert_details = [
                 {
-                    header: 'Biography',
                     description: $scope.current_slapexpert.brief_bio
                 },
                 {
-                    header: 'Career Highlights',
-                    description: $scope.current_slapexpert.why_slapexpert
+                    description: $scope.current_slapexpert.full_bio
                 }                
             ];
         }
         
         function getLeftSlapExperts() {
-            return $scope.chosen_slapexperts.slice(Math.max(0, $scope.current_slapexpert_number - 6), $scope.current_slapexpert_number - 1);
+                return $scope.chosen_slapexperts.slice(Math.max(0, $scope.current_slapexpert_number - 6), $scope.current_slapexpert_number - 1).reverse();
         }
 
         function getRightSlapExperts() {
-            return $scope.chosen_slapexperts.slice($scope.current_slapexpert_number, Math.min($scope.current_slapexpert_number+5, $scope.chosen_slapexperts.length));
+            return $scope.chosen_slapexperts.slice($scope.current_slapexpert_number, Math.min($scope.current_slapexpert_number+5, $scope.chosen_slapexperts.length)).reverse();
         }
 
         function getSlapExpertImageUrl(slapexpert) {
@@ -250,6 +242,58 @@
 
         function isNextDisabled() {
             return ($scope.current_slapexpert_number == $scope.chosen_slapexperts.length)
+        }
+
+        function isContinueAvailable(step) {
+            if (step == 'SELECT_PERSONALITY') {
+                return $scope.selected_personalities.length == 3;
+            }
+            if (step == 'SCHEDULE_SLAPEXPERT_CALL') {
+                return $scope.selected_slot != null;
+            }
+        }
+
+        function setDayContent(date) {
+            var selected_date = moment(date);
+            $scope.available_slots_for_day = [];
+            _.each($scope.available_slots, function(slot) {
+                var slot_date = moment(slot.startTime);
+                if (slot_date.isSame(selected_date, 'day')) {
+                    return '<label color="red">Available</label>';
+                }
+            });       
+            return '<label color="red">Available</label>';
+            // var selected_date = moment(date);
+            // var slot_date = moment($scope.selected_slot.startTime);
+            // if (slot_date.isSame(selected_date, 'day')) {
+            //     return '<label color="red">Booked</label>';
+            // }
+            // else {
+            //     return "";
+            // }
+        }
+
+        function dayClick(date) {
+            var selected_date = moment(date);
+            $scope.available_slots_for_day = [];
+            _.each($scope.available_slots, function(slot) {
+                var slot_date = moment(slot.startTime);
+                if (slot_date.isSame(selected_date, 'day')) {
+                    $scope.available_slots_for_day.push(slot);
+                }
+            });
+        }
+
+        function getDurationFromSlot(slot) {
+            return moment(slot.startTime).format("hh:mm:ss") + "-" + moment(slot.endTime).format("hh:mm:ss");
+        }
+
+        function selectSlot(slot) {
+            $scope.selected_slot = slot;
+        }
+
+        function isSlotSelected(slot) {
+            return $scope.selected_slot === slot;
         }
     }
 }());

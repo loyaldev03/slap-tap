@@ -28,13 +28,14 @@
             originalImage: null,
             imageFileName: null,
             avatar_file: null,
-            is_calendar_setup_available: false,
+            is_calendar_setup_available: true,
             //deleteItem: deleteItem,
             Upload: Upload,
             createOrSave: createOrSave,
             fileUpload: fileUpload,
             isCalendarSetupAvailable: isCalendarSetupAvailable,
-            setupCalendarAvailability: setupCalendarAvailability
+            setupCalendarAvailability: setupCalendarAvailability,
+            isValid: isValid
         });
         pageService
             .reset()
@@ -69,6 +70,9 @@
             })
         }
         function createOrSave(event) {
+            if (!$scope.isValid()) {
+                return;
+            }            
             if ($scope.image != $scope.originalImage) {
                 $scope.Upload.upload({
                     url: CONFIG.api + '/admin/uploadAvatar',
@@ -96,6 +100,15 @@
             }
 
         }
+
+        function isValid() {
+            if ($scope.expert.personality1 == $scope.expert.personality2 || $scope.expert.personality1 == $scope.expert.personality3 || $scope.expert.personality2 == $scope.expert.personality3) {
+                toaster.pop({type: 'error', body: 'You must choose 3 different Personality/Expert Style Words.  Please go back and update your choices.'});                
+                return false;
+            }
+            return true;
+        }
+
 
         function fileUpload(event) {
             $('.avatar-file').click();
