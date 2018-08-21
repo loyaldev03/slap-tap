@@ -52,11 +52,23 @@
                     </div>
 
                     <md-input-container flex="100">
-                        <textarea name="brief_bio" ng-model="expert.brief_bio" placeholder="Brief Bio" required>
-                        </textarea>
-                        <div ng-messages="form.brief_bio.$error">
-                            <ng-message when="required">Brief Bio is required.</ng-message>
-                        </div>
+                        <md-header>
+                            <div class="md-slap-header">
+                                Write a 20 word or less brief personal introduction  and overview of your entrepreneurial experience.  This is the information a SLAPster will see (along with your picture and 3 Personality/Expert Style Words when they are choosing their SLAPexpert) so make it feel personal!
+                            </div>
+                        </md-header>
+                        <textarea name="brief_bio" ng-model="expert.brief_bio" placeholder="" maxlength="20">
+                        </textarea>                    
+                    </md-input-container>
+
+                    <md-input-container flex="100">
+                        <md-header>
+                            <div class="md-slap-header">
+                                Paste your full Bio which highlights in more detail your entrepreneurial experience.   Ensure that your full bio is not more than 120 words and can be more formal and less personal. Reference your experience that will help a SLAPster understand your skills and knowledge.
+                            </div>
+                        </md-header>
+                        <textarea name="full_bio" ng-model="expert.full_bio" placeholder="" maxlength="120">
+                        </textarea>                    
                     </md-input-container>
 
                     <div class="md-slap-header">
@@ -87,13 +99,6 @@
                         </div>
                     </md-input-container>
 
-                    <md-input-container flex="50">
-                        <label>Video Introduction</label>
-                        <input ng-model="expert.video_introduction" required name="video_introduction">
-                        <div ng-messages="form.video_introduction.$error">
-                            <ng-message when="required">Video Introduction is required.</ng-message>
-                        </div>
-                    </md-input-container>
                     <section layout="row" layout-align="end center" flex="100">
                         <md-button ng-click="setupCalendarAvailability()" class="md-primary">
                             Set up Calendar Availability
