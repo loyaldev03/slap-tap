@@ -52,11 +52,23 @@
                     </div>
 
                     <md-input-container flex="100">
-                        <textarea name="brief_bio" ng-model="expert.brief_bio" placeholder="Brief Bio" required>
-                        </textarea>
-                        <div ng-messages="form.brief_bio.$error">
-                            <ng-message when="required">Brief Bio is required.</ng-message>
-                        </div>
+                        <md-header>
+                            <div class="md-slap-header">
+                                Write a 20 word or less brief personal introduction  and overview of your entrepreneurial experience.  This is the information a SLAPster will see (along with your picture and 3 Personality/Expert Style Words when they are choosing their SLAPexpert) so make it feel personal!
+                            </div>
+                        </md-header>
+                        <textarea name="brief_bio" ng-model="expert.brief_bio" placeholder="" maxlength="20">
+                        </textarea>                    
+                    </md-input-container>
+
+                    <md-input-container flex="100">
+                        <md-header>
+                            <div class="md-slap-header">
+                                Paste your full Bio which highlights in more detail your entrepreneurial experience.   Ensure that your full bio is not more than 120 words and can be more formal and less personal. Reference your experience that will help a SLAPster understand your skills and knowledge.
+                            </div>
+                        </md-header>
+                        <textarea name="full_bio" ng-model="expert.full_bio" placeholder="" maxlength="120">
+                        </textarea>                    
                     </md-input-container>
 
                     <div class="md-slap-header">
@@ -87,32 +99,48 @@
                         </div>
                     </md-input-container>
 
-                    <md-input-container flex="50">
-                        <label>Video Introduction</label>
-                        <input ng-model="expert.video_introduction" required name="video_introduction">
-                        <div ng-messages="form.video_introduction.$error">
-                            <ng-message when="required">Video Introduction is required.</ng-message>
-                        </div>
-                    </md-input-container>
                     <md-input-container flex="100" ng-if="isCalendarSetupAvailable()">
                         <label>Ideal number of SLAPexpert Hours Per Month</label>
                         <input type="number" ng-model="expert.number_of_hours_per_month" name="number_of_hours_per_month">
                     </md-input-container>
 
-                    <md-input-container flex="100" ng-if="isCalendarSetupAvailable()">
-                        <textarea name="available_hours" ng-model="expert.available_hours" placeholder="Please block off hours you are available!" >
+                    <md-header>
+                        Please let us know exactly when you are available for SLAPexpert Calls and we will ensure we only book calls into the hours you mark as available.
+                    </md-header>
+                    <div layout="row" flex="100">                    
+                        <md-input-container flex="50" ng-if="isCalendarSetupAvailable()">
+                            <textarea name="available_hours_mon" ng-model="expert.available_hours_mon" placeholder="Monday" >
+                            </textarea>
+                        </md-input-container>
+                        <md-input-container flex="50" ng-if="isCalendarSetupAvailable()">                    
+                            <textarea name="available_hours_tue" ng-model="expert.available_hours_tue" placeholder="Tuesday" >
+                            </textarea>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" flex="100">                                        
+                        <md-input-container flex="50" ng-if="isCalendarSetupAvailable()">                    
+                            <textarea name="available_hours_wed" ng-model="expert.available_hours_wed" placeholder="Wednesday" >
+                            </textarea>
+                        </md-input-container>
+                        <md-input-container flex="50" ng-if="isCalendarSetupAvailable()">                    
+                            <textarea name="available_hours_thu" ng-model="expert.available_hours_thu" placeholder="Thursday" >
+                            </textarea>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" flex="100">                                        
+                        <md-input-container flex="50" ng-if="isCalendarSetupAvailable()">
+                            <textarea name="available_hours_fri" ng-model="expert.available_hours_fri" placeholder="Friday" >
+                            </textarea>
+                        </md-input-container>
+                        <md-input-container flex="50" ng-if="isCalendarSetupAvailable()">
+                            <textarea name="available_hours_sat" ng-model="expert.available_hours_sat" placeholder="Saturday" >
+                            </textarea>
+                        </md-input-container>
+                    </div>
+                    <md-input-container flex="100" ng-if="isCalendarSetupAvailable()">                    
+                        <textarea name="available_hours_sun" ng-model="expert.available_hours_sun" placeholder="Sunday" >
                         </textarea>
-                        <div ng-messages="form.available_hours.$error">
-                            <ng-message when="required">Why a SLAPexpert is required.</ng-message>
-                        </div>
                     </md-input-container>
-
-                    <section layout="row" layout-align="end center" flex="100">
-                        <md-button ng-click="setupCalendarAvailability()" class="md-primary">
-                            Set up Calendar Availability
-                        </md-button>
-                    </section>
-
                     <section layout="row" layout-align="end center" flex="100">
                         <md-button ng-click="createOrSave($event)" class="md-primary">
                             Save
@@ -124,6 +152,6 @@
         </form>
         <form action style="display:none;">
             <input class="avatar-file" type="file" originalfile="avatar_file" fileread="image" style="display:none;">
-        </form>    
+                  </form>    
     </md-card>
 </div>

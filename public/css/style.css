@@ -21503,6 +21503,9 @@ md-select-menu {
   height: 150px;
   border-radius: 50%;
 }
+.choose-slapexpert-page .panel-body .slapexpert-choose .selected-slapexpert-detail .slapexpert-choose-content .slapexpert-name {
+  height: 30px;
+}
 .choose-slapexpert-page .panel-body .slapexpert-choose .selected-slapexpert-detail .slapexpert-choose-content .slapexpert-number {
   border-radius: 50%;
   width: 30px;
@@ -21522,8 +21525,10 @@ md-select-menu {
 .choose-slapexpert-page .panel-body .slapexpert-choose .selected-slapexpert-detail .slapexpert-choose-content .profile .profile-sub-header {
   text-align: left;
 }
-.choose-slapexpert-page .panel-body .slapexpert-choose .selected-slapexpert-detail .slapexpert-choose-content .profile p {
-  text-align: left;
+.choose-slapexpert-page .panel-body .slapexpert-choose .selected-slapexpert-detail .slapexpert-choose-content .profile textarea {
+  height: 200px;
+  border: none;
+  resize: none;
 }
 .choose-slapexpert-page .panel-body .slapexpert-choose .selected-slapexpert-detail .slapexpert-choose-content .profile .profile-switch {
   width: 20px;
@@ -21577,6 +21582,16 @@ md-select-menu {
 }
 .choose-slapexpert-page .panel-body .slapexpert-choose .selected-slapexpert-detail .slapexpert-choose-content .slapexpert-numbers-pagination .item.disabled:hover {
   cursor: initial;
+}
+.choose-slapexpert-page .panel-body .schedule-slapexpert-call .schedule-slapexpert-call-content .slots-content h3 {
+  text-align: center;
+}
+.choose-slapexpert-page .panel-body .schedule-slapexpert-call .schedule-slapexpert-call-content .slots-content md-list {
+  height: 330px;
+  overflow-y: scroll;
+}
+.choose-slapexpert-page .panel-body .schedule-slapexpert-call .schedule-slapexpert-call-content .slots-content md-list md-list-item.selected {
+  background-color: #237bb5;
 }
 .choose-slapexpert-page .panel-body .sync-with-slapexpert .sync-with-slapexpert-content .connect-your-calendar {
   padding: 0 50px;

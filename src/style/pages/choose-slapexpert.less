@@ -100,6 +100,9 @@
 						height: 150px;
 						border-radius: 50%;
 					}
+					.slapexpert-name {
+						height: 30px;
+					}
 					.slapexpert-number {
 						border-radius: 50%;
 						width: 30px;
@@ -118,8 +121,10 @@
 						.profile-sub-header {
 							text-align: left;
 						}
-						p {
-							text-align: left;
+						textarea {
+							height: 200px;
+							border: none;
+							resize: none;
 						}
 						.profile-switch {
 							width: 20px;
@@ -180,6 +185,24 @@
 							    }
 						    }			
 						}
+					}
+				}
+			}
+		}
+
+		.schedule-slapexpert-call {
+			.schedule-slapexpert-call-content {
+				.slots-content {
+					h3 {
+						text-align: center;
+					}
+					md-list {
+					    height: 330px;
+					    overflow-y: scroll;						
+
+					    md-list-item.selected {
+					    	background-color: #237bb5;
+					    }
 					}
 				}
 			}
